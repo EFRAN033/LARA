@@ -1,9 +1,7 @@
 <template>
   <footer class="bg-gray-900 text-white py-6 px-4">
     <div class="container mx-auto">
-      <!-- Versión móvil - Acordeón compacto -->
       <div class="md:hidden space-y-6">
-        <!-- Acordeón de enlaces -->
         <div v-for="(section, index) in mobileSections" :key="index">
           <button 
             @click="toggleSection(index)"
@@ -36,7 +34,6 @@
           </div>
         </div>
 
-        <!-- Botón CTA siempre visible -->
         <div class="pt-2">
           <button 
             @click="navigateToRegister"
@@ -47,10 +44,9 @@
         </div>
       </div>
 
-      <!-- Versión desktop (igual que antes) -->
       <div class="hidden md:grid md:grid-cols-3 gap-8">
         <div>
-          <h3 class="text-lg font-bold mb-4">VisteteYA</h3>
+          <h3 class="text-lg font-bold mb-4">KambiaPe</h3>
           <ul class="space-y-2">
             <li><router-link to="/" class="hover:text-pink-400 transition">Inicio</router-link></li>
             <li><router-link to="/explorar" class="hover:text-pink-400 transition">Explorar prendas</router-link></li>
@@ -77,7 +73,6 @@
         </div>
       </div>
 
-      <!-- Copyright (móvil y desktop) -->
       <div class="border-t border-gray-700 mt-6 pt-4 text-center text-gray-400 text-sm">
         <p>© 2025 VisteteYA. Todos los derechos reservados.</p>
         <div class="mt-2 flex justify-center space-x-4">
@@ -95,7 +90,6 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-// Estado para acordeón móvil
 const openSections = ref([false, false]);
 const mobileSections = ref([
   {
@@ -126,13 +120,11 @@ const navigateToRegister = () => {
 </script>
 
 <style scoped>
-/* Mejoras para móvil */
 @media (max-width: 767px) {
   .border-t {
     border-top-width: 1px;
   }
   
-  /* Asegura que los acordeones no se superpongan */
   [v-show] {
     transition: opacity 0.2s ease, max-height 0.3s ease;
   }
