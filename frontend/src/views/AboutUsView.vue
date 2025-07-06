@@ -2,9 +2,7 @@
   <div class="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans text-gray-900 antialiased">
     <Header />
 
-    <!-- Hero Section -->
     <section class="relative overflow-hidden bg-gradient-to-br from-[#d7037b] to-[#9e0154] text-white py-24 sm:py-32 lg:py-40">
-      <!-- Background pattern -->
       <div class="absolute inset-0">
         <div class="absolute inset-0 opacity-20" 
              style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA4KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')"></div>
@@ -12,12 +10,10 @@
       </div>
       
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <!-- Subtitle with typewriter effect -->
         <p class="text-xl sm:text-2xl lg:text-3xl font-light mb-6 overflow-hidden whitespace-nowrap animate-[typewriter_2s_steps(40)_0.5s_1_normal_both]">
           Más que una plataforma, un movimiento.
         </p>
         
-        <!-- Main title with animated gradient -->
         <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight mb-8">
           <span class="block mb-3">Revolucionando el</span>
           <span class="bg-gradient-to-r from-white to-[#fbcfe8] bg-clip-text text-transparent bg-[length:200%_200%] animate-[gradient-shift_8s_ease_infinite]">
@@ -25,7 +21,6 @@
           </span>
         </h1>
         
-        <!-- Description with staggered animation -->
         <div class="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto mb-12 opacity-90 leading-relaxed">
           <p class="inline-block opacity-0 animate-[fade-in-up_0.8s_ease-out_0.25s_forwards]">En KambiaPe, conectamos personas,</p>
           <p class="inline-block opacity-0 animate-[fade-in-up_0.8s_ease-out_0.3s_forwards]">valoramos lo que tienes</p>
@@ -33,7 +28,6 @@
           <p class="inline-block opacity-0 animate-[fade-in-up_0.8s_ease-out_0.4s_forwards]">en oportunidades.</p>
         </div>
         
-        <!-- CTA with 3D hover effect -->
         <div class="[perspective:1000px] animate-[fade-in-up_0.8s_ease-out_0.5s_forwards]">
           <router-link 
             to="/publicar" 
@@ -46,11 +40,9 @@
         </div>
       </div>
       
-      <!-- Floating decorative element -->
       <div class="absolute bottom-[-100px] left-[-100px] w-[300px] h-[300px] rounded-full bg-[#fbcfe8] opacity-20 blur-[80px] animate-[float-slow_6s_ease-in-out_infinite]"></div>
     </section>
 
-    <!-- History Section -->
     <section 
       class="py-20 bg-white"
       v-intersect="{
@@ -71,10 +63,8 @@
       </div>
     </section>
 
-    <!-- Mission & Vision -->
     <section class="py-16 sm:py-24 bg-gray-50 border-y border-gray-100">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-        <!-- Mission Card -->
         <div 
           class="[perspective:1000px] h-full" 
           @mouseenter="flipCard('mission')" 
@@ -119,7 +109,6 @@
           </div>
         </div>
 
-        <!-- Vision Card -->
         <div 
           class="[perspective:1000px] h-full" 
           @mouseenter="flipCard('vision')" 
@@ -166,7 +155,6 @@
       </div>
     </section>
 
-    <!-- Values Section -->
     <section class="py-20 bg-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-16 relative inline-block">
@@ -186,12 +174,9 @@
           >
             <div class="relative h-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(10deg)]">
               <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 h-full flex flex-col items-center transition-all duration-300 group-hover:shadow-2xl">
-                <!-- Radial chart -->
                 <div class="relative w-40 h-40 mb-6">
                   <svg class="w-full h-full" viewBox="0 0 100 100">
-                    <!-- Background -->
                     <circle cx="50" cy="50" r="45" fill="none" stroke="#f3f4f6" stroke-width="8" />
-                    <!-- Animated segment -->
                     <circle 
                       cx="50" cy="50" r="45" fill="none" 
                       :stroke="value.color" 
@@ -202,7 +187,6 @@
                       transform="rotate(-90 50 50)"
                       class="transition-all duration-700 ease-out"
                     />
-                    <!-- Center icon -->
                     <foreignObject x="25" y="25" width="50" height="50">
                       <div class="w-full h-full flex items-center justify-center">
                         <component 
@@ -222,7 +206,6 @@
                   {{ value.description }}
                 </p>
                 
-                <!-- Hover effect -->
                 <div class="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-[#d7037b] opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"></div>
               </div>
             </div>
@@ -231,7 +214,6 @@
       </div>
     </section>
 
-    <!-- Benefits Section -->
     <section class="py-20 bg-gray-50 border-y border-gray-100">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-16 text-center relative">
@@ -242,7 +224,6 @@
         </h2>
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <!-- Benefits list -->
           <div class="space-y-8">
             <div 
               v-for="(benefit, index) in benefits" 
@@ -274,13 +255,10 @@
             </div>
           </div>
           
-          <!-- Interactive visualization -->
           <div class="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-            <!-- Animated background -->
             <div class="absolute inset-0 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
               <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgxMDIsMTI2LDIzNCwwLjEpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+')"></div>
               
-              <!-- Content based on active benefit -->
               <transition 
                 enter-active-class="transition-opacity duration-300 ease-out"
                 enter-from-class="opacity-0"
@@ -309,7 +287,6 @@
               </transition>
             </div>
             
-            <!-- Overlay effect -->
             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent flex items-end p-6">
               <p class="text-white text-lg font-bold">
                 {{ benefits[activeBenefit].tagline }}
@@ -320,7 +297,6 @@
       </div>
     </section>
 
-    <!-- Team Section -->
     <section class="py-20 bg-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
@@ -347,13 +323,11 @@
               :style="activeTeamMember === index ? teamCardTransform[index] : ''"
             >
               <div class="relative mb-6 flex justify-center">
-                <!-- Avatar with hover effect -->
                 <div class="w-32 h-32 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center border-4 transition-all duration-300"
                   :class="activeTeamMember === index ? 'border-[#d7037b] scale-110' : 'border-[#fce4ec]'">
                   <UserCircleIcon class="h-20 w-20 transition-all duration-300" 
                     :class="activeTeamMember === index ? 'text-gray-500 scale-105' : 'text-gray-400'" />
                 </div>
-                <!-- Badge -->
                 <span class="absolute bottom-0 right-1/2 translate-x-1/2 text-white rounded-full px-3 py-1 text-xs font-bold transform translate-y-1/2 shadow-md transition-all duration-300"
                   :class="[
                     activeTeamMember === index ? 'scale-110' : '',
@@ -392,9 +366,7 @@
       </div>
     </section>
 
-    <!-- Final CTA -->
     <section class="relative py-24 sm:py-32 bg-gradient-to-r from-[#9e0154] to-[#d7037b] text-white text-center overflow-hidden">
-      <!-- Animated particles -->
       <div class="absolute inset-0 overflow-hidden">
         <div v-for="i in 30" :key="i" 
           class="absolute rounded-full bg-white opacity-[0.03]"
@@ -462,10 +434,20 @@ import {
   HeartIcon,
   ChatBubbleLeftRightIcon,
   LinkIcon,
-  TwitterIcon,
-  LinkedInIcon,
-  InstagramIcon
-} from '@heroicons/vue/24/outline';
+  // Asegúrate de importar los íconos de redes sociales si son personalizados o de una librería externa.
+  // Aquí asumo que podrías tenerlos o necesitarías importar de Heroicons 'SimpleIcons' o similar.
+  // Por ahora, para Twitter, LinkedIn, Instagram, los mantengo como placeholders o podrías eliminarlos si no los usas.
+  // Ejemplo si usas @heroicons/vue/24/outline para LinkIcon y necesitas otros:
+  // TwitterIcon, // No existe directamente en Heroicons v24/outline
+  // LinkedInIcon, // No existe directamente en Heroicons v24/outline
+  // InstagramIcon // No existe directamente en Heroicons v24/outline
+} from '@heroicons/vue/24/outline'; // Solo importo los que están en outline
+
+// Si necesitas íconos de redes sociales, considera usar una librería como `simple-icons/vue`
+// o si los tienes como SVGs en tus assets, impórtalos directamente:
+// import TwitterIcon from '@/assets/icons/twitter.svg';
+// import LinkedInIcon from '@/assets/icons/linkedin.svg';
+// import InstagramIcon from '@/assets/icons/instagram.svg';
 
 // Animation states
 const historyVisible = ref(false);
@@ -485,8 +467,8 @@ const team = ref([
     badgeText: 'Líder',
     badgeColor: 'bg-blue-500',
     social: [
-      { name: 'Twitter', url: '#', icon: TwitterIcon },
-      { name: 'LinkedIn', url: '#', icon: LinkedInIcon }
+      { name: 'Twitter', url: '#', icon: LinkIcon }, // Placeholder con LinkIcon
+      { name: 'LinkedIn', url: '#', icon: LinkIcon } // Placeholder con LinkIcon
     ]
   },
   {
@@ -496,8 +478,8 @@ const team = ref([
     badgeText: 'UX/UI',
     badgeColor: 'bg-purple-500',
     social: [
-      { name: 'Instagram', url: '#', icon: InstagramIcon },
-      { name: 'LinkedIn', url: '#', icon: LinkedInIcon }
+      { name: 'Instagram', url: '#', icon: LinkIcon }, // Placeholder con LinkIcon
+      { name: 'LinkedIn', url: '#', icon: LinkIcon } // Placeholder con LinkIcon
     ]
   },
   {
@@ -508,7 +490,7 @@ const team = ref([
     badgeColor: 'bg-teal-500',
     social: [
       { name: 'GitHub', url: '#', icon: LinkIcon },
-      { name: 'Twitter', url: '#', icon: TwitterIcon }
+      { name: 'Twitter', url: '#', icon: LinkIcon } // Placeholder con LinkIcon
     ]
   },
   {
@@ -518,8 +500,8 @@ const team = ref([
     badgeText: 'Comms',
     badgeColor: 'bg-yellow-500',
     social: [
-      { name: 'Instagram', url: '#', icon: InstagramIcon },
-      { name: 'Twitter', url: '#', icon: TwitterIcon }
+      { name: 'Instagram', url: '#', icon: LinkIcon }, // Placeholder con LinkIcon
+      { name: 'Twitter', url: '#', icon: LinkIcon } // Placeholder con LinkIcon
     ]
   }
 ]);
