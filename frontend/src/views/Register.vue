@@ -1,0 +1,350 @@
+<template>
+    <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <!-- Header premium -->
+      <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4">
+          <div class="flex items-center justify-between">
+            <router-link to="/" class="flex items-center space-x-2 group">
+              <div class="w-8 h-8 rounded-full bg-gradient-to-r from-[#d7037b] to-[#9e0154] flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <span class="text-xl font-bold text-gray-900 group-hover:text-[#d7037b] transition-colors">
+                Kambia<span class="text-[#9e0154]">Pe</span>
+              </span>
+            </router-link>
+            
+            <nav class="hidden md:flex items-center space-x-8">
+              <router-link to="/about" class="text-sm font-medium text-gray-500 hover:text-[#d7037b] transition-colors">
+                ¿Qué es KambiaPe?
+              </router-link>
+              <router-link to="/pricing" class="text-sm font-medium text-gray-500 hover:text-[#d7037b] transition-colors">
+                Planes
+              </router-link>
+              <router-link to="/contact" class="text-sm font-medium text-gray-500 hover:text-[#d7037b] transition-colors">
+                Contacto
+              </router-link>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+              <router-link to="/login" class="text-sm font-medium text-[#d7037b] hover:text-[#9e0154] transition-colors">
+                Iniciar sesión
+              </router-link>
+              <router-link to="/register" class="hidden sm:inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-[#d7037b] to-[#9e0154] hover:from-[#c5026f] hover:to-[#8b014a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d7037b] transition-all">
+                Regístrate gratis
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </header>
+  
+      <!-- Contenido principal -->
+      <main class="container mx-auto px-4 py-8 flex flex-col items-center">
+        <!-- Tarjeta de registro -->
+        <div class="w-full max-w-md bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl">
+          <div class="p-8 sm:p-10">
+            <!-- Encabezado con icono -->
+            <div class="text-center mb-8">
+              <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-r from-[#d7037b] to-[#9e0154] mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+              </div>
+              <h2 class="text-2xl font-bold text-gray-900">Crea tu cuenta</h2>
+              <p class="mt-2 text-sm text-gray-600">Comienza tu experiencia con KambiaPe</p>
+            </div>
+  
+            <!-- Formulario de registro -->
+            <form @submit.prevent="handleRegister" class="space-y-4">
+              <!-- Campo de nombre -->
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="name"
+                    v-model="name"
+                    required
+                    class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d7037b] focus:border-transparent transition-all"
+                    placeholder="Tu nombre"
+                    autocomplete="name"
+                  />
+                  <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Campo de email -->
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                <div class="relative">
+                  <input
+                    type="email"
+                    id="email"
+                    v-model="email"
+                    required
+                    class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d7037b] focus:border-transparent transition-all"
+                    placeholder="tu@email.com"
+                    autocomplete="email"
+                  />
+                  <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Campo de contraseña -->
+              <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                <div class="relative">
+                  <input
+                    :type="showPassword ? 'text' : 'password'"
+                    id="password"
+                    v-model="password"
+                    required
+                    @input="validatePassword"
+                    class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d7037b] focus:border-transparent transition-all"
+                    placeholder="••••••••"
+                    autocomplete="new-password"
+                  />
+                  <button 
+                    type="button" 
+                    @click="showPassword = !showPassword" 
+                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-500"
+                  >
+                    <svg v-if="showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                    </svg>
+                  </button>
+                </div>
+                <div v-if="passwordStrength.visible" class="mt-2">
+                  <div class="flex items-center space-x-2">
+                    <div class="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                      <div 
+                        :class="passwordStrength.color" 
+                        class="h-full rounded-full transition-all duration-500"
+                        :style="{width: passwordStrength.width}"
+                      ></div>
+                    </div>
+                    <span class="text-xs font-medium" :class="passwordStrength.textColor">
+                      {{ passwordStrength.text }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Confirmar contraseña -->
+              <div>
+                <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirmar contraseña</label>
+                <div class="relative">
+                  <input
+                    :type="showConfirmPassword ? 'text' : 'password'"
+                    id="confirmPassword"
+                    v-model="confirmPassword"
+                    required
+                    class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d7037b] focus:border-transparent transition-all"
+                    placeholder="••••••••"
+                    autocomplete="new-password"
+                  />
+                  <button 
+                    type="button" 
+                    @click="showConfirmPassword = !showConfirmPassword" 
+                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-500"
+                  >
+                    <svg v-if="showConfirmPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+  
+              <!-- Términos y condiciones -->
+              <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  <input
+                    id="terms"
+                    type="checkbox"
+                    v-model="termsAccepted"
+                    required
+                    class="h-4 w-4 text-[#d7037b] focus:ring-[#d7037b] border-gray-300 rounded"
+                  />
+                </div>
+                <div class="ml-3 text-sm">
+                  <label for="terms" class="font-medium text-gray-700">
+                    Acepto los <router-link to="/terms" class="text-[#d7037b] hover:text-[#9e0154]">Términos de servicio</router-link> y <router-link to="/privacy" class="text-[#d7037b] hover:text-[#9e0154]">Política de privacidad</router-link>
+                  </label>
+                </div>
+              </div>
+  
+              <!-- Mensaje de error -->
+              <div 
+                v-if="errorMessage" 
+                class="rounded-md bg-red-50 p-4 transition-all duration-300"
+              >
+                <div class="flex items-start">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400 mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span class="text-sm text-red-600">{{ errorMessage }}</span>
+                </div>
+              </div>
+  
+              <!-- Botón de registro -->
+              <div>
+                <button
+                  type="submit"
+                  :disabled="isLoading"
+                  class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-[#d7037b] to-[#9e0154] hover:from-[#c5026f] hover:to-[#8b014a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d7037b] transition-all duration-300"
+                >
+                  <span v-if="!isLoading">Crear cuenta</span>
+                  <svg v-else class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </button>
+              </div>
+            </form>
+  
+            <!-- Enlace a login -->
+            <div class="mt-6 text-center text-sm text-gray-600">
+              ¿Ya tienes una cuenta? 
+              <router-link to="/login" class="font-medium text-[#d7037b] hover:text-[#9e0154] transition-colors">
+                Inicia sesión
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    name: 'PremiumRegisterView',
+    data() {
+      return {
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        termsAccepted: false,
+        showPassword: false,
+        showConfirmPassword: false,
+        isLoading: false,
+        errorMessage: ''
+      };
+    },
+    computed: {
+      passwordStrength() {
+        if (!this.password) return { visible: false, width: '0%', text: '', color: '', textColor: '' };
+        
+        const strength = {
+          0: { width: '20%', text: 'Débil', color: 'bg-red-500', textColor: 'text-red-500' },
+          1: { width: '40%', text: 'Regular', color: 'bg-yellow-500', textColor: 'text-yellow-500' },
+          2: { width: '60%', text: 'Buena', color: 'bg-blue-500', textColor: 'text-blue-500' },
+          3: { width: '80%', text: 'Fuerte', color: 'bg-green-400', textColor: 'text-green-500' },
+          4: { width: '100%', text: 'Excelente', color: 'bg-green-500', textColor: 'text-green-600' }
+        };
+        
+        // Calculador de fortaleza de contraseña
+        let score = 0;
+        if (this.password.length >= 8) score++;
+        if (this.password.match(/[A-Z]/)) score++;
+        if (this.password.match(/[0-9]/)) score++;
+        if (this.password.match(/[^A-Za-z0-9]/)) score++;
+        
+        return {
+          visible: true,
+          ...strength[Math.min(score, 4)]
+        };
+      }
+    },
+    methods: {
+      validatePassword() {
+        if (this.password && this.confirmPassword && this.password !== this.confirmPassword) {
+          this.errorMessage = 'Las contraseñas no coinciden';
+        } else {
+          this.errorMessage = '';
+        }
+      },
+      async handleRegister() {
+        this.errorMessage = '';
+        this.isLoading = true;
+        
+        // Validaciones básicas
+        if (!this.name || !this.email || !this.password || !this.confirmPassword) {
+          this.errorMessage = 'Todos los campos son obligatorios';
+          this.isLoading = false;
+          return;
+        }
+        
+        if (this.password !== this.confirmPassword) {
+          this.errorMessage = 'Las contraseñas no coinciden';
+          this.isLoading = false;
+          return;
+        }
+        
+        if (!this.termsAccepted) {
+          this.errorMessage = 'Debes aceptar los términos y condiciones';
+          this.isLoading = false;
+          return;
+        }
+  
+        try {
+          // Simulación de llamada a API
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          
+          // Redirigir después del registro exitoso
+          this.$router.push('/dashboard');
+        } catch (error) {
+          this.errorMessage = 'Error al registrar. Por favor, inténtalo de nuevo.';
+          console.error('Error de registro:', error);
+        } finally {
+          this.isLoading = false;
+        }
+      }
+    }
+  };
+  </script>
+  
+  <style scoped>
+  /* Animaciones */
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Transiciones suaves */
+  * {
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.2s, opacity 0.2s;
+  }
+  
+  /* Mejoras de accesibilidad */
+  :focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(215, 3, 123, 0.3);
+  }
+  
+  /* Efecto hover para elementos interactivos */
+  button:hover, .router-link:hover {
+    transform: translateY(-1px);
+  }
+  </style>
