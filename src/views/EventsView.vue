@@ -426,12 +426,14 @@
         </div>
       </Dialog>
     </TransitionRoot>
+    <Footer />
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
 import Header from './Header.vue';
+import Footer from './Footer.vue'; // Import the Footer component
 import { 
   CalendarDaysIcon, 
   MapPinIcon, 

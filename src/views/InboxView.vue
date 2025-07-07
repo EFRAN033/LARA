@@ -333,12 +333,14 @@
         </div>
       </Dialog>
     </TransitionRoot>
+    <Footer />
   </div>
 </template>
 
 <script setup>
 import { ref, computed, nextTick } from 'vue'
 import Header from './Header.vue' // Asegúrate de que tu Header.vue esté en el mismo directorio.
+import Footer from './Footer.vue'; // Import the Footer componen
 import { 
   ChatBubbleLeftRightIcon, // Icono principal para el buzón de chat
   ArrowRightIcon,

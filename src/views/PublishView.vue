@@ -1,760 +1,396 @@
 <template>
-  <div class="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
+  <div class="bg-gradient-to-b from-gray-50 to-rose-50 min-h-screen font-sans antialiased">
     <Header />
 
-    <!-- Contenedor principal con efecto de carta flotante -->
     <main class="w-full max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 mt-6 transform transition-all duration-300 hover:scale-[1.002]">
-      <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-2xl">
+      <div class="bg-white rounded-3xl shadow-2xl border border-rose-100 overflow-hidden transition-all duration-300 hover:shadow-2xl">
         
-        <!-- Cabecera con gradiente animado -->
-        <div class="p-6 sm:p-8 md:p-10 bg-gradient-to-br from-[#f8e1ee] to-[#fdedf5] text-center relative overflow-hidden">
-          <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')] opacity-30"></div>
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#d7037b] mb-3 relative z-10">
-            ¡Publica tu Intercambio!
+        <div class="p-6 sm:p-8 md:p-10 bg-gradient-to-br from-rose-50 to-pink-100 text-center relative overflow-hidden">
+          <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zv..."></div>
+          <h1 class="relative z-10 text-4xl sm:text-5xl font-extrabold text-gray-900 mb-3 drop-shadow-md animate-fade-in-down">
+            Publica tu Producto
           </h1>
-          <p class="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto relative z-10">
-            Completa los siguientes pasos para ofrecer tu artículo y encontrar el intercambio perfecto.
+          <p class="relative z-10 text-lg sm:text-xl text-gray-700 font-medium max-w-2xl mx-auto animate-fade-in">
+            ¡Dale una segunda vida a tus objetos! Completa los detalles de tu producto para iniciar un trueque.
           </p>
-          
-          <!-- Elemento decorativo -->
-          <div class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-[#d7037b] opacity-10 blur-xl"></div>
-          <div class="absolute -top-10 -left-10 w-24 h-24 rounded-full bg-[#9e0154] opacity-10 blur-xl"></div>
         </div>
 
-        <!-- Indicador de progreso mejorado -->
-        <div class="relative pt-8 px-6 sm:px-8 md:px-10">
-          <div class="flex items-center justify-between text-sm font-medium text-gray-500 mb-2">
-            <span class="text-xs font-semibold px-2 py-1 bg-gray-100 rounded-full">Paso {{ currentStep }} de {{ totalSteps }}</span>
-            <span v-if="currentStep === 1" class="text-[#d7037b] font-semibold flex items-center">
-              <InformationCircleIcon class="h-4 w-4 mr-1" /> Información Básica
-            </span>
-            <span v-if="currentStep === 2" class="text-[#d7037b] font-semibold flex items-center">
-              <PhotoIcon class="h-4 w-4 mr-1" /> Imágenes Brillantes
-            </span>
-            <span v-if="currentStep === 3" class="text-[#d7037b] font-semibold flex items-center">
-              <GiftIcon class="h-4 w-4 mr-1" /> Tu Deseo de Intercambio
-            </span>
-          </div>
-          
-          <!-- Barra de progreso con animación -->
-          <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
-            <div 
-              class="bg-gradient-to-r from-[#d7037b] via-[#c1026d] to-[#9e0154] h-2.5 rounded-full transition-all duration-700 ease-out"
-              :style="{ width: progressPercentage }"
-            ></div>
-          </div>
-          
-          <!-- Indicadores de pasos con animación -->
-          <div class="flex justify-between mt-4 text-xs text-gray-500 relative">
-            <div v-for="step in totalSteps" :key="step" 
-                 class="flex flex-col items-center relative z-10"
-                 @click="goToStep(step)">
-              <div class="w-8 h-8 rounded-full flex items-center justify-center mb-1 cursor-pointer transition-all"
-                   :class="{
-                     'bg-[#d7037b] text-white shadow-md': currentStep >= step,
-                     'bg-white border-2 border-gray-300 text-gray-400': currentStep < step,
-                     'ring-2 ring-[#d7037b] ring-offset-2': currentStep === step
-                   }">
-                <span v-if="currentStep > step || currentStep === step">
-                  <CheckIcon v-if="currentStep > step" class="h-4 w-4" />
-                  <span v-else class="font-bold">{{ step }}</span>
-                </span>
-                <span v-else class="font-medium">{{ step }}</span>
-              </div>
-              <span class="text-xs font-medium text-center"
-                    :class="{
-                      'text-[#d7037b]': currentStep >= step,
-                      'text-gray-400': currentStep < step
-                    }">
-                {{ getStepName(step) }}
-              </span>
+        <div class="relative px-6 pt-6 sm:px-8 bg-white z-20">
+          <div class="flex justify-between items-center mb-6">
+            <div class="flex-1 text-center">
+              <span :class="{'text-rose-600 font-bold': currentStep === 1, 'text-gray-500': currentStep !== 1}" class="text-sm sm:text-base transition-colors duration-300">Paso 1: Detalles Básicos</span>
             </div>
-            
-            <!-- Línea decorativa detrás de los círculos -->
-            <div class="absolute top-4 left-0 right-0 h-0.5 bg-gray-200 z-0"></div>
+            <div class="flex-1 text-center">
+              <span :class="{'text-rose-600 font-bold': currentStep === 2, 'text-gray-500': currentStep !== 2}" class="text-sm sm:text-base transition-colors duration-300">Paso 2: Fotos</span>
+            </div>
+          </div>
+          <div class="h-1 bg-gray-200 rounded-full overflow-hidden">
+            <div :style="{ width: currentStep === 1 ? '50%' : '100%' }" class="h-full bg-gradient-to-r from-rose-500 to-purple-600 transition-all duration-500 ease-out"></div>
           </div>
         </div>
 
-        <!-- Formulario con transiciones mejoradas -->
-        <form @submit.prevent="handleFormSubmission" class="p-6 sm:p-8 md:p-10 space-y-8">
+        <form @submit.prevent="handleSubmit" class="p-6 sm:p-8 md:p-10 bg-white">
           <transition name="slide-fade" mode="out-in">
-            <div v-if="currentStep === 1" key="step1" class="space-y-6">
-              <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4 flex items-center">
-                <div class="w-10 h-10 rounded-full bg-[#f8e1ee] flex items-center justify-center mr-3">
-                  <InformationCircleIcon class="h-6 w-6 text-[#d7037b]" />
-                </div>
-                Detalles de tu Artículo
-              </h2>
-
-              <!-- Campo de título con contador de caracteres -->
-              <div>
-                <label for="title" class="block text-sm font-medium text-gray-700 mb-1 flex justify-between">
-                  <span>Título del Artículo <span class="text-red-500">*</span></span>
-                  <span class="text-xs font-medium" :class="{
-                    'text-gray-500': product.title.length <= 60,
-                    'text-amber-500': product.title.length > 60 && product.title.length <= 70,
-                    'text-red-500': product.title.length > 70
-                  }">
-                    {{ product.title.length }}/70
-                  </span>
-                </label>
-                <div class="relative mt-1">
-                  <input 
-                    type="text" 
-                    id="title" 
-                    v-model="product.title" 
-                    maxlength="70"
-                    placeholder="Ej: Consola de videojuegos Nintendo Switch"
-                    class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#d7037b] focus:border-[#d7037b] sm:text-sm transition duration-150 ease-in-out pr-10"
-                    :class="{ 'border-red-500': step1Errors.title }"
-                  />
-                  <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <SparklesIcon v-if="product.title.length > 5 && !step1Errors.title" class="h-5 w-5 text-green-500" />
-                  </div>
-                </div>
-                <p v-if="step1Errors.title" class="mt-1 text-sm text-red-600 flex items-center">
-                  <ExclamationTriangleIcon class="h-4 w-4 mr-1" /> {{ step1Errors.title }}
-                </p>
-                <p v-else class="mt-1 text-xs text-gray-500">
-                  Ejemplo: "iPhone 12 Pro Max 128GB - Como nuevo con accesorios"
-                </p>
-              </div>
-
-              <!-- Campo de descripción con contador y ejemplos -->
-              <div>
-                <label for="description" class="block text-sm font-medium text-gray-700 mb-1 flex justify-between">
-                  <span>Descripción Detallada <span class="text-red-500">*</span></span>
-                  <span class="text-xs font-medium" :class="{
-                    'text-gray-500': product.description.length <= 300,
-                    'text-amber-500': product.description.length > 300 && product.description.length <= 400,
-                    'text-red-500': product.description.length > 400
-                  }">
-                    {{ product.description.length }}/400
-                  </span>
-                </label>
-                <textarea 
-                  id="description" 
-                  v-model="product.description" 
-                  rows="6" 
-                  maxlength="400"
-                  placeholder="Describe el artículo, sus características, estado, defectos (si los hay), accesorios incluidos, etc."
-                  class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#d7037b] focus:border-[#d7037b] sm:text-sm transition duration-150 ease-in-out resize-y"
-                  :class="{ 'border-red-500': step1Errors.description }"
-                ></textarea>
-                <p v-if="step1Errors.description" class="mt-1 text-sm text-red-600 flex items-center">
-                  <ExclamationTriangleIcon class="h-4 w-4 mr-1" /> {{ step1Errors.description }}
-                </p>
-                <div class="mt-1 text-xs text-gray-500">
-                  <p class="font-medium">Sugerencias para una buena descripción:</p>
-                  <ul class="list-disc pl-5 space-y-1">
-                    <li>Estado real del artículo (nuevo, usado, detalles)</li>
-                    <li>Tiempo de uso o antigüedad</li>
-                    <li>Accesorios incluidos</li>
-                    <li>Razón del intercambio</li>
-                  </ul>
-                </div>
-              </div>
-
-              <!-- Campos de categoría y condición en grid responsive -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Selector de categoría con iconos -->
+            <div v-if="currentStep === 1" key="step1">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div>
-                  <label for="category" class="block text-sm font-medium text-gray-700 mb-1">
-                    Categoría <span class="text-red-500">*</span>
-                  </label>
-                  <div class="relative mt-1">
-                    <select 
-                      id="category" 
+                  <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Nombre del Producto <span class="text-red-500">*</span></label>
+                  <input
+                    type="text"
+                    id="name"
+                    v-model="product.name"
+                    placeholder="Ej. Consola de Videojuegos, Bicicleta de Montaña"
+                    class="w-full px-4 py-2.5 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 transition duration-200 text-gray-800 placeholder-gray-400"
+                    :class="{'border-red-500': step1Errors.name}"
+                    aria-required="true"
+                    aria-describedby="name-error"
+                  />
+                  <p v-if="step1Errors.name" id="name-error" class="text-red-500 text-xs mt-1">{{ step1Errors.name }}</p>
+                </div>
+
+                <div>
+                  <label for="category" class="block text-sm font-semibold text-gray-700 mb-2">Categoría <span class="text-red-500">*</span></label>
+                  <div class="relative">
+                    <select
+                      id="category"
                       v-model="product.category"
-                      class="block w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg shadow-sm focus:ring-[#d7037b] focus:border-[#d7037b] sm:text-sm transition duration-150 ease-in-out bg-white appearance-none"
-                      :class="{ 'border-red-500': step1Errors.category }"
+                      class="block w-full px-4 py-2.5 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 transition duration-200 text-gray-800 appearance-none bg-white pr-10"
+                      :class="{'border-red-500': step1Errors.category}"
+                      aria-required="true"
+                      aria-describedby="category-error"
                     >
                       <option value="" disabled>Selecciona una categoría</option>
-                      <option value="electronics">📱 Electrónica</option>
-                      <option value="books">📚 Libros</option>
-                      <option value="clothing">👕 Ropa y Accesorios</option>
-                      <option value="home">🏠 Hogar y Jardín</option>
-                      <option value="sports">⚽ Deportes y Ocio</option>
-                      <option value="collectibles">🎨 Coleccionables</option>
-                      <option value="vehicles">🚗 Vehículos y Partes</option>
-                      <option value="services">🛠️ Servicios</option>
-                      <option value="other">❓ Otro</option>
+                      <option>Electrónica</option>
+                      <option>Mobiliario</option>
+                      <option>Deportes</option>
+                      <option>Libros</option>
+                      <option>Ropa y Accesorios</option>
+                      <option>Hogar</option>
+                      <option>Juguetes</option>
+                      <option>Herramientas</option>
+                      <option>Música</option>
+                      <option>Videojuegos</option>
+                      <option>Coleccionables</option>
+                      <option>Arte</option>
+                      <option>Otros</option>
                     </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                      <ChevronDownIcon class="h-5 w-5 text-gray-400" />
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9z"/></svg>
                     </div>
                   </div>
-                  <p v-if="step1Errors.category" class="mt-1 text-sm text-red-600 flex items-center">
-                    <ExclamationTriangleIcon class="h-4 w-4 mr-1" /> {{ step1Errors.category }}
-                  </p>
+                  <p v-if="step1Errors.category" id="category-error" class="text-red-500 text-xs mt-1">{{ step1Errors.category }}</p>
                 </div>
 
-                <!-- Selector de condición con descripciones emergentes -->
                 <div>
-                  <label for="condition" class="block text-sm font-medium text-gray-700 mb-1">
-                    Condición <span class="text-red-500">*</span>
-                  </label>
-                  <div class="relative mt-1">
-                    <select 
-                      id="condition" 
+                  <label for="condition" class="block text-sm font-semibold text-gray-700 mb-2">Estado del Producto <span class="text-red-500">*</span></label>
+                  <div class="relative">
+                    <select
+                      id="condition"
                       v-model="product.condition"
-                      class="block w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg shadow-sm focus:ring-[#d7037b] focus:border-[#d7037b] sm:text-sm transition duration-150 ease-in-out bg-white appearance-none"
-                      :class="{ 'border-red-500': step1Errors.condition }"
+                      class="w-full px-4 py-2.5 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 transition duration-200 text-gray-800 appearance-none bg-white pr-10"
+                      :class="{'border-red-500': step1Errors.condition}"
+                      aria-required="true"
+                      aria-describedby="condition-error"
                     >
-                      <option value="" disabled>Selecciona la condición</option>
-                      <option value="new">✨ Nuevo - Sin uso, con etiquetas</option>
-                      <option value="like-new">👍 Como Nuevo - Usado poco, impecable</option>
-                      <option value="used-good">👌 Usado - Buen Estado - Algunos signos de uso</option>
-                      <option value="used-fair">🤔 Usado - Estado Regular - Funciona pero con detalles</option>
-                      <option value="for-parts">⚠️ Para Partes / Reparar - No funciona completamente</option>
+                      <option value="" disabled>Selecciona el estado</option>
+                      <option>Nuevo</option>
+                      <option>Como Nuevo</option>
+                      <option>Usado - Buen Estado</option>
+                      <option>Usado - Aceptable</option>
+                      <option>Para Piezas/Reparar</option>
                     </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                      <ChevronDownIcon class="h-5 w-5 text-gray-400" />
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9z"/></svg>
                     </div>
                   </div>
-                  <p v-if="step1Errors.condition" class="mt-1 text-sm text-red-600 flex items-center">
-                    <ExclamationTriangleIcon class="h-4 w-4 mr-1" /> {{ step1Errors.condition }}
-                  </p>
+                  <p v-if="step1Errors.condition" id="condition-error" class="text-red-500 text-xs mt-1">{{ step1Errors.condition }}</p>
+                </div>
+
+                <div class="md:col-span-2">
+                  <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">Descripción <span class="text-red-500">*</span></label>
+                  <textarea
+                    id="description"
+                    v-model="product.description"
+                    rows="4"
+                    placeholder="Describe tu producto, su estado, características, y cualquier detalle relevante para un posible trueque. Máximo 500 caracteres."
+                    class="w-full px-4 py-2.5 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 transition duration-200 text-gray-800 placeholder-gray-400 resize-y"
+                    :class="{'border-red-500': step1Errors.description}"
+                    maxlength="500"
+                    aria-required="true"
+                    aria-describedby="description-error"
+                  ></textarea>
+                  <p v-if="step1Errors.description" id="description-error" class="text-red-500 text-xs mt-1">{{ step1Errors.description }}</p>
+                  <p class="text-xs text-gray-500 text-right mt-1">{{ product.description.length }}/500</p>
                 </div>
               </div>
-            </div>
-          </transition>
 
-          <transition name="slide-fade" mode="out-in">
-            <div v-if="currentStep === 2" key="step2" class="space-y-6">
-              <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4 flex items-center">
-                <div class="w-10 h-10 rounded-full bg-[#f8e1ee] flex items-center justify-center mr-3">
-                  <PhotoIcon class="h-6 w-6 text-[#d7037b]" />
-                </div>
-                Sube las Mejores Fotos
-              </h2>
-              
-              <div class="bg-blue-50 border-l-4 border-blue-400 text-blue-800 p-4 rounded-md flex items-start">
-                <LightBulbIcon class="h-5 w-5 text-blue-500 mr-3 mt-0.5 flex-shrink-0" />
+              <div class="flex justify-end">
+                <button
+                  type="button"
+                  @click="goToNextStep"
+                  class="px-8 py-3 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-full shadow-lg hover:from-rose-600 hover:to-pink-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-rose-300 focus:ring-offset-2"
+                >
+                  Siguiente Paso
+                </button>
+              </div>
+            </div>
+
+            <div v-else-if="currentStep === 2" key="step2">
+              <div class="grid grid-cols-1 gap-6 mb-8">
                 <div>
-                  <p class="font-semibold">Consejo profesional:</p>
-                  <p class="text-sm mt-1">Las fotos claras y bien iluminadas aumentan hasta un 70% las posibilidades de intercambio. Usa fondo neutro y muestra detalles importantes.</p>
-                </div>
-              </div>
-
-              <!-- Área de carga de imágenes mejorada -->
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                  Imágenes del Artículo <span class="text-red-500">*</span>
-                  <span class="text-xs font-normal text-gray-500 ml-1">({{ product.images.length }}/5)</span>
-                </label>
-                
-                <div v-if="imagePreviews.length < 5" 
-                     class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer hover:border-[#d7037b] transition-all duration-200 group"
-                     @click="triggerFileInput"
-                     @dragover.prevent="dragOver = true"
-                     @dragleave="dragOver = false"
-                     @drop.prevent="handleDrop"
-                     :class="{ 
-                       'border-[#d7037b] bg-[#fdf2f8]': dragOver,
-                       'border-red-500': step2Errors.images 
-                     }">
-                  <input type="file" ref="fileInput" @change="handleImageUpload" multiple accept="image/*" class="sr-only">
-                  <div class="space-y-2 text-center">
-                    <div class="flex justify-center">
-                      <div class="p-3 rounded-full bg-[#fce7f3] group-hover:bg-[#fbcfe8] transition-colors">
-                        <CloudArrowUpIcon class="h-8 w-8 text-[#d7037b]" />
-                      </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row justify-center text-sm text-gray-600">
-                      <span class="relative cursor-pointer bg-white rounded-md font-medium text-[#d7037b] hover:text-[#9e0154]">
-                        Haz clic para subir
-                      </span>
-                      <p class="sm:pl-1">o arrastra y suelta</p>
-                    </div>
-                    <p class="text-xs text-gray-500">PNG, JPG, GIF hasta 5MB por foto</p>
-                    <p class="text-xs text-gray-400">Recomendado: 3-5 fotos desde diferentes ángulos</p>
+                  <label for="photos" class="block text-sm font-semibold text-gray-700 mb-2">Fotos del Producto <span class="text-red-500">*</span></label>
+                  <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-rose-400 transition duration-200"
+                       :class="{'border-red-500': step2Errors.photos}"
+                       @click="triggerFileInput"
+                       @dragover.prevent="handleDragOver"
+                       @dragleave.prevent="handleDragLeave"
+                       @drop.prevent="handleDrop"
+                       role="button"
+                       aria-describedby="photos-error"
+                       tabindex="0"
+                  >
+                    <input type="file" id="photos" ref="fileInput" @change="handleFileChange" multiple accept="image/*" class="hidden" aria-hidden="true" />
+                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m-4-4l5.172 5.172a4 4 0 005.656 0L40 32M28 8a4 4 0 100 8 4 4 0 000-8z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="mt-2 text-sm text-gray-600">Arrastra y suelta tus imágenes aquí, o haz clic para seleccionar</p>
+                    <p class="text-xs text-gray-500">(Máximo 4 imágenes, JPG, PNG)</p>
                   </div>
-                </div>
-                
-                <p v-if="step2Errors.images" class="mt-1 text-sm text-red-600 flex items-center">
-                  <ExclamationTriangleIcon class="h-4 w-4 mr-1" /> {{ step2Errors.images }}
-                </p>
-                
-                <!-- Galería de imágenes con miniaturas -->
-                <div v-if="imagePreviews.length" class="mt-4">
-                  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                    <div v-for="(src, index) in imagePreviews" :key="index" 
-                         class="relative group overflow-hidden rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200">
-                      <img :src="src" class="w-full h-40 object-cover" />
-                      
-                      <!-- Botón de eliminar con efecto hover -->
-                      <button 
-                        @click.stop="removeImage(index)" 
-                        class="absolute top-2 right-2 bg-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-sm hover:bg-red-100"
-                        aria-label="Eliminar imagen"
-                      >
-                        <XMarkIcon class="h-4 w-4 text-gray-600 hover:text-red-600" />
-                      </button>
-                      
-                      <!-- Indicador de posición -->
-                      <div class="absolute bottom-2 left-2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full">
-                        {{ index + 1 }}
-                      </div>
-                      
-                      <!-- Botón para establecer como imagen principal -->
-                      <button 
-                        v-if="index !== 0"
-                        @click.stop="setAsPrimary(index)"
-                        class="absolute bottom-2 right-2 bg-white text-xs px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-sm hover:bg-[#fce7f3]"
-                      >
-                        Principal
+                  <p v-if="step2Errors.photos" id="photos-error" class="text-red-500 text-xs mt-1">{{ step2Errors.photos }}</p>
+                  
+                  <div v-if="imagePreviews.length" class="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div v-for="(image, index) in imagePreviews" :key="index" class="relative group">
+                      <img :src="image" :alt="`Preview ${index + 1}`" class="w-full h-32 object-cover rounded-lg shadow-md" />
+                      <button @click="removeImage(index)" class="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200" aria-label="Eliminar imagen">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
                       </button>
                     </div>
-                    
-                    <!-- Slot para añadir más imágenes si hay menos de 5 -->
-                    <div v-if="imagePreviews.length < 5" 
-                         class="border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-[#d7037b] transition-colors h-40"
-                         @click="triggerFileInput">
-                      <PlusCircleIcon class="h-8 w-8 text-gray-400 hover:text-[#d7037b]" />
-                    </div>
                   </div>
-                  
-                  <p class="mt-2 text-xs text-gray-500 flex items-center">
-                    <InformationCircleIcon class="h-4 w-4 mr-1 text-gray-400" />
-                    La primera imagen será la principal. Arrastra para reordenar (próximamente).
-                  </p>
                 </div>
               </div>
+
+              <div class="flex justify-between mt-8">
+                <button
+                  type="button"
+                  @click="goToPreviousStep"
+                  class="px-6 py-2.5 bg-gray-300 text-gray-800 font-bold rounded-full shadow hover:bg-gray-400 transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+                >
+                  Paso Anterior
+                </button>
+                <button
+                  type="submit"
+                  :disabled="isSubmitting"
+                  class="px-8 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold rounded-full shadow-lg hover:from-green-600 hover:to-teal-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <span v-if="!isSubmitting">Publicar Producto</span>
+                  <span v-else>Publicando...</span>
+                </button>
+              </div>
+              <transition name="fade">
+                <div v-if="errorMessage" class="mt-6 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-center" role="alert">
+                  {{ errorMessage }}
+                </div>
+              </transition>
             </div>
           </transition>
-
-          <transition name="slide-fade" mode="out-in">
-            <div v-if="currentStep === 3" key="step3" class="space-y-6">
-              <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4 flex items-center">
-                <div class="w-10 h-10 rounded-full bg-[#f8e1ee] flex items-center justify-center mr-3">
-                  <GiftIcon class="h-6 w-6 text-[#d7037b]" />
-                </div>
-                ¿Qué te gustaría Recibir?
-              </h2>
-              
-              <div class="bg-purple-50 border-l-4 border-purple-400 text-purple-800 p-4 rounded-md">
-                <div class="flex items-start">
-                  <SparklesIcon class="h-5 w-5 text-purple-500 mr-3 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p class="font-semibold">¡Aumenta tus posibilidades!</p>
-                    <p class="text-sm mt-1">Los intercambios con descripciones claras de lo que buscas tienen un 60% más de éxito. Sé específico pero flexible.</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Campo de intercambio deseado con sugerencias -->
-              <div>
-                <label for="exchange_for" class="block text-sm font-medium text-gray-700 mb-1">
-                  Tu Interés de Intercambio <span class="text-gray-500">(Opcional, pero muy recomendado)</span>
-                </label>
-                <textarea 
-                  id="exchange_for" 
-                  v-model="product.exchange_for" 
-                  rows="5" 
-                  placeholder="Ej: Busco una tablet Android reciente (Samsung, Xiaomi) en buen estado, o una bicicleta de montaña para principiantes. También podría considerar herramientas eléctricas."
-                  class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#d7037b] focus:border-[#d7037b] sm:text-sm transition duration-150 ease-in-out resize-y"
-                ></textarea>
-                <div class="mt-2 text-xs text-gray-500">
-                  <p class="font-medium mb-1">Ejemplos efectivos:</p>
-                  <ul class="list-disc pl-5 space-y-1">
-                    <li>"Interesado en intercambiar por un portátil con características similares"</li>
-                    <li>"Abierto a ofertas de muebles para oficina o equipos de sonido"</li>
-                    <li>"Busco principalmente bicicletas urbanas, pero considero otras opciones"</li>
-                  </ul>
-                </div>
-              </div>
-
-              <!-- Resumen de la publicación -->
-              <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                  <EyeIcon class="h-5 w-5 text-gray-600 mr-2" />
-                  Así verán los demás tu publicación
-                </h3>
-                
-                <div class="space-y-3">
-                  <div class="flex items-start">
-                    <span class="text-sm font-medium text-gray-600 w-24 flex-shrink-0">Título:</span>
-                    <span class="text-sm text-gray-800">{{ product.title || "(No especificado)" }}</span>
-                  </div>
-                  
-                  <div class="flex items-start">
-                    <span class="text-sm font-medium text-gray-600 w-24 flex-shrink-0">Categoría:</span>
-                    <span class="text-sm text-gray-800">{{ getCategoryName(product.category) || "(No especificada)" }}</span>
-                  </div>
-                  
-                  <div class="flex items-start">
-                    <span class="text-sm font-medium text-gray-600 w-24 flex-shrink-0">Condición:</span>
-                    <span class="text-sm text-gray-800">{{ getConditionName(product.condition) || "(No especificada)" }}</span>
-                  </div>
-                  
-                  <div class="flex items-start">
-                    <span class="text-sm font-medium text-gray-600 w-24 flex-shrink-0">Fotos:</span>
-                    <span class="text-sm text-gray-800">{{ imagePreviews.length }} {{ imagePreviews.length === 1 ? 'imagen' : 'imágenes' }}</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Nota final con animación -->
-              <div class="bg-gradient-to-r from-[#f8e1ee] to-[#fdf2f8] p-4 rounded-lg border border-[#fbcfe8]">
-                <div class="flex items-center">
-                  <RocketLaunchIcon class="h-6 w-6 text-[#d7037b] mr-3 animate-bounce" />
-                  <p class="font-semibold text-[#9e0154]">¡Estás a un paso de encontrar el intercambio perfecto!</p>
-                </div>
-                <p class="mt-2 text-sm text-gray-700">
-                  Revisa que toda la información sea correcta antes de publicar. Podrás editar algunos detalles después.
-                </p>
-              </div>
-            </div>
-          </transition>
-
-          <!-- Navegación entre pasos mejorada -->
-          <div class="flex justify-between items-center pt-6 border-t mt-8">
-            <button 
-              type="button" 
-              @click="prevStep" 
-              v-if="currentStep > 1"
-              class="inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d7037b] transition-colors duration-200"
-            >
-              <ArrowLeftIcon class="-ml-1 mr-2 h-5 w-5 text-gray-500" />
-              Atrás
-            </button>
-            <div v-else></div>
-            
-            <button 
-              type="button" 
-              @click="nextStep" 
-              v-if="currentStep < totalSteps"
-              class="inline-flex items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-lg text-white bg-gradient-to-r from-[#9e0154] to-[#d7037b] hover:from-[#d7037b] hover:to-[#9e0154] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d7037b] transition-all duration-200 group"
-            >
-              Siguiente
-              <ArrowRightIcon class="ml-2 -mr-1 h-5 w-5 text-white group-hover:translate-x-1 transition-transform" />
-            </button>
-
-            <button 
-              type="submit" 
-              :disabled="isSubmitting"
-              v-if="currentStep === totalSteps"
-              class="inline-flex justify-center items-center py-3 px-8 border border-transparent rounded-lg shadow-sm text-lg font-medium text-white bg-gradient-to-r from-[#d7037b] to-[#9e0154] hover:from-[#9e0154] hover:to-[#d7037b] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d7037b] transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed group"
-            >
-              <template v-if="!isSubmitting">
-                <RocketLaunchIcon class="-ml-1 mr-2 h-5 w-5 text-white group-hover:animate-pulse" />
-                ¡Publicar Ahora!
-              </template>
-              <template v-else>
-                <ArrowPathIcon class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
-                Publicando...
-              </template>
-            </button>
-          </div>
         </form>
-
-        <!-- Mensajes de feedback mejorados -->
-        <transition name="fade">
-          <div v-if="successMessage" class="mx-6 sm:mx-8 md:mx-10 mb-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-700 flex items-start shadow-lg">
-            <CheckCircleIcon class="h-6 w-6 mr-3 text-green-500 mt-0.5 flex-shrink-0" />
-            <div>
-              <p class="font-semibold">{{ successMessage }}</p>
-              <p class="text-sm mt-1">Puedes ver tu publicación en tu perfil o esperar ofertas de intercambio.</p>
-            </div>
-          </div>
-        </transition>
-        
-        <transition name="fade">
-          <div v-if="errorMessage" class="mx-6 sm:mx-8 md:mx-10 mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 flex items-start shadow-lg">
-            <ExclamationCircleIcon class="h-6 w-6 mr-3 text-red-500 mt-0.5 flex-shrink-0" />
-            <div>
-              <p class="font-semibold">¡Ups! Algo salió mal</p>
-              <p class="text-sm mt-1">{{ errorMessage }}</p>
-            </div>
-          </div>
-        </transition>
-
-        <!-- Pie de página con enlace -->
-        <div class="mt-8 mb-6 text-center">
-          <router-link to="/" class="inline-flex items-center text-gray-600 hover:text-[#d7037b] font-medium transition-colors text-sm group">
-            <ArrowLeftIcon class="h-4 w-4 mr-1 text-gray-500 group-hover:text-[#d7037b] transition-colors" />
-            Volver a la página principal
-          </router-link>
-        </div>
       </div>
     </main>
+
+    <Footer />
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue';
-import Header from './Header.vue';
-import { 
-  CloudArrowUpIcon, 
-  XMarkIcon, 
-  ArrowPathIcon, 
-  CheckCircleIcon, 
-  ExclamationCircleIcon,
-  ArrowRightIcon,
-  ArrowLeftIcon,
-  InformationCircleIcon,
-  PhotoIcon,
-  GiftIcon,
-  ExclamationTriangleIcon,
-  LightBulbIcon,
-  SparklesIcon,
-  CheckIcon,
-  ChevronDownIcon,
-  PlusCircleIcon,
-  RocketLaunchIcon,
-  EyeIcon
-} from '@heroicons/vue/24/outline'; 
+import { ref, reactive } from 'vue';
+import Header from './Header.vue'; // Asume que Header.vue existe
+import Footer from './Footer.vue'; // Importa el componente Footer
 
 const currentStep = ref(1);
-const totalSteps = 3;
-const dragOver = ref(false);
+const isSubmitting = ref(false);
+const errorMessage = ref('');
 
 const product = reactive({
-  title: '',
-  description: '',
+  name: '',
   category: '',
   condition: '',
-  exchange_for: '',
-  images: [] 
+  description: '',
+  photos: [],
 });
 
-const imagePreviews = ref([]); 
-const step1Errors = reactive({});
-const step2Errors = reactive({});
-const isSubmitting = ref(false); 
-const successMessage = ref('');
-const errorMessage = ref('');
-const fileInput = ref(null); 
+const imagePreviews = ref([]); // Para almacenar las URLs de previsualización de imágenes
 
-// Computed properties
-const progressPercentage = computed(() => {
-    return `${(currentStep.value / totalSteps) * 100}%`;
+const step1Errors = reactive({
+  name: '',
+  category: '',
+  condition: '',
+  description: '',
 });
 
-// Helper functions
-const getStepName = (step) => {
-  switch(step) {
-    case 1: return 'Artículo';
-    case 2: return 'Fotos';
-    case 3: return 'Intercambio';
-    default: return '';
+const step2Errors = reactive({
+  photos: '',
+});
+
+const fileInput = ref(null); // Ref para el input de tipo file
+
+const validateStep1 = () => {
+  let isValid = true;
+  // Resetear errores
+  Object.keys(step1Errors).forEach(key => step1Errors[key] = '');
+
+  if (!product.name.trim()) {
+    step1Errors.name = 'El nombre del producto es obligatorio.';
+    isValid = false;
+  }
+  if (!product.category) {
+    step1Errors.category = 'Selecciona una categoría.';
+    isValid = false;
+  }
+  if (!product.condition) {
+    step1Errors.condition = 'Selecciona el estado del producto.';
+    isValid = false;
+  }
+  if (!product.description.trim()) {
+    step1Errors.description = 'La descripción es obligatoria.';
+    isValid = false;
+  } else if (product.description.length > 500) {
+    step1Errors.description = 'La descripción no debe exceder los 500 caracteres.';
+    isValid = false;
+  }
+  return isValid;
+};
+
+const validateStep2 = () => {
+  let isValid = true;
+  // Resetear errores
+  Object.keys(step2Errors).forEach(key => step2Errors[key] = '');
+
+  if (product.photos.length === 0) {
+    step2Errors.photos = 'Sube al menos una foto de tu producto.';
+    isValid = false;
+  }
+  return isValid;
+};
+
+const goToNextStep = () => {
+  if (validateStep1()) {
+    currentStep.value = 2;
+    errorMessage.value = ''; // Limpiar mensaje de error al avanzar
+  } else {
+    errorMessage.value = 'Por favor, corrige los errores en los detalles básicos.';
   }
 };
 
-const getCategoryName = (category) => {
-  const categories = {
-    'electronics': 'Electrónica',
-    'books': 'Libros',
-    'clothing': 'Ropa y Accesorios',
-    'home': 'Hogar y Jardín',
-    'sports': 'Deportes y Ocio',
-    'collectibles': 'Coleccionables',
-    'vehicles': 'Vehículos y Partes',
-    'services': 'Servicios',
-    'other': 'Otro'
-  };
-  return categories[category] || '';
+const goToPreviousStep = () => {
+  currentStep.value = 1;
+  errorMessage.value = ''; // Limpiar mensaje de error al retroceder
 };
 
-const getConditionName = (condition) => {
-  const conditions = {
-    'new': 'Nuevo',
-    'like-new': 'Como Nuevo',
-    'used-good': 'Usado - Buen Estado',
-    'used-fair': 'Usado - Estado Regular',
-    'for-parts': 'Para Partes / Reparar'
-  };
-  return conditions[condition] || '';
-};
-
-// Step navigation
-const goToStep = (step) => {
-  if (step < currentStep.value) {
-    currentStep.value = step;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-};
-
-const validateStep = (step) => {
-    let isValid = true;
-    
-    if (step === 1) {
-        step1Errors.title = '';
-        step1Errors.description = '';
-        step1Errors.category = '';
-        step1Errors.condition = '';
-
-        if (!product.title.trim()) {
-            step1Errors.title = 'El título es obligatorio.';
-            isValid = false;
-        } else if (product.title.trim().length < 5) {
-            step1Errors.title = 'El título debe tener al menos 5 caracteres.';
-            isValid = false;
-        }
-
-        if (!product.description.trim()) {
-            step1Errors.description = 'La descripción es obligatoria.';
-            isValid = false;
-        } else if (product.description.trim().length < 20) {
-            step1Errors.description = 'La descripción debe tener al menos 20 caracteres.';
-            isValid = false;
-        }
-        
-        if (!product.category) {
-            step1Errors.category = 'La categoría es obligatoria.';
-            isValid = false;
-        }
-        
-        if (!product.condition) {
-            step1Errors.condition = 'La condición es obligatoria.';
-            isValid = false;
-        }
-    } else if (step === 2) {
-        step2Errors.images = '';
-        if (product.images.length === 0) {
-            step2Errors.images = 'Debes subir al menos una imagen de tu artículo.';
-            isValid = false;
-        } else if (product.images.length > 5) {
-            step2Errors.images = 'Puedes subir un máximo de 5 imágenes.';
-            isValid = false;
-        }
-    }
-    
-    return isValid;
-};
-
-const nextStep = () => {
-    successMessage.value = '';
-    errorMessage.value = '';
-
-    if (validateStep(currentStep.value)) {
-        if (currentStep.value < totalSteps) {
-            currentStep.value++;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    } else {
-        errorMessage.value = 'Por favor, completa los campos obligatorios del paso actual.';
-        window.scrollTo({ 
-          top: 0, 
-          behavior: 'smooth' 
-        });
-    }
-};
-
-const prevStep = () => {
-    successMessage.value = '';
-    errorMessage.value = '';
-    if (currentStep.value > 1) {
-        currentStep.value--;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-};
-
-// Image handling
 const triggerFileInput = () => {
   fileInput.value.click();
 };
 
-const handleDrop = (e) => {
-  dragOver.value = false;
-  fileInput.value.files = e.dataTransfer.files;
-  handleImageUpload(e);
+const handleFileChange = (event) => {
+  const files = event.target.files;
+  processFiles(files);
 };
 
-const handleImageUpload = (event) => {
-  const files = Array.from(event.target.files || event.dataTransfer.files);
-  const maxFiles = 5;
-  const maxFileSizeMB = 5;
+const handleDragOver = (event) => {
+  event.target.classList.add('border-rose-500', 'bg-rose-50');
+};
 
-  errorMessage.value = '';
-  step2Errors.images = '';
+const handleDragLeave = (event) => {
+  event.target.classList.remove('border-rose-500', 'bg-rose-50');
+};
 
-  if ((product.images.length + files.length) > maxFiles) {
-    step2Errors.images = `Solo puedes subir un máximo de ${maxFiles} imágenes (ya tienes ${product.images.length}).`;
+const handleDrop = (event) => {
+  event.target.classList.remove('border-rose-500', 'bg-rose-50');
+  const files = event.dataTransfer.files;
+  processFiles(files);
+};
+
+const processFiles = (files) => {
+  errorMessage.value = ''; // Limpiar errores de fotos
+  if (product.photos.length + files.length > 4) {
+    errorMessage.value = 'Solo puedes subir un máximo de 4 imágenes.';
     return;
   }
 
-  const newValidFiles = [];
-  files.forEach(file => {
-    const isImage = file.type.startsWith('image/');
-    const isSizeValid = file.size <= maxFileSizeMB * 1024 * 1024; 
-    
-    if (!isImage) {
-        errorMessage.value = `El archivo "${file.name}" no es una imagen válida.`;
-    } else if (!isSizeValid) {
-        errorMessage.value = `El archivo "${file.name}" excede el tamaño máximo de ${maxFileSizeMB}MB.`;
-    } else {
-      newValidFiles.push(file);
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    if (file.type.startsWith('image/') && product.photos.length < 4) {
+      product.photos.push(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreviews.value.push(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    } else if (!file.type.startsWith('image/')) {
+        errorMessage.value = 'Solo se permiten archivos de imagen.';
     }
-  });
-
-  product.images.push(...newValidFiles);
-
-  newValidFiles.forEach(file => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      imagePreviews.value.push(e.target.result);
-    };
-    reader.readAsDataURL(file);
-  });
-  
-  if (product.images.length > 0 && step2Errors.images === 'Debes subir al menos una imagen de tu artículo.') {
-      step2Errors.images = '';
+  }
+  // Limpiar el input de archivo para permitir la misma selección de nuevo
+  if (fileInput.value) {
+    fileInput.value.value = '';
   }
 };
 
 const removeImage = (index) => {
-  product.images.splice(index, 1);
+  product.photos.splice(index, 1);
   imagePreviews.value.splice(index, 1);
-  if (product.images.length === 0) {
-      step2Errors.images = 'Debes subir al menos una imagen de tu artículo.';
-  } else {
-      step2Errors.images = '';
+  if (product.photos.length === 0 && step2Errors.photos) {
+    step2Errors.photos = 'Sube al menos una foto de tu producto.';
   }
-  errorMessage.value = ''; 
 };
 
-const setAsPrimary = (index) => {
-  // Mover la imagen seleccionada a la primera posición
-  const img = imagePreviews.value[index];
-  const file = product.images[index];
-  
-  imagePreviews.value.splice(index, 1);
-  imagePreviews.value.unshift(img);
-  
-  product.images.splice(index, 1);
-  product.images.unshift(file);
-};
-
-// Form submission
-const handleFormSubmission = async () => {
-    successMessage.value = '';
+const handleSubmit = async () => {
     errorMessage.value = '';
-
-    if (!validateStep(1) || !validateStep(2)) {
-        errorMessage.value = 'Por favor, revisa todos los pasos y completa los campos obligatorios.';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (!validateStep2()) {
+        errorMessage.value = 'Por favor, sube al menos una imagen.';
         return;
     }
 
     isSubmitting.value = true;
-    console.log('Datos finales a enviar:', product);
+    
+    // Simular el envío de datos a un backend
+    // En un caso real, aquí usarías FormData para enviar archivos y otros datos
+    // const formData = new FormData();
+    // formData.append('name', product.name);
+    // formData.append('category', product.category);
+    // formData.append('condition', product.condition);
+    // formData.append('description', product.description);
+    // product.photos.forEach((photo, index) => {
+    //     formData.append(`photo_${index}`, photo);
+    // });
 
     try {
-        // Simulación de envío a API
-        await new Promise(resolve => setTimeout(resolve, 2500));
+        // Ejemplo de fetch (descomentar y adaptar para un backend real)
+        // const response = await fetch('/api/products', {
+        //     method: 'POST',
+        //     body: formData,
+        // });
 
-        successMessage.value = '¡Tu artículo ha sido publicado con éxito! 🎉';
-        
-        // Resetear el formulario
+        // if (!response.ok) {
+        //     const errorData = await response.json();
+        //     throw new Error(errorData.message || 'Error al publicar el producto.');
+        // }
+
+        // const result = await response.json();
+        // console.log('Producto publicado:', result);
+
+        // Simulación de éxito
+        await new Promise(resolve => setTimeout(resolve, 2000)); 
+        alert('¡Producto publicado con éxito!');
+
+        // Resetear formulario y estado
         Object.assign(product, {
-          title: '',
-          description: '',
-          category: '',
-          condition: '',
-          exchange_for: '',
-          images: []
+            name: '',
+            category: '',
+            condition: '',
+            description: '',
+            photos: [],
         });
         imagePreviews.value = [];
         Object.keys(step1Errors).forEach(key => step1Errors[key] = '');
@@ -772,7 +408,7 @@ const handleFormSubmission = async () => {
 </script>
 
 <style scoped>
-/* Transiciones mejoradas */
+/* Transiciones Vue - se mantienen porque son específicas de Vue */
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
 }
@@ -794,18 +430,44 @@ const handleFormSubmission = async () => {
   opacity: 0;
 }
 
-/* Estilo personalizado para el select */
+/* Estilo personalizado para el select - mantenido para el icono SVG */
+/* Este SVG codificado en base64 es un patrón común para personalizar el icono de flecha del select */
 select {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-  background-position: right 0.5rem center;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
   background-repeat: no-repeat;
-  background-size: 1.5em 1.5em;
-  -webkit-print-color-adjust: exact;
-  print-color-adjust: exact;
+  background-size: 0.8em 0.8em;
+  padding-right: 2.5rem;
 }
 
-/* Efecto de hover para las imágenes */
-.group:hover .group-hover\:opacity-100 {
-  opacity: 1;
+/* Animaciones de keyframes - generalmente se definirían en un CSS global o tailwind.config.js */
+/* Si no están en tu config de Tailwind, déjalas aquí, si sí, remuévelas */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.3s;
 }
 </style>
