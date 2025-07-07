@@ -1,0 +1,9 @@
+# Ignorar la carpeta 'frontend'
+frontend/
+
+# Archivos y carpetas comunes de Node/NPM
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+.env
