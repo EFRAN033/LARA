@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col h-full animate-card-fade-in"
+  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col h-full group animate-card-fade-in"
        tabindex="0"
        role="listitem"
        :aria-labelledby="'product-name-' + product.id"
@@ -7,8 +7,8 @@
     <div class="relative w-full h-48 sm:h-56 overflow-hidden">
       <img :src="product.imageUrl" :alt="product.name" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
       <div class="absolute top-3 right-3 bg-brand-primary/90 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10 flex items-center gap-1 opacity-90">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm.94 13.06a.75.75 0 01-1.06 0l-4-4a.75.75 0 011.06-1.06L9.25 11.44V7a.75.75 0 011.5 0v4.44l2.19-2.19a.75.75 0 111.06 1.06l-4 4z" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-300" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.929 8.72c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
         </svg>
         <span>{{ getStarRating(product.value) }} Estrellas</span>
       </div>
@@ -105,4 +105,24 @@ const formatDate = (dateString) => {
     transform: translateY(0);
   }
 }
+
+/* Base colors for brand if not defined in tailwind.config.js */
+/*
+If 'brand-primary' and 'brand-accentPink' are not defined in your Tailwind config,
+you might see issues. Consider adding them to your tailwind.config.js like this:
+
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          primary: '#yourPrimaryColor', // e.g., #EC4899 for a vibrant pink
+          accentPink: '#yourAccentPinkColor', // e.g., #D946EF for a purple-pink
+          accentBlue: '#yourAccentBlueColor', // e.g., #3B82F6 for a strong blue
+        },
+      },
+    },
+  },
+};
+*/
 </style>
