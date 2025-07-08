@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useUserStore } from '@/stores/user'; // Import your user store for route guards
 
 // Core layout and main page components
 import MainPage from '../views/MainPage.vue';
@@ -11,16 +12,18 @@ import ProductFeed from '../views/ProductFeed.vue';
 import AboutUsView from '../views/AboutUsView.vue';    // Corresponds to 'Nosotros'
 import PublishView from '../views/PublishView.vue';  // Corresponds to 'Publicar'
 import EventsView from '../views/EventsView.vue';    // Corresponds to 'Eventos'
-// Note: You didn't list NewView.vue in your 'ls' output, but it was included previously.
-// If 'NewView.vue' does not exist, you should remove this line and its route.
-// For now, I'll keep it commented out as a reminder:
-// import NewView from '../views/NewView.vue';          // Corresponds to 'Nuevo'
 import InboxView from '../views/InboxView.vue';      // Corresponds to 'Buzón'
 
-// --- Nuevas importaciones para Login y Register ---
-import LoginView from '../views/Login.vue';      // Asegúrate de que esta ruta sea correcta
-import RegisterView from '../views/Register.vue'; // Asegúrate de que esta ruta sea correcta
-// --- Fin de nuevas importaciones ---
+// --- Nuevas importaciones para Login, Register, MyProfile y Configuration ---
+import LoginView from '../views/Login.vue';
+import RegisterView from '../views/Register.vue';
+import MyProfile from '../views/MyProfile.vue';
+import ConfigurationView from '../views/Configuration.vue';
+// --- FIN de nuevas importaciones ---
+
+// --- NUEVA IMPORTACIÓN PARA MyProducts.vue ---
+import MyProducts from '../views/MyProducts.vue';
+// --- FIN NUEVA IMPORTACIÓN ---
 
 const routes = [
   {
@@ -31,7 +34,7 @@ const routes = [
       title: 'Inicio | KambiaPe'
     }
   },
-  // Existing structural routes
+  // Existing structural routes (consider if these should be direct routes or sub-components)
   {
     path: '/header',
     name: 'header',
@@ -89,17 +92,6 @@ const routes = [
       title: 'Eventos | KambiaPe'
     }
   },
-  // If you decide to add 'NewView.vue' later, uncomment this section
-  /*
-  {
-    path: '/nuevo', // Path for 'Nuevo'
-    name: 'new',
-    component: NewView,
-    meta: {
-      title: 'Nuevo | KambiaPe'
-    }
-  },
-  */
   {
     path: '/buzon', // Path for 'Buzón'
     name: 'inbox',
@@ -108,9 +100,9 @@ const routes = [
       title: 'Buzón | KambiaPe'
     }
   },
-  // --- Nuevas rutas para Login y Register ---
+  // --- Rutas para autenticación y perfil de usuario ---
   {
-    path: '/login', // Ruta para el formulario de inicio de sesión
+    path: '/login',
     name: 'Login',
     component: LoginView,
     meta: {
@@ -118,14 +110,42 @@ const routes = [
     }
   },
   {
-    path: '/register', // Ruta para el formulario de registro
+    path: '/register',
     name: 'Register',
     component: RegisterView,
     meta: {
       title: 'Registrarse | KambiaPe'
     }
   },
-  // --- Fin de nuevas rutas ---
+  {
+    path: '/profile',
+    name: 'MyProfile',
+    component: MyProfile,
+    meta: {
+      title: 'Mi Perfil | KambiaPe',
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: ConfigurationView,
+    meta: {
+      title: 'Configuración | KambiaPe',
+      requiresAuth: true
+    }
+  },
+  // --- NUEVA RUTA PARA "MIS PRODUCTOS" (INVENTARIO) ---
+  {
+    path: '/my-products', // Esta es la ruta a la que apunta el botón del sidebar
+    name: 'MyProducts',
+    component: MyProducts,
+    meta: {
+      title: 'Mis Productos | KambiaPe',
+      requiresAuth: true // Probablemente quieras que esta ruta esté protegida también
+    }
+  },
+  // --- FIN NUEVA RUTA ---
 
   // Catch-all route for unmatched paths, redirects to home
   {
@@ -137,25 +157,29 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-  // This ensures smooth scrolling to anchors or maintains scroll position
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
       return {
         el: to.hash,
         behavior: 'smooth',
-        top: 100 // Offset for fixed header, adjust as needed
+        top: 100
       };
     } else if (savedPosition) {
       return savedPosition;
     }
-    return { top: 0 }; // Scroll to top by default
+    return { top: 0 };
   }
 });
 
-// Global navigation guard to update document title
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title || 'KambiaPe';
-  next(); // Continue to the next navigation step
+
+  const userStore = useUserStore();
+  if (to.meta.requiresAuth && !userStore.isLoggedIn) {
+    next('/login');
+  } else {
+    next();
+  }
 });
 
 export default router;

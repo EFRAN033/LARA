@@ -10,17 +10,23 @@
         aria-labelledby="proposal-title"
         aria-describedby="proposal-description"
       >
-        <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 shadow-2xl max-w-3xl w-full text-center md:text-left transform scale-95 opacity-0 animate-scale-in-fade" @click.stop>
+        <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 shadow-2xl max-w-3xl w-full text-center md:text-left transform scale-95 opacity-0 animate-scale-in-fade relative" @click.stop>
+          <button @click="cancelProposal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200" aria-label="Cerrar modal">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
           <h3 id="proposal-title" class="text-2xl lg:text-3xl font-extrabold text-gray-900 dark:text-white mb-2 text-center leading-tight">
             Propón un <span class="text-rose-500 animate-pulse-text">Intercambio</span> por:
           </h3>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-3 p-3 mb-6 bg-rose-50 dark:bg-gray-800 rounded-xl shadow-inner border border-rose-100 dark:border-gray-700">
             <div class="flex-shrink-0">
-              <img :src="activeProposal.imageUrl" :alt="activeProposal.name" class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-xl shadow-md border-2 border-rose-200 dark:border-gray-700" />
+              <img :src="`${API_BASE_URL}${activeProposal.thumbnail_image_url}`" :alt="activeProposal.title" class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-xl shadow-md border-2 border-rose-200 dark:border-gray-700" />
             </div>
             <div class="text-center sm:text-left">
-              <p class="text-lg font-semibold text-gray-800 dark:text-gray-100">{{ activeProposal.name }}</p>
-              <p class="text-sm text-gray-600 dark:text-gray-400">{{ activeProposal.category }}</p>
+              <p class="text-lg font-semibold text-gray-800 dark:text-gray-100">{{ activeProposal.title }}</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">{{ activeProposal.category_name }}</p>
             </div>
           </div>
 
@@ -42,10 +48,10 @@
               role="button"
               :aria-pressed="selectedProductForProposal && selectedProductForProposal.id === product.id"
             >
-              <img :src="product.imageUrl" :alt="product.name" class="w-16 h-16 object-cover rounded-md mr-4 border border-gray-200 dark:border-gray-600" />
+              <img :src="`${API_BASE_URL}${product.thumbnail_image_url}`" :alt="product.title" class="w-16 h-16 object-cover rounded-md mr-4 border border-gray-200 dark:border-gray-600" />
               <div class="flex-1">
-                <p class="font-semibold text-gray-800 dark:text-gray-100">{{ product.name }}</p>
-                <p class="text-sm text-gray-500 dark:text-gray-400">{{ product.category }}</p>
+                <p class="font-semibold text-gray-800 dark:text-gray-100">{{ product.title }}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ product.category_name }}</p>
               </div>
               <div v-if="selectedProductForProposal && selectedProductForProposal.id === product.id" class="text-rose-500 dark:text-rose-400 ml-auto animate-check-pulse">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -53,7 +59,13 @@
                 </svg>
               </div>
             </div>
-            <p v-if="userProducts.length === 0" class="text-center text-gray-500 dark:text-gray-400 py-4">No tienes productos para intercambiar.</p>
+            <div v-if="userProducts.length === 0" class="text-center text-gray-500 dark:text-gray-400 py-4">
+              <p class="mb-4">Parece que no tienes productos publicados para intercambiar.</p>
+              <router-link to="/publish" class="inline-flex items-center px-5 py-2.5 rounded-full bg-rose-500 text-white font-semibold shadow-md hover:bg-rose-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                Publicar un Producto
+              </router-link>
+            </div>
           </div>
 
           <div class="flex justify-end space-x-3 mt-6">
@@ -84,7 +96,7 @@
       </div>
     </transition>
 
-    <div class="bg-gradient-to-br from-rose-50 to-pink-100 py-16 sm:py-20 text-center relative overflow-hidden shadow-md">
+    <div class="bg-gradient-to-br from-rose-50 to-pink-100 py-16 sm:py-20 text-center relative overflow-hidden shadow-md rounded-lg mb-8">
       <div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml,%3Csvg width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 100 100\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cpath d=\\'M0 0h50v50H0z\\' fill=\\'%23d7037b\\' fill-opacity=\\'0.1\\' fill-rule=\\'evenodd\\'/%3E%3Cpath d=\\'M50 50h50v50H50z\\' fill=\\'%23ffffff\\' fill-opacity=\\'0.05\\' fill-rule=\\'evenodd\\'/%3E%3C/svg%3E');"></div>
       <div class="relative z-10">
         <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4 animate-fade-in-up">
@@ -105,7 +117,7 @@
       </div>
     </div>
 
-    <div class="bg-white py-6 shadow-sm border-b border-gray-100">
+    <div class="bg-white py-6 shadow-sm border-b border-gray-100 rounded-lg mb-8">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-6">
         <div class="w-full sm:w-auto flex-grow">
           <label for="category-filter" class="sr-only">Filtrar por Categoría</label>
@@ -113,7 +125,7 @@
             <select
               id="category-filter"
               v-model="selectedCategory"
-              class="block w-full px-4 py-2.5 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 transition duration-200 text-gray-800 appearance-none pr-10 bg-white"
+              class="block w-full px-4 py-2.5 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 transition duration-200 text-gray-800 appearance-none pr-10 bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
             >
               <option value="">Todas las categorías</option>
               <option>Electrónica</option>
@@ -130,7 +142,7 @@
               <option>Arte</option>
               <option>Otros</option>
             </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700 dark:text-gray-300">
               <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9z"/></svg>
             </div>
           </div>
@@ -142,14 +154,14 @@
             <select
               id="sort-by"
               v-model="sortBy"
-              class="block w-full px-4 py-2.5 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 transition duration-200 text-gray-800 appearance-none pr-10 bg-white"
+              class="block w-full px-4 py-2.5 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 transition duration-200 text-gray-800 appearance-none pr-10 bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
             >
               <option value="date-desc">Más Recientes</option>
               <option value="date-asc">Más Antiguos</option>
               <option value="name-asc">Nombre (A-Z)</option>
               <option value="name-desc">Nombre (Z-A)</option>
             </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700 dark:text-gray-300">
               <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9z"/></svg>
             </div>
           </div>
@@ -157,44 +169,53 @@
 
         <button
           @click="resetFilters"
-          class="w-full sm:w-auto flex-shrink-0 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2.5 px-6 rounded-full transition duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+          class="w-full sm:w-auto flex-shrink-0 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2.5 px-6 rounded-full transition duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
         >
           Reiniciar Filtros
         </button>
       </div>
     </div>
 
-
-    <div class="py-10 md:py-12 bg-gray-50">
-      <div v-if="loading" class="text-center py-20">
-        <p class="text-gray-600 text-lg">Cargando productos...</p>
-        <div class="animate-spin rounded-full h-16 w-16 border-4 border-rose-500 border-t-transparent mx-auto mt-6"></div>
+    <div class="py-10 md:py-12 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-inner">
+      <div v-if="loading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 sm:px-6 lg:px-8">
+        <div v-for="n in 12" :key="n" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 animate-pulse">
+          <div class="w-full h-48 sm:h-56 bg-gray-200 dark:bg-gray-700"></div>
+          <div class="p-5">
+            <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
+            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-3"></div>
+            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6 mb-4"></div>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100 dark:border-gray-700">
+              <div class="h-5 bg-gray-200 dark:bg-gray-700 rounded w-1/3"></div>
+              <div class="h-10 bg-rose-200 dark:bg-rose-700 rounded-full w-24"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div v-else-if="filteredProducts.length === 0" class="text-center py-20">
-        <p class="text-xl text-gray-600">No se encontraron productos que coincidan con tus criterios.</p>
-        <button @click="resetFilters" class="mt-6 px-6 py-3 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors">
+        <p class="text-xl text-gray-600 dark:text-gray-300 mb-6">No se encontraron productos que coincidan con tus criterios.</p>
+        <button @click="resetFilters" class="mt-6 px-6 py-3 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors shadow-md focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2">
           Mostrar todos los productos
         </button>
       </div>
 
       <TransitionGroup name="product-list" tag="div" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 sm:px-6 lg:px-8">
-        <div v-for="product in filteredProducts" :key="product.id" class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group border border-gray-100">
+        <div v-for="product in filteredProducts" :key="product.id" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden group border border-gray-100 dark:border-gray-700">
           <div class="relative">
-            <img :src="product.imageUrl" :alt="product.name" class="w-full h-48 object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-300" />
+            <img :src="`${API_BASE_URL}${product.thumbnail_image_url}`" :alt="product.title" class="w-full h-48 object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-300" />
             <div class="absolute top-3 right-3 bg-rose-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-              {{ product.category }}
+              {{ product.category_name }}
             </div>
           </div>
           <div class="p-5">
-            <h3 class="text-xl font-bold text-gray-900 mb-2 truncate">{{ product.name }}</h3>
-            <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ product.description }}</p>
-            <div class="flex items-center text-gray-500 text-sm mb-4">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 truncate">{{ product.title }}</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">{{ product.description }}</p>
+            <div class="flex items-center text-gray-500 dark:text-gray-400 text-sm mb-4">
               <svg class="w-4 h-4 mr-2 text-rose-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.929 8.72c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z"></path></svg>
               <span>{{ product.condition }}</span>
             </div>
-            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
-              <span class="text-lg font-semibold text-gray-700">Hace {{ product.ageDays }} días</span>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100 dark:border-gray-700">
+              <span class="text-lg font-semibold text-gray-700 dark:text-gray-200">Hace {{ calculateAgeDays(product.created_at) }} días</span>
               <button 
                 @click="openProposalModal(product)"
                 class="bg-rose-500 hover:bg-rose-600 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2"
@@ -210,157 +231,132 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
+import { useUserStore } from '@/stores/user';
+import axios from 'axios';
+import router from '@/router';
 
 const products = ref([]);
-const userProducts = ref([]); // Simula los productos del usuario loggeado
+const userProducts = ref([]);
 const loading = ref(true);
 const selectedCategory = ref('');
-const sortBy = ref('date-desc'); // 'date-desc', 'date-asc', 'name-asc', 'name-desc'
-const activeProposal = ref(null); // Producto para el que se está proponiendo un intercambio
-const selectedProductForProposal = ref(null); // Producto del usuario seleccionado para la propuesta
-const showNotification = ref(false); // Para la notificación de éxito
+const sortBy = ref('date-desc');
+const activeProposal = ref(null);
+const selectedProductForProposal = ref(null);
+const showNotification = ref(false);
 
-// Simulación de carga de datos
-const fetchProducts = async () => {
-  loading.value = true;
-  await new Promise(resolve => setTimeout(resolve, 1500)); // Simula latencia de red
-  products.value = [
-    {
-      id: 1,
-      name: 'Consola de Videojuegos Retro',
-      description: 'Consola clásica en perfecto estado con varios juegos. Ideal para coleccionistas.',
-      imageUrl: 'https://images.unsplash.com/photo-1585642732979-b7b51e06d15a?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      category: 'Videojuegos',
-      condition: 'Como Nuevo',
-      datePosted: '2025-06-15T10:00:00Z',
-    },
-    {
-      id: 2,
-      name: 'Libro "Cien Años de Soledad"',
-      description: 'Edición de tapa dura en excelente condición. Lectura obligatoria.',
-      imageUrl: 'https://images.unsplash.com/photo-1592496431122-2349e0fbc666?q=80&w=2712&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      category: 'Libros',
-      condition: 'Usado - Buen Estado',
-      datePosted: '2025-06-20T14:30:00Z',
-    },
-    {
-      id: 3,
-      name: 'Bicicleta de Montaña',
-      description: 'Bicicleta de montaña usada, ideal para senderos. Requiere ajuste de frenos.',
-      imageUrl: 'https://images.unsplash.com/photo-1574041189494-0d3570659638?q=80&w=2835&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      category: 'Deportes',
-      condition: 'Usado - Aceptable',
-      datePosted: '2025-06-01T08:15:00Z',
-    },
-    {
-      id: 4,
-      name: 'Set de Herramientas Completo',
-      description: 'Caja de herramientas con variedad de llaves, destornilladores y más. Casi nuevo.',
-      imageUrl: 'https://images.unsplash.com/photo-1621980860547-5d0b9049788f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      category: 'Herramientas',
-      condition: 'Nuevo',
-      datePosted: '2025-07-01T11:00:00Z',
-    },
-    {
-      id: 5,
-      name: 'Cámara Fotográfica Vintage',
-      description: 'Cámara analógica con lentes intercambiables. Funciona perfectamente.',
-      imageUrl: 'https://images.unsplash.com/photo-1510125867995-177217983610?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      category: 'Electrónica',
-      condition: 'Usado - Buen Estado',
-      datePosted: '2025-06-25T09:00:00Z',
-    },
-    {
-      id: 6,
-      name: 'Sofá de Tres Cuerpos',
-      description: 'Sofá cómodo, ideal para sala de estar. Tapicería en buen estado.',
-      imageUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      category: 'Mobiliario',
-      condition: 'Usado - Aceptable',
-      datePosted: '2025-06-10T16:00:00Z',
-    },
-    {
-      id: 7,
-      name: 'Guitarra Acústica',
-      description: 'Guitarra para principiantes, buen sonido. Incluye funda.',
-      imageUrl: 'https://images.unsplash.com/photo-1561703276-857c50a04910?q=80&w=2940&auto=format&fit=crop',
-      category: 'Música',
-      condition: 'Como Nuevo',
-      datePosted: '2025-07-02T18:00:00Z',
-    },
-    {
-      id: 8,
-      name: 'Juego de Mesa Moderno',
-      description: 'Juego de estrategia para 2-4 jugadores. Piezas completas.',
-      imageUrl: 'https://images.unsplash.com/photo-1596701092705-d3d611867c29?q=80&w=2940&auto=format&fit=crop',
-      category: 'Juguetes',
-      condition: 'Usado - Buen Estado',
-      datePosted: '2025-06-28T12:00:00Z',
-    },
-  ].map(p => ({
-    ...p,
-    datePosted: new Date(p.datePosted) // Convertir a objeto Date
-  }));
+const userStore = useUserStore();
+const API_BASE_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:8000';
 
-  // Simular productos del usuario loggeado
-  userProducts.value = [
-    {
-      id: 101,
-      name: 'Reloj Inteligente',
-      description: 'Smartwatch en excelente estado, con cargador y caja original.',
-      imageUrl: 'https://images.unsplash.com/photo-1546865882-99227f516a73?q=80&w=2940&auto=format&fit=crop',
-      category: 'Electrónica',
-    },
-    {
-      id: 102,
-      name: 'Colección de Novelas Gráficas',
-      description: 'Serie completa de 5 tomos, edición de coleccionista.',
-      imageUrl: 'https://images.unsplash.com/photo-1506880940386-7a718041a13b?q=80&w=2940&auto=format&fit=crop',
-      category: 'Libros',
-    },
-    {
-      id: 103,
-      name: 'Patines en Línea',
-      description: 'Patines ajustables, ideales para principiantes, talla 38-42.',
-      imageUrl: 'https://images.unsplash.com/photo-1533096232537-b847849e7b23?q=80&w=2940&auto=format&fit=crop',
-      category: 'Deportes',
-    }
-  ];
-
-  loading.value = false;
-};
-
-// Cargar productos al montar el componente
-onMounted(fetchProducts);
-
-// Calcular la "edad" del producto en días
-const addAgeDays = (product) => {
+const calculateAgeDays = (dateString) => {
   const today = new Date();
-  const diffTime = Math.abs(today.getTime() - product.datePosted.getTime());
+  const productDate = new Date(dateString);
+  const diffTime = Math.abs(today.getTime() - productDate.getTime());
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return { ...product, ageDays: diffDays };
+  return diffDays;
 };
 
-// Filtrar y ordenar productos
+const fetchAllProducts = async () => {
+  try {
+    loading.value = true;
+    const response = await fetch(`${API_BASE_URL}/products_feed`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    
+    const loggedInUserId = userStore.user?.id;
+    if (loggedInUserId) {
+      // Filtra los propios productos del usuario de la lista principal
+      products.value = data.filter(product => product.user_id !== loggedInUserId);
+    } else {
+      products.value = data;
+    }
+
+  } catch (error) {
+    console.error("Error fetching all products:", error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+const fetchLoggedInUserProducts = async () => {
+  const loggedInUserId = userStore.user?.id;
+  const authToken = userStore.token;
+
+  console.log("--- DEBUG ProductFeed.vue ---");
+  console.log("ID de usuario en userStore:", loggedInUserId);
+  console.log("Token en userStore:", authToken ? 'Token presente' : 'Token AUSENTE');
+
+  if (!loggedInUserId || !authToken) {
+    userProducts.value = [];
+    console.warn("No hay usuario autenticado o token para cargar productos del usuario.");
+    console.log("userProducts.value después de la advertencia:", userProducts.value);
+    return;
+  }
+  try {
+    const response = await axios.get(`${API_BASE_URL}/users/${loggedInUserId}/products`, {
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    });
+    userProducts.value = response.data;
+
+    console.log("Respuesta de /users/{id}/products:", response.data);
+    console.log("userProducts.value (después de la asignación):", userProducts.value);
+
+  } catch (error) {
+    console.error("Error al obtener los productos del usuario autenticado:", error);
+    userProducts.value = [];
+    if (axios.isAxiosError(error) && error.response) {
+        if (error.response.status === 401) {
+            userStore.clearUser();
+            router.push('/login');
+            alert('Tu sesión ha expirado o no tienes permisos. Por favor, inicia sesión de nuevo si necesitas ver tus productos.');
+        } else {
+            console.error("Detalle del error de Axios:", error.response.data);
+        }
+    } else {
+        alert(`Hubo un error al cargar tus productos: ${error.message}. Inténtalo de nuevo.`);
+    }
+  }
+};
+
+
+onMounted(() => {
+  fetchAllProducts();
+});
+
+// Observar el estado de autenticación para cargar productos del usuario
+watch(() => userStore.isLoggedIn, (newVal) => {
+  console.log('ProductFeed: userStore.isLoggedIn cambió a:', newVal);
+  if (newVal) {
+    fetchLoggedInUserProducts();
+  } else {
+    userProducts.value = [];
+  }
+}, { immediate: true });
+
 const filteredProducts = computed(() => {
-  let filtered = products.value.map(addAgeDays); // Añadir ageDays a cada producto
+  let filtered = [...products.value];
 
   if (selectedCategory.value) {
-    filtered = filtered.filter(product => product.category === selectedCategory.value);
+    filtered = filtered.filter(product => product.category_name === selectedCategory.value);
   }
 
-  // Ordenar
   filtered.sort((a, b) => {
+    const dateA = new Date(a.created_at);
+    const dateB = new Date(b.created_at);
+    
     switch (sortBy.value) {
       case 'date-desc':
-        return b.datePosted.getTime() - a.datePosted.getTime();
+        return dateB.getTime() - dateA.getTime();
       case 'date-asc':
-        return a.datePosted.getTime() - b.datePosted.getTime();
+        return dateA.getTime() - dateB.getTime();
       case 'name-asc':
-        return a.name.localeCompare(b.name);
+        return a.title.localeCompare(b.title);
       case 'name-desc':
-        return b.name.localeCompare(a.name);
+        return b.title.localeCompare(a.title);
       default:
         return 0;
     }
@@ -371,7 +367,12 @@ const filteredProducts = computed(() => {
 
 const openProposalModal = (product) => {
   activeProposal.value = product;
-  selectedProductForProposal.value = null; // Resetear selección al abrir modal
+  selectedProductForProposal.value = null;
+  // Solo llama a fetchLoggedInUserProducts si la lista aún no se ha cargado
+  // Esto evita llamadas redundantes si el watch ya lo hizo.
+  if (userProducts.value.length === 0 && userStore.isLoggedIn) {
+      fetchLoggedInUserProducts(); 
+  }
 };
 
 const cancelProposal = () => {
@@ -389,38 +390,45 @@ const sendProposal = async () => {
     return;
   }
 
-  // Aquí iría la lógica para enviar la propuesta al backend
-  // Por ejemplo, usando fetch o axios:
-  // try {
-  //   const response = await fetch('/api/proposals', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       offeredProductId: selectedProductForProposal.value.id,
-  //       requestedProductId: activeProposal.value.id,
-  //       // Puedes añadir más detalles de la propuesta aquí
-  //     }),
-  //   });
+  console.log("Enviando propuesta:", {
+    offeredProductId: selectedProductForProposal.value.id,
+    requestedProductId: activeProposal.value.id,
+    proposerUserId: userStore.user?.id,
+    ownerOfRequestedProductId: activeProposal.value.user_id
+  });
 
-  //   if (!response.ok) {
-  //     throw new Error('Error al enviar la propuesta');
-  //   }
+  try {
+    const authToken = userStore.token;
+    if (!authToken) {
+      throw new Error("No hay token de autenticación disponible para enviar la propuesta.");
+    }
 
-  //   const data = await response.json();
-  //   console.log('Propuesta enviada:', data);
+    const response = await axios.post(`${API_BASE_URL}/proposals`, {
+      offered_product_id: selectedProductForProposal.value.id,
+      requested_product_id: activeProposal.value.id,
+      proposer_user_id: userStore.user?.id,
+      owner_of_requested_product_id: activeProposal.value.user_id,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
 
-  showNotification.value = true;
-  setTimeout(() => {
-    showNotification.value = false;
-  }, 3000); // La notificación desaparecerá después de 3 segundos
+    showNotification.value = true;
+    setTimeout(() => {
+      showNotification.value = false;
+    }, 3000);
 
-  cancelProposal(); // Cerrar el modal después de enviar
-  // } catch (error) {
-  //   console.error('Error al enviar la propuesta:', error);
-  //   alert('Hubo un error al enviar tu propuesta. Inténtalo de nuevo.');
-  // }
+    cancelProposal();
+  } catch (error) {
+    console.error('Error al enviar la propuesta:', error);
+    if (axios.isAxiosError(error) && error.response) {
+        alert(`Hubo un error al enviar tu propuesta: ${error.response.data.detail || error.message}. Inténtalo de nuevo.`);
+    } else {
+        alert(`Hubo un error al enviar tu propuesta: ${error.message}. Inténtalo de nuevo.`);
+    }
+  }
 };
 
 const resetFilters = () => {
@@ -430,6 +438,8 @@ const resetFilters = () => {
 </script>
 
 <style scoped>
+/* Las animaciones y estilos existentes se mantienen */
+
 /* Transiciones para el overlay */
 .fade-overlay-enter-active,
 .fade-overlay-leave-active {
@@ -560,7 +570,7 @@ const resetFilters = () => {
   transform: translateY(30px);
 }
 .product-list-leave-active {
-  position: absolute; /* Permite que los elementos salientes se desvanezcan sin afectar el layout de los que entran */
+  position: absolute;
 }
 
 /* Efecto de recorte de texto para descripciones y nombres de producto */

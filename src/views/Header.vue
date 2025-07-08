@@ -2,9 +2,9 @@
   <header class="bg-gradient-to-r from-[#d7037b] to-[#9e0154] shadow-lg sticky top-0 z-50 border-b border-white/10 backdrop-blur-sm">
     <div class="container mx-auto px-4 sm:px-6 py-3">
       <div class="flex items-center justify-between">
-        <router-link 
-          to="/" 
-          class="flex items-center group focus-visible:outline-none focus-visible:ring-0" 
+        <router-link
+          to="/"
+          class="flex items-center group focus-visible:outline-none focus-visible:ring-0"
           aria-label="KambiaPe - Inicio"
         >
           <span class="text-2xl font-bold text-white">
@@ -13,10 +13,10 @@
         </router-link>
 
         <nav class="hidden lg:flex items-center space-x-1">
-          <router-link 
+          <router-link
             v-for="link in navLinks"
             :key="link.path"
-            :to="link.path" 
+            :to="link.path"
             class="px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 relative group"
             :class="{
               'text-white bg-white/10': $route.path === link.path,
@@ -25,15 +25,15 @@
           >
             <span class="flex items-center">
               {{ link.label }}
-              <span 
-                v-if="link.badge" 
+              <span
+                v-if="link.badge"
                 :class="link.badge.class"
                 class="ml-1.5 px-1.5 py-0.5 text-xs font-bold rounded-full"
               >
                 {{ link.badge.text }}
               </span>
             </span>
-            <span 
+            <span
               class="absolute left-1/2 -bottom-1 h-0.5 bg-white transition-all duration-300"
               :class="{
                 'w-4/5 left-[10%]': $route.path === link.path,
@@ -45,7 +45,7 @@
 
         <div class="hidden lg:flex items-center space-x-4">
           <div class="relative">
-            <button 
+            <button
               @click="toggleSearch"
               class="p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
               aria-label="Buscar"
@@ -54,14 +54,14 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </button>
-            <div 
+            <div
               v-show="searchOpen"
               class="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-xl overflow-hidden"
               @click.stop
             >
               <div class="relative">
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   placeholder="Buscar en KambiaPe..."
                   class="w-full pl-10 pr-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none"
                   v-model="searchQuery"
@@ -75,17 +75,18 @@
           </div>
 
           <div class="relative">
-            <template v-if="user">
-              <button 
+            <template v-if="userStore.isLoggedIn">
+              <button
                 @click="toggleUserMenu"
                 class="flex items-center space-x-2 focus:outline-none"
                 aria-label="Menú de usuario"
               >
                 <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center overflow-hidden border border-white/20">
-                  <span class="text-sm font-medium text-white">{{ userInitials }}</span>
+                  <span class="text-sm font-medium text-white">{{ userStore.userInitials }}</span>
                 </div>
+                <span class="text-white text-sm font-medium hidden md:inline">{{ userStore.userFirstName }}</span>
               </button>
-              
+
               <transition
                 enter-active-class="transition duration-100 ease-out"
                 leave-active-class="transition duration-75 ease-in"
@@ -94,26 +95,26 @@
                 leave-from-class="transform scale-100 opacity-100"
                 leave-to-class="transform scale-95 opacity-0"
               >
-                <div 
+                <div
                   v-show="userMenuOpen"
                   class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
                   @click.stop
                 >
-                  <router-link 
-                    to="/profile" 
+                  <router-link
+                    to="/profile"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     @click="userMenuOpen = false"
                   >
                     Mi perfil
                   </router-link>
-                  <router-link 
-                    to="/settings" 
+                  <router-link
+                    to="/settings"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     @click="userMenuOpen = false"
                   >
                     Configuración
                   </router-link>
-                  <button 
+                  <button
                     @click="logout"
                     class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
@@ -123,15 +124,15 @@
               </transition>
             </template>
             <template v-else>
-              <router-link 
-                to="/login" 
+              <router-link
+                to="/login"
                 class="text-sm font-medium text-white/90 hover:text-white transition-colors"
               >
                 Iniciar sesión
               </router-link>
-              <router-link 
-                to="/register" 
-                class="px-4 py-2 text-sm font-medium text-white bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+              <router-link
+                to="/register"
+                class="px-4 py-2 ml-4 text-sm font-medium text-white bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
               >
                 Registrarse
               </router-link>
@@ -140,7 +141,7 @@
         </div>
 
         <div class="lg:hidden flex items-center space-x-4">
-          <button 
+          <button
             @click="toggleSearch"
             class="text-white p-2 focus:outline-none"
             aria-label="Buscar"
@@ -149,7 +150,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </button>
-          <button 
+          <button
             @click="toggleMenu"
             class="text-white p-2 focus:outline-none transition-transform duration-200 active:scale-90"
             :aria-expanded="menuOpen"
@@ -166,9 +167,9 @@
 
       <div v-show="searchOpen" class="lg:hidden mt-3">
         <div class="relative">
-          <input 
-            type="text" 
-            placeholder="Buscar en KambiaPe..." 
+          <input
+            type="text"
+            placeholder="Buscar en KambiaPe..."
             class="w-full pl-10 pr-4 py-3 text-sm rounded-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200"
             v-model="searchQuery"
             @keyup.enter="performSearch"
@@ -191,18 +192,18 @@
       <div v-show="menuOpen" class="lg:hidden bg-white shadow-xl" @click.stop>
         <div class="container mx-auto px-4 py-4">
           <nav class="flex flex-col space-y-2">
-            <router-link 
+            <router-link
               v-for="link in navLinks"
               :key="`mobile-${link.path}`"
-              :to="link.path" 
+              :to="link.path"
               @click="menuOpen = false"
               class="px-4 py-3 text-base font-medium text-gray-800 hover:bg-[#fce4ec] rounded-lg transition-colors duration-200 flex items-center"
               :class="{'bg-[#fce4ec] text-[#d7037b]': $route.path === link.path}"
             >
               <component :is="link.icon" class="h-5 w-5 mr-3 text-[#d7037b]" />
               {{ link.label }}
-              <span 
-                v-if="link.badge" 
+              <span
+                v-if="link.badge"
                 :class="link.badge.class"
                 class="ml-auto px-2 py-0.5 text-xs font-bold rounded-full"
               >
@@ -212,16 +213,23 @@
           </nav>
 
           <div class="mt-4 pt-4 border-t border-gray-200">
-            <template v-if="user">
-              <router-link 
-                to="/profile" 
+            <template v-if="userStore.isLoggedIn">
+              <router-link
+                to="/profile"
                 class="block px-4 py-3 text-base font-medium text-gray-800 hover:bg-[#fce4ec] rounded-lg transition-colors flex items-center"
                 @click="menuOpen = false"
               >
                 <UserIcon class="h-5 w-5 mr-3 text-[#d7037b]" />
                 Mi perfil
               </router-link>
-              <button 
+              <router-link
+                to="/settings"
+                class="block px-4 py-3 text-base font-medium text-gray-800 hover:bg-[#fce4ec] rounded-lg transition-colors flex items-center"
+                @click="menuOpen = false"
+              >
+                <Cog6ToothIcon class="h-5 w-5 mr-3 text-[#d7037b]" /> Configuración
+              </router-link>
+              <button
                 @click="logout"
                 class="block w-full text-left px-4 py-3 text-base font-medium text-gray-800 hover:bg-[#fce4ec] rounded-lg transition-colors flex items-center"
               >
@@ -230,15 +238,15 @@
               </button>
             </template>
             <template v-else>
-              <router-link 
-                to="/login" 
+              <router-link
+                to="/login"
                 class="block text-center px-4 py-3 text-base font-medium text-[#d7037b] hover:bg-[#fce4ec] rounded-lg transition-colors mb-2"
                 @click="menuOpen = false"
               >
                 Iniciar sesión
               </router-link>
-              <router-link 
-                to="/register" 
+              <router-link
+                to="/register"
                 class="block text-center px-4 py-3 text-base font-medium text-white bg-gradient-to-r from-[#d7037b] to-[#9e0154] rounded-lg shadow-sm hover:shadow transition-all"
                 @click="menuOpen = false"
               >
@@ -254,44 +262,43 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import { useUserStore } from '@/stores/user';
 
-// Asegúrate de que estas importaciones de iconos sean correctas para tu proyecto
-// Si no usas Heroicons, deberás reemplazar los iconos SVG directamente en el HTML
+// Importa los íconos necesarios de Heroicons
 import {
   UserGroupIcon as AboutIcon,
   PlusCircleIcon as PostIcon,
   CalendarIcon as EventsIcon,
   InboxIcon as InboxIcon,
-  UserIcon, 
-  PowerIcon 
-} from '@heroicons/vue/24/outline';
+  UserIcon, // Para el icono de "Mi perfil"
+  PowerIcon, // Para el icono de "Cerrar sesión"
+  Cog6ToothIcon // ¡Nuevo! Para el icono de Configuración
+} from '@heroicons/vue/24/outline'; // O @heroicons/vue/solid para iconos rellenos
 
+const router = useRouter();
 const route = useRoute();
+const userStore = useUserStore();
+
 const menuOpen = ref(false);
 const searchOpen = ref(false);
 const userMenuOpen = ref(false);
 const searchQuery = ref('');
 
-// Datos de usuario simulados - **REEMPLAZA ESTO CON TU LÓGICA DE AUTENTICACIÓN REAL**
-// Para probar el menú de usuario logueado:
-const user = ref({ name: 'Juan Pérez', email: 'juan@example.com' }); 
-// Para probar sin usuario logueado (ver Iniciar Sesión/Registrarse):
-// const user = ref(null); 
-
+// Definición de los enlaces de navegación
 const navLinks = [
-  { 
-    path: '/nosotros', 
+  {
+    path: '/nosotros',
     label: 'Nosotros',
     icon: AboutIcon
   },
-  { 
-    path: '/publicar', 
+  {
+    path: '/publicar',
     label: 'Publicar',
     icon: PostIcon
   },
-  { 
-    path: '/eventos', 
+  {
+    path: '/eventos',
     label: 'Eventos',
     icon: EventsIcon,
     badge: {
@@ -299,8 +306,8 @@ const navLinks = [
       class: 'bg-[#ff4081] text-white'
     }
   },
-  { 
-    path: '/buzon', 
+  {
+    path: '/buzon',
     label: 'Buzón',
     icon: InboxIcon,
     badge: {
@@ -310,16 +317,14 @@ const navLinks = [
   }
 ];
 
-const userInitials = computed(() => {
-  if (!user.value || !user.value.name) return '';
-  const names = user.value.name.split(' ');
-  if (names.length === 1) return names[0][0].toUpperCase();
-  return (names[0][0] + names[names.length - 1][0]).toUpperCase();
-});
+// Propiedad computada para las iniciales del usuario (usa el getter del store)
+const userInitials = computed(() => userStore.userInitials);
+const userFirstName = computed(() => userStore.userFirstName); // Asegúrate de que tu store tenga este getter
 
 // Métodos para alternar la visibilidad de los menús
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value;
+  // Cierra otros menús si este se abre
   if (menuOpen.value) {
     searchOpen.value = false;
     userMenuOpen.value = false;
@@ -328,6 +333,7 @@ const toggleMenu = () => {
 
 const toggleSearch = () => {
   searchOpen.value = !searchOpen.value;
+  // Cierra otros menús si este se abre
   if (searchOpen.value) {
     menuOpen.value = false;
     userMenuOpen.value = false;
@@ -336,6 +342,7 @@ const toggleSearch = () => {
 
 const toggleUserMenu = () => {
   userMenuOpen.value = !userMenuOpen.value;
+  // Cierra otros menús si este se abre
   if (userMenuOpen.value) {
     menuOpen.value = false;
     searchOpen.value = false;
@@ -345,7 +352,7 @@ const toggleUserMenu = () => {
 const performSearch = () => {
   if (searchQuery.value.trim()) {
     console.log('Buscando:', searchQuery.value);
-    // TODO: Implementar lógica de búsqueda real, ej: this.$router.push('/search?q=' + searchQuery.value);
+    // TODO: Implementar lógica de búsqueda real, ej: router.push('/search?q=' + searchQuery.value);
     searchOpen.value = false;
     searchQuery.value = '';
   }
@@ -353,16 +360,18 @@ const performSearch = () => {
 
 const logout = () => {
   console.log('Cerrando sesión...');
-  // TODO: Implementar lógica de cierre de sesión real (ej. limpiar localStorage, llamar a API de backend)
-  user.value = null; // Simular cierre de sesión
+  // Llama a la acción para limpiar el usuario del store
+  userStore.clearUser();
+  // Cierra todos los menús
   menuOpen.value = false;
   userMenuOpen.value = false;
+  // Redirige al inicio o a la página de login
+  router.push('/login');
 };
 
-// Lógica para cerrar menús al hacer clic fuera (sin directiva @click.away)
+// Lógica para cerrar menús al hacer clic fuera de la cabecera
 const handleClickOutside = (event) => {
   const headerElement = document.querySelector('header');
-  // Si el clic no fue dentro del header, cierra todos los menús
   if (headerElement && !headerElement.contains(event.target)) {
     menuOpen.value = false;
     searchOpen.value = false;
@@ -370,6 +379,7 @@ const handleClickOutside = (event) => {
   }
 };
 
+// Montar y desmontar el event listener para clics fuera
 onMounted(() => {
   document.addEventListener('click', handleClickOutside);
 });
@@ -380,7 +390,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Smooth transitions for interactive elements */
+/* Transiciones suaves para elementos interactivos */
 button, a, .router-link {
   transition: all 0.2s ease;
 }
@@ -395,7 +405,7 @@ button, a, .router-link {
 /* El router-link del logo siempre debe ser transparente y con texto blanco */
 .router-link[aria-label="KambiaPe - Inicio"].router-link-active,
 .router-link[aria-label="KambiaPe - Inicio"].router-link-exact-active {
-    background-color: transparent !important; 
+    background-color: transparent !important;
     color: white !important; /* Asegura que el color del texto del link sea blanco */
 }
 
@@ -412,22 +422,22 @@ button, a, .router-link {
 
 /* Estilos para los enlaces del menú móvil (NO el logo) cuando están activos */
 .px-4.py-3.text-base.font-medium.text-gray-800.router-link-active {
-    @apply bg-[#fce4ec] text-[#d7037b]; 
+    @apply bg-[#fce4ec] text-[#d7037b];
 }
 
 
-/* Animation for the mobile menu button */
+/* Animación para el botón del menú móvil (hamburguesa) */
 .hamburger-line {
   transition: all 0.3s ease;
 }
 
-/* Better hover effects for desktop navigation (aplicados a los NavLinks, no al logo) */
+/* Mejores efectos hover para la navegación de escritorio (aplicados a los NavLinks, no al logo) */
 .router-link:hover {
   transform: translateY(-1px);
 }
 
 
-/* User menu dropdown shadow */
+/* Sombra del menú desplegable de usuario */
 .user-menu {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }

@@ -26,7 +26,18 @@
           </div>
         </div>
         
-        <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col lg:flex-row h-[75vh] max-h-[850px] animate-slide-in-bottom">
+        <div 
+          v-if="loading" 
+          class="flex justify-center items-center h-[75vh] max-h-[850px] bg-white rounded-3xl shadow-2xl border border-gray-100"
+        >
+          <svg class="animate-spin h-10 w-10 text-[#d7037b]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <p class="ml-3 text-lg text-[#d7037b]">Cargando tus conversaciones...</p>
+        </div>
+
+        <div v-else class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col lg:flex-row h-[75vh] max-h-[850px] animate-slide-in-bottom">
           <div class="w-full lg:w-1/3 border-r border-gray-200 overflow-y-auto custom-scrollbar-unique flex-shrink-0 relative">
             <div class="sticky top-0 bg-white p-4 border-b border-gray-100 flex items-center justify-between z-10 shadow-sm">
               <h2 class="text-xl font-semibold text-gray-900">Conversaciones</h2>
@@ -43,7 +54,7 @@
               </button>
             </div>
             
-            <ul class="divide-y divide-gray-100">
+            <ul class="divide-y divide-gray-100" v-if="filteredConversations.length > 0">
               <li 
                 v-for="conversation in filteredConversations" 
                 :key="conversation.exchange.id"
@@ -51,31 +62,31 @@
                 :class="[
                   'p-4 flex items-center gap-4 cursor-pointer transition-all duration-250 ease-out transform',
                   { 'bg-gray-100/70 shadow-inner scale-[1.01]': selectedConversation && selectedConversation.exchange.id === conversation.exchange.id },
-                  { 'bg-gradient-to-r from-[#fdf2f8]/60 to-white border-l-4 border-[#d7037b] animate-pulse-once': conversation.unreadCount > 0 },
+                  { 'bg-gradient-to-r from-[#fdf2f8]/60 to-white border-l-4 border-[#d7037b] animate-pulse-once': conversation.unread_count > 0 },
                   'hover:bg-gray-50 hover:shadow-sm hover:scale-[1.01]'
                 ]"
               >
                 <div class="relative flex-shrink-0">
                   <img 
                     :src="conversation.user.avatar" 
-                    :alt="conversation.user.name" 
+                    :alt="conversation.user.full_name" 
                     class="h-12 w-12 rounded-full object-cover border-2 border-white shadow-md transition-transform duration-200 group-hover:scale-105"
                   >
                   <span 
-                    v-if="conversation.unreadCount > 0" 
+                    v-if="conversation.unread_count > 0" 
                     class="absolute -top-0.5 -right-0.5 inline-flex items-center justify-center h-5 w-5 text-xs font-bold leading-none text-white bg-red-500 rounded-full animate-bounce-custom z-20"
                   >
-                    {{ conversation.unreadCount }}
+                    {{ conversation.unread_count }}
                   </span>
                 </div>
                 <div class="flex-grow min-w-0">
-                  <p class="text-base font-semibold text-gray-900 truncate">{{ conversation.user.name }}</p>
+                  <p class="text-base font-semibold text-gray-900 truncate">{{ conversation.user.full_name }}</p>
                   <p class="text-sm text-gray-600 truncate mt-0.5">
-                    {{ conversation.lastMessage.sender === 'You' ? 'Tú: ' : '' }}{{ conversation.lastMessage.text }}
+                    {{ conversation.last_message.sender_id === userStore.user.id ? 'Tú: ' : '' }}{{ conversation.last_message.text }}
                   </p>
                 </div>
                 <div class="flex-shrink-0 text-right">
-                  <p class="text-xs text-gray-500 whitespace-nowrap">{{ formatTime(conversation.lastMessage.timestamp) }}</p>
+                  <p class="text-xs text-gray-500 whitespace-nowrap">{{ formatTime(conversation.last_message.timestamp) }}</p>
                   <span 
                     class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium capitalize mt-1 transition-colors duration-200"
                     :class="{
@@ -90,7 +101,7 @@
                 </div>
               </li>
             </ul>
-            <div v-if="filteredConversations.length === 0" class="p-8 text-center text-gray-500 animate-fade-in">
+            <div v-else class="p-8 text-center text-gray-500 animate-fade-in">
                 <ChatBubbleOvalLeftIcon class="h-16 w-16 text-gray-200 mx-auto mb-4" />
                 <p class="text-lg font-medium">No hay conversaciones {{ filter === 'unread' ? 'no leídas' : 'activas' }} en este momento.</p>
             </div>
@@ -99,32 +110,32 @@
           <div class="w-full lg:w-2/3 flex flex-col" v-if="selectedConversation">
             <div class="flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50 shadow-sm z-10 flex-wrap gap-y-2">
               <div class="flex items-center gap-3 animate-fade-in-right">
-                <img :src="selectedConversation.user.avatar" :alt="selectedConversation.user.name" class="h-10 w-10 rounded-full object-cover border border-white shadow">
+                <img :src="selectedConversation.user.avatar" :alt="selectedConversation.user.full_name" class="h-10 w-10 rounded-full object-cover border border-white shadow">
                 <div>
-                  <h3 class="font-semibold text-lg text-gray-900">{{ selectedConversation.user.name }}</h3>
+                  <h3 class="font-semibold text-lg text-gray-900">{{ selectedConversation.user.full_name }}</h3>
                   <p class="text-sm text-gray-600 flex items-center gap-2 flex-wrap">
                     <span class="flex items-center gap-1">
-                        Ofrece: <span class="font-medium text-gray-800">{{ selectedConversation.exchange.offer }}</span>
+                        Ofrece: <span class="font-medium text-gray-800">{{ selectedConversation.exchange.offer.title }}</span>
                     </span>
                     <ArrowRightIcon class="h-4 w-4 text-gray-400 flex-shrink-0 animate-bounce-horizontal-subtle" />
                     <span class="flex items-center gap-1">
-                        Pide: <span class="font-medium text-gray-800">{{ selectedConversation.exchange.request }}</span>
+                        Pide: <span class="font-medium text-gray-800">{{ selectedConversation.exchange.request.title }}</span>
                     </span>
                   </p>
                 </div>
               </div>
               <div class="flex gap-2 animate-fade-in-left">
                 <button 
-                  v-if="selectedConversation.exchange.status === 'pending'"
-                  @click="acceptExchange(selectedConversation.exchange.id)"
+                  v-if="selectedConversation.exchange.status === 'pending' && selectedConversation.exchange.request.user_id === userStore.user.id"
+                  @click="updateProposalStatus('accepted')"
                   class="p-2 rounded-full text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm"
                   title="Aceptar Intercambio"
                 >
                   <CheckIcon class="h-6 w-6" />
                 </button>
                 <button 
-                  v-if="selectedConversation.exchange.status === 'pending'"
-                  @click="rejectExchange(selectedConversation.exchange.id)"
+                  v-if="selectedConversation.exchange.status === 'pending' && selectedConversation.exchange.request.user_id === userStore.user.id"
+                  @click="updateProposalStatus('rejected')"
                   class="p-2 rounded-full text-red-600 bg-red-50 hover:bg-red-100 hover:text-red-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm"
                   title="Rechazar Intercambio"
                 >
@@ -140,22 +151,20 @@
               </div>
             </div>
 
-            <div class="flex-1 p-6 overflow-y-auto custom-scrollbar-unique space-y-4 bg-gray-100 relative group">
+            <div class="flex-1 p-6 overflow-y-auto custom-scrollbar-unique space-y-4 bg-gray-100 relative group" ref="messagesContainer">
               <div 
                 v-for="(message, index) in selectedConversation.messages" 
                 :key="message.id"
                 :class="[
                   'flex',
-                  message.sender === 'You' ? 'justify-end' : 'justify-start'
+                  message.sender_id === userStore.user.id ? 'justify-end' : 'justify-start'
                 ]"
               >
                 <div 
                   :class="[
                     'max-w-[75%] px-4 py-2 rounded-xl shadow-sm relative transition-transform duration-300 ease-out animate-fade-in-message',
-                    { 'bg-[#d7037b] text-white rounded-br-none': message.sender === 'You' },
-                    { 'bg-white text-gray-800 rounded-bl-none border border-gray-200': message.sender !== 'You' },
-                    { 'self-start mr-8': message.sender === 'You' }, /* Espacio para avatar falso del otro */
-                    { 'self-end ml-8': message.sender !== 'You' } /* Espacio para avatar falso propio */
+                    { 'bg-[#d7037b] text-white rounded-br-none': message.sender_id === userStore.user.id },
+                    { 'bg-white text-gray-800 rounded-bl-none border border-gray-200': message.sender_id !== userStore.user.id },
                   ]"
                   :style="{ animationDelay: `${index * 0.05}s` }"
                 >
@@ -163,14 +172,18 @@
                   <span 
                     :class="[
                       'absolute text-xs text-gray-400 transition-opacity duration-200',
-                      message.sender === 'You' ? 'bottom-1 right-2 text-white/70' : 'bottom-1 left-2 text-gray-500',
-                      'opacity-0 group-hover:opacity-100 sm:opacity-100' // Siempre visible en desktop, solo en hover en mobile (no real en CSS)
+                      message.sender_id === userStore.user.id ? 'bottom-1 right-2 text-white/70' : 'bottom-1 left-2 text-gray-500',
+                      'opacity-0 group-hover:opacity-100 sm:opacity-100' 
                     ]"
                     style="font-size: 0.65rem;"
                   >
                     {{ formatTime(message.timestamp) }}
+                    <span v-if="message.sender_id === userStore.user.id" class="ml-1">
+                      <CheckCircleIcon v-if="message.is_read" class="h-3 w-3 inline-block text-white" />
+                      <ClockIcon v-else class="h-3 w-3 inline-block text-pink-200" />
+                    </span>
                   </span>
-                  <div v-if="message.sender === 'You'" class="message-tail-right"></div>
+                  <div v-if="message.sender_id === userStore.user.id" class="message-tail-right"></div>
                   <div v-else class="message-tail-left"></div>
                 </div>
               </div>
@@ -183,26 +196,32 @@
                   v-model="newMessageText" 
                   placeholder="Escribe tu mensaje aquí..." 
                   class="flex-1 p-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#d7037b] focus:border-transparent transition-all duration-200 shadow-sm"
+                  :disabled="sendingMessage || !isChatActive"
                 >
                 <button 
                   type="submit"
-                  :disabled="!newMessageText.trim()"
+                  :disabled="!newMessageText.trim() || sendingMessage || !isChatActive"
                   :class="[
                     'p-3 rounded-full bg-[#d7037b] text-white transition-all duration-300 transform',
-                    !newMessageText.trim() ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105 active:scale-95 shadow-md hover:shadow-lg hover:rotate-6'
+                    (!newMessageText.trim() || sendingMessage || !isChatActive) ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105 active:scale-95 shadow-md hover:shadow-lg hover:rotate-6'
                   ]"
                   title="Enviar mensaje"
                 >
-                  <PaperAirplaneIcon class="h-6 w-6" />
+                  <PaperAirplaneIcon v-if="!sendingMessage" class="h-6 w-6" />
+                  <svg v-else class="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
                 </button>
               </form>
+              <p v-if="!isChatActive" class="text-sm text-red-500 mt-2 text-center">No puedes enviar mensajes a propuestas que no estén pendientes.</p>
             </div>
           </div>
           <div v-else class="w-full lg:w-2/3 flex items-center justify-center p-8 text-center text-gray-500 animate-fade-in">
             <div class="flex flex-col items-center gap-4">
                 <ChatBubbleLeftRightIcon class="h-28 w-28 text-gray-200 mx-auto mb-4" />
                 <p class="text-2xl font-semibold text-gray-700">¡Bienvenido a tus Intercambios!</p>
-                <p class="max-w-md">Selecciona una conversación de la lista de la izquierda para ver los mensajes o comenzar una nueva.</p>
+                <p class="max-w-md">Selecciona una conversación de la lista de la izquierda para ver los mensajes o comienza una nueva al enviar una propuesta.</p>
             </div>
           </div>
         </div>
@@ -249,12 +268,12 @@
                           <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-xl border border-gray-100 animate-fade-in-up">
                             <img 
                               :src="selectedConversation.user.avatar" 
-                              :alt="selectedConversation.user.name" 
+                              :alt="selectedConversation.user.full_name" 
                               class="h-16 w-16 rounded-full object-cover border-3 border-white shadow-lg"
                             >
                             <div>
-                              <p class="text-lg font-semibold text-gray-900">{{ selectedConversation.user.name }}</p>
-                              <p class="text-sm text-gray-600">Miembro desde {{ formatDate(selectedConversation.user.joinDate) }}</p>
+                              <p class="text-lg font-semibold text-gray-900">{{ selectedConversation.user.full_name }}</p>
+                              <p class="text-sm text-gray-600">Miembro desde {{ formatDate(selectedConversation.user.join_date) }}</p>
                             </div>
                           </div>
                           
@@ -262,12 +281,12 @@
                             <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                               <div class="text-center sm:text-left">
                                 <p class="text-sm font-medium text-blue-700">Ofrece</p>
-                                <p class="text-xl font-bold text-gray-900 mt-1">{{ selectedConversation.exchange.offer }}</p>
+                                <p class="text-xl font-bold text-gray-900 mt-1">{{ selectedConversation.exchange.offer.title }}</p>
                               </div>
                               <ArrowRightIcon class="h-9 w-9 text-blue-400 flex-shrink-0 animate-bounce-horizontal" />
                               <div class="text-center sm:text-left">
                                 <p class="text-sm font-medium text-blue-700">Solicita</p>
-                                <p class="text-xl font-bold text-gray-900 mt-1">{{ selectedConversation.exchange.request }}</p>
+                                <p class="text-xl font-bold text-gray-900 mt-1">{{ selectedConversation.exchange.request.title }}</p>
                               </div>
                             </div>
                           </div>
@@ -294,7 +313,7 @@
                               </div>
                               <div class="flex items-center gap-2">
                                 <span class="text-sm font-medium text-gray-900">Fecha de la Propuesta:</span>
-                                <span class="text-sm text-gray-600">{{ formatDate(selectedConversation.exchange.date) }}</span>
+                                <span class="text-sm text-gray-600">{{ formatDate(selectedConversation.exchange.created_at) }}</span>
                               </div>
                           </div>
                         </div>
@@ -304,18 +323,18 @@
                 </div>
                 <div class="bg-gray-50 px-6 py-4 sm:flex sm:flex-row-reverse sm:px-8 gap-3 border-t border-gray-100">
                   <button
-                    v-if="selectedConversation?.exchange.status === 'pending'"
+                    v-if="selectedConversation?.exchange.status === 'pending' && selectedConversation.exchange.request.user_id === userStore.user.id"
                     type="button"
                     class="inline-flex w-full justify-center rounded-xl border border-transparent bg-green-600 px-5 py-2.5 text-base font-medium text-white shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:w-auto sm:text-sm transition-all duration-200 transform hover:scale-105 active:scale-95"
-                    @click="acceptExchange(selectedConversation.exchange.id)"
+                    @click="updateProposalStatus('accepted')"
                   >
                     Aceptar Intercambio
                   </button>
                   <button
-                    v-if="selectedConversation?.exchange.status === 'pending'"
+                    v-if="selectedConversation?.exchange.status === 'pending' && selectedConversation.exchange.request.user_id === userStore.user.id"
                     type="button"
                     class="mt-3 inline-flex w-full justify-center rounded-xl border border-gray-300 bg-white px-5 py-2.5 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#d7037b] focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm transition-all duration-200 transform hover:scale-105 active:scale-95"
-                    @click="rejectExchange(selectedConversation.exchange.id)"
+                    @click="updateProposalStatus('rejected')"
                   >
                     Rechazar Intercambio
                   </button>
@@ -338,17 +357,22 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick } from 'vue'
-import Header from './Header.vue' // Asegúrate de que tu Header.vue esté en el mismo directorio.
-import Footer from './Footer.vue'; // Import the Footer componen
+import { ref, computed, nextTick, onMounted, watch } from 'vue' // Añadido onMounted y watch
+import { useUserStore } from '@/stores/user'; // Asegúrate de que esta ruta sea correcta
+import axios from '@/axios'; // Asegúrate de que esta ruta sea correcta
+import Header from './Header.vue' 
+import Footer from './Footer.vue'; 
 import { 
-  ChatBubbleLeftRightIcon, // Icono principal para el buzón de chat
+  ChatBubbleLeftRightIcon, 
   ArrowRightIcon,
   CheckIcon,
   XMarkIcon,
   EyeIcon,
-  PaperAirplaneIcon, // Icono para enviar mensaje
-  ChatBubbleOvalLeftIcon // Icono para el estado vacío
+  PaperAirplaneIcon, 
+  ChatBubbleOvalLeftIcon,
+  ArrowsRightLeftIcon,
+  CheckCircleIcon, // Añadido para el estado de leído
+  ClockIcon // Añadido para el estado de no leído (enviado por mí)
 } from '@heroicons/vue/24/outline'
 import { 
   Dialog, 
@@ -357,6 +381,8 @@ import {
   TransitionChild, 
   TransitionRoot 
 } from '@headlessui/vue'
+
+const userStore = useUserStore(); // Instanciar el userStore
 
 // Estado del modal de detalles
 const showDetailsModal = ref(false)
@@ -370,164 +396,18 @@ const selectedConversation = ref(null)
 // Texto del nuevo mensaje
 const newMessageText = ref('')
 
+// Estado de carga de conversaciones
+const loading = ref(true); // Nuevo estado de carga
+
+// Estado de envío de mensaje
+const sendingMessage = ref(false); // Nuevo estado para evitar envíos duplicados
+
+// Ref para el contenedor de mensajes para el scroll automático
+const messagesContainer = ref(null);
+
 // Datos de ejemplo simulando conversaciones de intercambios
-const conversations = ref([
-  {
-    exchange: {
-      id: 1,
-      offer: 'Libros de cocina (5)',
-      request: 'Ropa para niños',
-      details: 'Libros en buen estado por ropa tallas 6-8',
-      message: 'Hola, tengo varios libros de cocina que ya no uso y me gustaría cambiarlos por ropa para mi hijo de 7 años. ¿Te interesa mi propuesta? Podemos coordinar la entrega en un punto intermedio si estás de acuerdo.',
-      date: '2025-07-04T14:30:00', // Fecha de la propuesta original
-      status: 'pending',
-    },
-    user: {
-      name: 'María Gómez',
-      avatar: 'https://i.pravatar.cc/150?img=31',
-      joinDate: '2023-05-15'
-    },
-    messages: [
-      { id: 1, text: 'Hola, me interesa tu propuesta de los libros de cocina. ¿Podrías enviarme fotos?', sender: 'Other', timestamp: '2025-07-04T14:35:00' },
-      { id: 2, text: 'Claro, te las envío. ¿Qué tipo de ropa para niños buscas específicamente? Tengo de varias tallas.', sender: 'You', timestamp: '2025-07-04T14:38:00' },
-      { id: 3, text: 'Principalmente camisetas y pantalones talla 6-8. ¿Están los libros en buen estado?', sender: 'Other', timestamp: '2025-07-04T14:45:00' },
-      { id: 4, text: 'Sí, están en muy buen estado. Te adjunto algunas fotos de la ropa que tengo. Dime si te sirve.', sender: 'You', timestamp: '2025-07-04T14:48:00' },
-    ],
-    unreadCount: 1 // Mensajes no leídos en esta conversación
-  },
-  {
-    exchange: {
-      id: 2,
-      offer: 'Servicio de plomería',
-      request: 'Clases de inglés',
-      details: '2 horas de servicio por 1 hora de clase',
-      message: 'Soy plomero profesional con experiencia de 10 años. Ofrezco mis servicios a cambio de clases de inglés para mejorar mi fluidez. Estoy disponible los fines de semana.',
-      date: '2025-07-03T09:15:00',
-      status: 'accepted',
-    },
-    user: {
-      name: 'Carlos Mendoza',
-      avatar: 'https://i.pravatar.cc/150?img=45',
-      joinDate: '2023-02-20'
-    },
-    messages: [
-      { id: 1, text: '¡Excelente! He aceptado tu propuesta. ¿Cuándo podemos coordinar la primera clase?', sender: 'You', timestamp: '2025-07-03T09:20:00' },
-      { id: 2, text: 'Genial. Podría ser este sábado por la mañana, ¿te viene bien?', sender: 'Other', timestamp: '2025-07-03T09:25:00' },
-    ],
-    unreadCount: 0
-  },
-  {
-    exchange: {
-      id: 3,
-      offer: 'Plantas ornamentales',
-      request: 'Utensilios de cocina',
-      details: '3 plantas por juego de ollas',
-      message: 'Tengo plantas de interior muy bonitas que ya no tengo espacio para cuidar. Busco utensilios de cocina básicos en buen estado, como un juego de ollas o sartenes.',
-      date: '2025-07-02T16:45:00',
-      status: 'pending',
-    },
-    user: {
-      name: 'Ana Torres',
-      avatar: 'https://i.pravatar.cc/150?img=28',
-      joinDate: '2023-07-10'
-    },
-    messages: [
-      { id: 1, text: 'Hola Ana, me interesan tus plantas. ¿Qué tipo de utensilios de cocina necesitas?', sender: 'You', timestamp: '2025-07-02T16:50:00' },
-      { id: 2, text: 'Busco un juego básico de ollas y sartenes, no importa que sean usados, siempre que estén en buen estado. ¿Podrías enviarme fotos de tus plantas?', sender: 'Other', timestamp: '2025-07-02T17:00:00' },
-      { id: 3, text: 'Claro, te las envío en un momento. Tengo varias opciones.', sender: 'You', timestamp: '2025-07-02T17:05:00' },
-      { id: 4, text: 'Ok, espero las fotos. Gracias!', sender: 'Other', timestamp: '2025-07-02T17:08:00' },
-    ],
-    unreadCount: 0
-  },
-  {
-    exchange: {
-      id: 4,
-      offer: 'Bicicleta usada',
-      request: 'Laptop funcional',
-      details: 'Bicicleta mountain bike por laptop básica',
-      message: 'Tengo una bicicleta de montaña en buen estado que ya no uso. Necesito una laptop básica para que mi hija pueda hacer sus tareas escolares y conectarse a clases online.',
-      date: '2025-07-01T11:20:00',
-      status: 'rejected',
-    },
-    user: {
-      name: 'Luis Ramírez',
-      avatar: 'https://i.pravatar.cc/150?img=50',
-      joinDate: '2023-01-05'
-    },
-    messages: [
-      { id: 1, text: 'Hola Luis, tu propuesta de la bicicleta me interesa. ¿Qué modelo y año es la bici?', sender: 'You', timestamp: '2025-07-01T11:25:00' },
-      { id: 2, text: 'Es una Mountain Bike, modelo X, año 2021. Está en muy buen estado.', sender: 'Other', timestamp: '2025-07-01T11:30:00' },
-      { id: 3, text: 'Lo siento, he encontrado otra oferta que se ajusta mejor. He rechazado el intercambio. ¡Gracias de todos modos!', sender: 'You', timestamp: '2025-07-01T12:00:00' },
-    ],
-    unreadCount: 0
-  },
-  {
-    exchange: {
-      id: 5,
-      offer: 'Clases de yoga',
-      request: 'Servicio de jardinería',
-      details: '4 clases por poda de jardín',
-      message: 'Soy instructora de yoga certificada y ofrezco clases personalizadas (en línea o presenciales) a cambio de ayuda con la poda y el mantenimiento de mi jardín pequeño. ¡Hagamos un intercambio beneficioso!',
-      date: '2025-06-30T13:10:00',
-      status: 'completed',
-    },
-    user: {
-      name: 'Sofía Castro',
-      avatar: 'https://i.pravatar.cc/150?img=60',
-      joinDate: '2023-03-22'
-    },
-    messages: [
-      { id: 1, text: 'Hola Sofía, tu propuesta me parece ideal. ¿Tienes disponibilidad los jueves por la tarde para las clases?', sender: 'You', timestamp: '2025-06-30T13:15:00' },
-      { id: 2, text: 'Sí, los jueves por la tarde me viene genial. Podemos empezar la próxima semana.', sender: 'Other', timestamp: '2025-06-30T13:20:00' },
-      { id: 3, text: 'Perfecto, hemos completado el intercambio satisfactoriamente.', sender: 'You', timestamp: '2025-07-07T10:00:00' },
-    ],
-    unreadCount: 0
-  },
-  {
-    exchange: {
-      id: 6,
-      offer: 'Mueble para TV',
-      request: 'Microondas',
-      details: 'Mueble de madera por microondas funcional',
-      message: 'Tengo un mueble para TV de madera sólida en excelentes condiciones que ya no necesito por redecoración. Busco un microondas funcional y en buen estado.',
-      date: '2025-06-28T17:30:00',
-      status: 'pending',
-    },
-    user: {
-      name: 'Jorge Paredes',
-      avatar: 'https://i.pravatar.cc/150?img=33',
-      joinDate: '2023-06-18'
-    },
-    messages: [
-      { id: 1, text: 'Me interesa tu mueble, Jorge. ¿Puedes enviarme las medidas y algunas fotos detalladas?', sender: 'You', timestamp: '2025-06-28T17:35:00' },
-      { id: 2, text: 'Claro, te las mando ahora. Es un mueble robusto, ideal para una sala grande.', sender: 'Other', timestamp: '2025-06-28T17:40:00' },
-    ],
-    unreadCount: 0
-  },
-  {
-    exchange: {
-      id: 9, // Nueva conversación con mensaje no leído
-      offer: 'Cochecito de bebé',
-      request: 'Silla de coche para bebé',
-      details: 'Cochecito en buen estado por silla de coche para recién nacido',
-      message: 'Mi bebé ya no usa el cochecito. Busco una silla de coche segura para mi segundo bebé que viene en camino.',
-      date: '2025-06-19T10:45:00',
-      status: 'pending',
-    },
-    user: {
-      name: 'Elena Díaz',
-      avatar: 'https://i.pravatar.cc/150?img=25',
-      joinDate: '2024-03-01'
-    },
-    messages: [
-      { id: 1, text: 'Hola Elena, me interesa el cochecito. ¿De qué marca es y qué edad tiene?', sender: 'You', timestamp: '2025-06-19T10:50:00' },
-      { id: 2, text: 'Es marca ABC, tiene 1 año y medio de uso. Está en muy buen estado, lo he cuidado mucho. ¿Tienes una silla de coche que cumpla con los estándares de seguridad?', sender: 'Other', timestamp: '2025-06-19T10:55:00' },
-      { id: 3, text: 'Sí, la silla es casi nueva y cumple con la norma i-Size. Te envío las especificaciones y fotos.', sender: 'You', timestamp: '2025-07-05T21:00:00' },
-      { id: 4, text: '¡Excelente! La silla se ve muy bien. Me interesa mucho el intercambio. ¿Cuándo podríamos vernos para el intercambio?', sender: 'Other', timestamp: '2025-07-05T21:10:00' }, // Este será el mensaje no leído
-    ],
-    unreadCount: 1 // Este es el mensaje no leído
-  }
-])
+// Ahora se inicializa vacío, los datos vendrán del backend.
+const conversations = ref([])
 
 // Computed properties
 const filteredConversations = computed(() => {
@@ -535,132 +415,204 @@ const filteredConversations = computed(() => {
   
   // Aplicar filtro
   if (filter.value === 'unread') {
-    filtered = filtered.filter(conv => conv.unreadCount > 0)
+    filtered = filtered.filter(conv => conv.unread_count > 0)
   }
   
   // Ordenar por fecha del último mensaje (más recientes primero)
-  filtered.sort((a, b) => new Date(b.lastMessage.timestamp) - new Date(a.lastMessage.timestamp))
+  filtered.sort((a, b) => {
+    // Asegurarse de que `last_message` existe
+    const dateA = a.last_message ? new Date(a.last_message.timestamp) : new Date(a.exchange.created_at);
+    const dateB = b.last_message ? new Date(b.last_message.timestamp) : new Date(b.exchange.created_at);
+    return dateB - dateA;
+  });
   
   return filtered
 })
 
 const totalUnreadMessages = computed(() => {
-  return conversations.value.reduce((sum, conv) => sum + conv.unreadCount, 0)
+  return conversations.value.reduce((sum, conv) => sum + conv.unread_count, 0)
 })
+
+// Computed para verificar si el chat está activo (solo si la propuesta está pendiente)
+const isChatActive = computed(() => {
+  return selectedConversation.value && selectedConversation.value.exchange.status === 'pending';
+});
 
 // Métodos
 const formatDate = (dateString) => {
+  if (!dateString) return '';
   const options = { year: 'numeric', month: 'short', day: 'numeric' }
   const date = new Date(dateString);
-  // Ajustar a la zona horaria de Sunampe, Ica, Perú (GMT-5)
-  date.setHours(date.getHours() + date.getTimezoneOffset() / 60 - 5); 
   return date.toLocaleDateString('es-ES', options)
 }
 
 const formatTime = (isoString) => {
+  if (!isoString) return '';
   const date = new Date(isoString);
-  // Ajustar a la zona horaria de Sunampe, Ica, Perú (GMT-5)
-  date.setHours(date.getHours() + date.getTimezoneOffset() / 60 - 5); 
   const hours = date.getHours().toString().padStart(2, '0');
   const minutes = date.getMinutes().toString().padStart(2, '0');
   return `${hours}:${minutes}`;
 }
 
-const selectConversation = (conversation) => {
-  selectedConversation.value = conversation
-  // Marcar mensajes como leídos al seleccionar la conversación
-  if (selectedConversation.value) {
-    selectedConversation.value.unreadCount = 0
+const fetchConversations = async () => {
+  loading.value = true;
+  try {
+    const response = await axios.get('/proposals/me');
+    // Adaptar la respuesta del backend a la estructura del frontend si es necesario
+    // La respuesta del backend ya debería venir con la estructura adecuada de ConversationResponse
+    conversations.value = response.data;
+    console.log("Conversaciones cargadas:", conversations.value);
+
+    // Si había una conversación seleccionada, intentar re-seleccionarla para mantener el chat abierto
+    if (selectedConversation.value) {
+      const reselected = conversations.value.find(conv => conv.exchange.id === selectedConversation.value.exchange.id);
+      if (reselected) {
+        selectConversation(reselected); // Llama a selectConversation para marcar como leídos también
+      } else {
+        selectedConversation.value = null; // La conversación ya no existe
+      }
+    }
+
+  } catch (error) {
+    console.error("Error al cargar conversaciones:", error);
+    // TODO: Mostrar un mensaje de error al usuario
+  } finally {
+    loading.value = false;
   }
+};
+
+const selectConversation = async (conversation) => {
+  selectedConversation.value = conversation;
+  
+  // Marcar los mensajes no leídos como leídos para el usuario actual
+  const unreadMessageIds = conversation.messages
+    .filter(msg => msg.sender_id !== userStore.user.id && !msg.is_read)
+    .map(msg => msg.id);
+
+  if (unreadMessageIds.length > 0) {
+    try {
+      await axios.patch('/messages/read_status', {
+        message_ids: unreadMessageIds,
+        is_read: true
+      });
+      // Actualizar el estado en el frontend sin recargar todo
+      conversation.messages.forEach(msg => {
+        if (unreadMessageIds.includes(msg.id)) {
+          msg.is_read = true;
+        }
+      });
+      conversation.unread_count = 0; // Resetear el contador de no leídos para esta conversación
+    } catch (error) {
+      console.error("Error al marcar mensajes como leídos:", error);
+    }
+  }
+
   // Scroll al final del chat
-  nextTick(() => {
-    const chatContainer = document.querySelector('.flex-1.p-6.overflow-y-auto');
-    if (chatContainer) {
-      chatContainer.scrollTop = chatContainer.scrollHeight;
+  await nextTick(() => {
+    if (messagesContainer.value) {
+      messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
     }
   });
 }
 
-const sendMessage = () => {
-  if (newMessageText.value.trim() && selectedConversation.value) {
-    const newMessage = {
-      id: selectedConversation.value.messages.length + 1,
-      text: newMessageText.value.trim(),
-      sender: 'You', // Asumimos que somos el emisor
-      timestamp: new Date().toISOString()
-    }
-    selectedConversation.value.messages.push(newMessage)
-    selectedConversation.value.lastMessage = newMessage; // Actualizar el último mensaje para el orden
+const sendMessage = async () => {
+  if (!newMessageText.value.trim() || !selectedConversation.value || sendingMessage.value || !isChatActive.value) {
+    return;
+  }
 
-    // Opcional: simular respuesta del otro usuario después de un tiempo
-    setTimeout(() => {
-        if (selectedConversation.value && selectedConversation.value.exchange.id) { // Asegura que aún estamos en una conversación
-            const replyMessage = {
-                id: selectedConversation.value.messages.length + 1,
-                text: "¡Gracias por tu mensaje! Lo reviso y te confirmo.",
-                sender: "Other",
-                timestamp: new Date(new Date().getTime() + 10000).toISOString() // 10 segundos después
-            };
-            selectedConversation.value.messages.push(replyMessage);
-            selectedConversation.value.unreadCount++; // Marcar como no leído para el otro usuario
-            selectedConversation.value.lastMessage = replyMessage; // Actualizar el último mensaje
-            nextTick(() => {
-                const chatContainer = document.querySelector('.flex-1.p-6.overflow-y-auto');
-                if (chatContainer) {
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-                }
-            });
-        }
-    }, 2000); // Simula una respuesta después de 2 segundos
+  sendingMessage.value = true;
+  try {
+    const response = await axios.post('/messages', {
+      proposal_id: selectedConversation.value.exchange.id,
+      text: newMessageText.value.trim()
+    });
+    
+    // Añadir el nuevo mensaje a la conversación actual en el frontend
+    selectedConversation.value.messages.push(response.data);
+    selectedConversation.value.last_message = response.data; // Actualizar el último mensaje
+    newMessageText.value = ''; // Limpiar el input
 
-    newMessageText.value = '' // Limpiar el input
-    // Scroll al final del chat
-    nextTick(() => {
-      const chatContainer = document.querySelector('.flex-1.p-6.overflow-y-auto');
-      if (chatContainer) {
-        chatContainer.scrollTop = chatContainer.scrollHeight;
+    // Reordenar las conversaciones para que la actual suba
+    conversations.value.sort((a, b) => {
+        const timeA = a.last_message ? new Date(a.last_message.timestamp) : new Date(a.exchange.created_at);
+        const timeB = b.last_message ? new Date(b.last_message.timestamp) : new Date(b.exchange.created_at);
+        return timeB.getTime() - timeA.getTime();
+    });
+
+    // Scroll al final del chat después de enviar
+    await nextTick(() => {
+      if (messagesContainer.value) {
+        messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
       }
     });
+
+  } catch (error) {
+    console.error("Error al enviar mensaje:", error);
+    // TODO: Mostrar un mensaje de error al usuario
+  } finally {
+    sendingMessage.value = false;
   }
 }
 
-const acceptExchange = (exchangeId) => {
-  const conversation = conversations.value.find(conv => conv.exchange.id === exchangeId)
-  if (conversation) {
-    conversation.exchange.status = 'accepted'
-    conversation.messages.push({
-      id: conversation.messages.length + 1,
-      text: '¡Has aceptado este intercambio! Ahora pueden coordinar los detalles finales.',
-      sender: 'System', // Mensaje del sistema
-      timestamp: new Date().toISOString()
-    })
-    conversation.lastMessage = conversation.messages[conversation.messages.length -1];
-  }
-  showDetailsModal.value = false // Cerrar modal si se abrió desde allí
-}
+const updateProposalStatus = async (status) => {
+  if (!selectedConversation.value) return;
 
-const rejectExchange = (exchangeId) => {
-  const conversation = conversations.value.find(conv => conv.exchange.id === exchangeId)
-  if (conversation) {
-    conversation.exchange.status = 'rejected'
-    conversation.messages.push({
-      id: conversation.messages.length + 1,
-      text: 'Has rechazado este intercambio. La conversación se ha cerrado.',
-      sender: 'System', // Mensaje del sistema
-      timestamp: new Date().toISOString()
-    })
-    conversation.lastMessage = conversation.messages[conversation.messages.length -1];
-  }
-  showDetailsModal.value = false // Cerrar modal si se abrió desde allí
-}
+  try {
+    await axios.put(`/proposals/${selectedConversation.value.exchange.id}/status`, { status });
+    selectedConversation.value.exchange.status = status; // Actualizar el estado en el frontend
+    
+    // Añadir mensaje del sistema sobre el cambio de estado
+    const systemMessage = {
+      id: selectedConversation.value.messages.length + 1, // Asumiendo que los IDs son secuenciales para el frontend
+      text: status === 'accepted' ? '¡Has aceptado este intercambio! Ahora pueden coordinar los detalles finales.' : 'Has rechazado este intercambio. La conversación se ha cerrado.',
+      sender_id: 0, // ID 0 para mensajes del sistema
+      timestamp: new Date().toISOString(),
+      is_read: true // Los mensajes del sistema siempre se consideran leídos
+    };
+    selectedConversation.value.messages.push(systemMessage);
+    selectedConversation.value.last_message = systemMessage;
 
-// Inicializar `lastMessage` para cada conversación al cargar
-conversations.value.forEach(conv => {
-  conv.lastMessage = conv.messages[conv.messages.length - 1];
+    alert(`Propuesta ${selectedConversation.value.exchange.id} ${status === 'accepted' ? 'aceptada' : 'rechazada'}.`);
+    // Opcional: Refrescar la lista de conversaciones para que se reflejen los cambios
+    await fetchConversations(); 
+
+  } catch (error) {
+    console.error("Error al actualizar el estado de la propuesta:", error);
+    const errorMessage = error.response?.data?.detail || "Error al actualizar la propuesta.";
+    alert(`Error: ${errorMessage}`);
+  } finally {
+    showDetailsModal.value = false; // Cerrar modal si se abrió desde allí
+  }
+};
+
+// Observar los mensajes de la conversación seleccionada para hacer scroll automático
+watch(
+  () => selectedConversation.value?.messages,
+  async () => {
+    await nextTick(() => {
+      if (messagesContainer.value) {
+        messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
+      }
+    });
+  },
+  { deep: true } // Observar cambios profundos dentro del array de mensajes
+);
+
+// Al montar el componente, cargar las conversaciones
+onMounted(() => {
+  fetchConversations();
+  // Puedes añadir aquí un setInterval para refrescar las conversaciones periódicamente
+  // para obtener nuevos mensajes y estados de propuesta.
+  // Por ejemplo: setInterval(fetchConversations, 10000); // Cada 10 segundos
 });
+
 </script>
 
 <style>
+/* ... (Tus estilos CSS existentes) ... */
+/* Asegúrate de que tus estilos para .message-tail-right y .message-tail-left estén correctos,
+   ya que tu versión actual usa `right: -9px` y `left: -9px` en lugar de `translate-x-full` */
+
 /* Estilos Globales y Animaciones Únicas */
 
 /* Fondo degradado sutil en el body */

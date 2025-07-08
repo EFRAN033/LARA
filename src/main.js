@@ -1,11 +1,15 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import './assets/css/main.css'
-import router from './router' 
+// src/main.js
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import { createPinia } from 'pinia'; // <-- Import createPinia
 
+import './assets/css/main.css'; // Your original correct path
 
-const app = createApp(App)
+const app = createApp(App);
+const pinia = createPinia(); // <-- Create Pinia instance
 
-app.use(router)  
+app.use(pinia); // <-- Use Pinia
+app.use(router);
 
-app.mount('#app')
+app.mount('#app');
