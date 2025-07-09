@@ -422,12 +422,17 @@
     </section>
   </div>
 </template>
-
 <script setup>
-import { ref, reactive, onMounted, onUnmounted } from 'vue'; // Importar onMounted y onUnmounted
+import { ref, reactive, onMounted, onUnmounted } from 'vue';
 import Header from './Header.vue';
 
-// Importar los íconos de Heroicons de manera organizada
+// Import your team member images
+import user1Image from '@/assets/imagenes/user1.jpeg';
+import user2Image from '@/assets/imagenes/user2.jpeg';
+import user3Image from '@/assets/imagenes/user3.jpeg';
+import user4Image from '@/assets/imagenes/user4.jpeg';
+import user5Image from '@/assets/imagenes/user5.jpeg';
+
 import {
   SparklesIcon,
   RocketLaunchIcon,
@@ -445,76 +450,73 @@ import {
   HeartIcon,
   ChatBubbleLeftRightIcon,
   LinkIcon,
-  // Si usas Font Awesome o algún otro para redes sociales, importarlos aquí
-  // por ejemplo: FaLinkedinIn, FaTwitter
-} from '@heroicons/vue/24/outline'; // Ajusta la ruta si usas Heroicons/vue/20/solid o similar
+} from '@heroicons/vue/24/outline';
 
-// Estado reactivo para las animaciones y datos
 const historyVisible = ref(false);
 const missionFlipped = ref(false);
 const visionFlipped = ref(false);
 const activeRadial = ref(null);
-const activeBenefit = ref(0); // Default to first benefit
+const activeBenefit = ref(0);
 const activeTeamMember = ref(null);
-const teamCardTransform = reactive(Array(5).fill({})); // Adjusted for 5 members
+const teamCardTransform = reactive(Array(5).fill({}));
 
-// Datos de Equipo
+// Updated Team Data with imported images
 const team = ref([
   {
-    name: 'Marco Torres',
-    role: 'Fundador & CEO',
-    bio: 'Visionario de la economía circular y estratega digital. Impulsor del trueque moderno.',
-    badgeText: 'Líder',
+    name: 'Antony Quispe Goyoneche',
+    role: 'Dirección General',
+    bio: 'Visionario y estratega clave que lidera el rumbo y la misión de KambiaPe, asegurando su crecimiento y impacto.',
+    badgeText: 'Dirección',
     badgeColor: 'bg-indigo-600',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: user1Image, // Use the imported image variable here
     social: [
-      { name: 'LinkedIn', url: '#', icon: LinkIcon }, // Considerar usar íconos de redes sociales reales (FaLinkedinIn)
+      { name: 'LinkedIn', url: '#', icon: LinkIcon },
       { name: 'Twitter', url: '#', icon: LinkIcon }
     ]
   },
   {
-    name: 'Ana Sofía Ríos',
-    role: 'Jefa de Producto',
-    bio: 'Diseñadora de experiencias intuitivas y centradas en el usuario de KambiaPe.',
-    badgeText: 'UX/UI',
+    name: 'Mayerly Espino Loyola',
+    role: 'Área de tecnología y desarrollo',
+    bio: 'Encargada de la innovación y mejora continua de la plataforma, garantizando una experiencia técnica fluida y segura.',
+    badgeText: 'Tecnología',
     badgeColor: 'bg-pink-600',
-    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: user2Image, // Use the imported image variable here
     social: [
       { name: 'LinkedIn', url: '#', icon: LinkIcon },
       { name: 'Instagram', url: '#', icon: LinkIcon }
     ]
   },
   {
-    name: 'Carlos Mendoza',
-    role: 'Líder de Tecnología',
-    bio: 'Arquitecto de sistemas robustos y escalables para una plataforma fiable.',
-    badgeText: 'Tech Lead',
+    name: 'Luis Llancari Flores',
+    role: 'Área de alianzas y expansión',
+    bio: 'Establece y cultiva relaciones estratégicas, buscando nuevas oportunidades para expandir el alcance de KambiaPe.',
+    badgeText: 'Alianzas',
     badgeColor: 'bg-green-600',
-    image: 'https://images.unsplash.com/photo-1542157140-5712e0350d75?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: user3Image, // Use the imported image variable here
     social: [
       { name: 'GitHub', url: '#', icon: LinkIcon },
       { name: 'Twitter', url: '#', icon: LinkIcon }
     ]
   },
   {
-    name: 'María Quispe',
-    role: 'Gerente de Comunidad',
-    bio: 'Conecta con nuestros usuarios y fortalece el espíritu de KambiaPe día a día.',
-    badgeText: 'Comunidad',
+    name: 'Fiorela Maurtua Avalos',
+    role: 'Área administrativa y legal',
+    bio: 'Asegura el correcto funcionamiento administrativo y el cumplimiento normativo, vital para la transparencia y confianza.',
+    badgeText: 'Legal',
     badgeColor: 'bg-yellow-600',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: user4Image, // Use the imported image variable here
     social: [
       { name: 'LinkedIn', url: '#', icon: LinkIcon },
       { name: 'Instagram', url: '#', icon: LinkIcon }
     ]
   },
   {
-    name: 'Javier Solís',
-    role: 'Especialista en Marketing',
-    bio: 'Impulsa nuestra visibilidad y atrae a nuevos usuarios a la comunidad KambiaPe, expandiendo nuestro alcance digital.',
-    badgeText: 'Marketing',
+    name: 'Arelis Belleza Castilla',
+    role: 'Área de comunicación y comunidad',
+    bio: 'Responsable de construir y mantener una comunidad activa y comprometida, gestionando la comunicación efectiva.',
+    badgeText: 'Comunidad',
     badgeColor: 'bg-orange-600',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: user5Image, // Use the imported image variable here
     social: [
       { name: 'LinkedIn', url: '#', icon: LinkIcon },
       { name: 'Twitter', url: '#', icon: LinkIcon }
@@ -522,7 +524,9 @@ const team = ref([
   }
 ]);
 
-// Datos de Valores
+// ... rest of your script setup code remains unchanged ...
+
+// Data de Valores (unchanged)
 const values = ref([
   {
     title: 'Innovación',
@@ -547,13 +551,13 @@ const values = ref([
   }
 ]);
 
-// Datos de Beneficios
+// Datos de Beneficios (unchanged)
 const benefits = ref([
   {
     title: 'Simplicidad & Rapidez',
     description: 'Publica en minutos, encuentra lo que necesitas al instante. Un trueque sin complicaciones ni barreras.',
     icon: CheckCircleIcon,
-    borderColor: 'hover:border-green-500', // No se usa directamente en el HTML, pero se mantiene para claridad
+    borderColor: 'hover:border-green-500',
     bgColor: 'bg-green-500',
     visualTitle: 'Intercambios en 3 Pasos',
     visualDescription: 'Publica tu artículo, encuentra el intercambio perfecto y acuerda con facilidad. ¡Así de simple!',
@@ -591,9 +595,7 @@ const benefits = ref([
   }
 ]);
 
-// Métodos
 const onHistoryIntersect = (entry) => {
-  // `entry` es un objeto IntersectionObserverEntry
   if (entry.isIntersecting) {
     historyVisible.value = true;
   }
@@ -609,12 +611,6 @@ const unflipCard = (cardType) => {
   if (cardType === 'vision') visionFlipped.value = false;
 };
 
-// La función activateRadial ya es simple y directa
-// const activateRadial = (index) => {
-//   activeRadial.value = index;
-// };
-
-// Efecto de inclinación 3D para tarjetas de equipo
 const handleTeamHover = (event, index) => {
   const card = event.currentTarget;
   const rect = card.getBoundingClientRect();
@@ -632,9 +628,6 @@ const handleTeamHover = (event, index) => {
   };
 };
 
-// Directiva personalizada 'v-intersect' para Intersection Observer
-// Se registra globalmente en main.js o localmente aquí
-// Si aún no la tienes globalmente, puedes definirla aquí:
 const vIntersect = {
   mounted(el, binding) {
     const options = binding.value.options || {};
@@ -646,7 +639,7 @@ const vIntersect = {
       });
     }, options);
     observer.observe(el);
-    el._intersectionObserver = observer; // Guardar el observador para poder desmontarlo
+    el._intersectionObserver = observer;
   },
   unmounted(el) {
     if (el._intersectionObserver) {
@@ -656,10 +649,8 @@ const vIntersect = {
   }
 };
 
-// Inicialización de activeBenefit para visualización inicial
 onMounted(() => {
-  // No se necesita inicialización especial aquí ya que activeBenefit ya es 0
-  // y se actualiza en @mouseenter
+  // No changes needed here.
 });
 </script>
 
@@ -775,8 +766,6 @@ onMounted(() => {
 .ease-out-expo { transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); } /* easeOutExpo */
 
 /* Specific transitions */
-/* Mantener estas clases utilitarias de Tailwind, pero si los valores ya están en Tailwind config,
-   podrían ser redundantes o manejarse con valores de configuración directamente */
 .transition-all-200 { transition: all 0.2s ease-in-out; }
 .transition-all-300 { transition: all 0.3s ease-in-out; }
 .transition-all-500 { transition: all 0.5s ease-in-out; }
