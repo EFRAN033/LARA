@@ -76,8 +76,7 @@
         <div>
           <h3 class="text-lg font-bold mb-4 text-pink-300">Nuestros Almacenes</h3>
           <ul class="space-y-2 text-gray-300">
-            <li><p>Av. Principal 123, Lima, Perú</p></li>
-            <li><p>Calle Falsa 456, Arequipa, Perú</p></li>
+            <li><p>Av. Mariscal Sucre #1032, en Pueblo Nuevo, Chincha (Ref. Frente al colegio Fe y AlegríaN°30)</p></li>
             <li><router-link to="/almacenes" class="text-pink-400 hover:underline hover:text-pink-300 transition">Ver en mapa</router-link></li>
           </ul>
         </div>

@@ -25,10 +25,10 @@
         </h1>
 
         <div class="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto mb-12 opacity-90 leading-relaxed">
-          <p class="inline-block opacity-0 animate-fade-in-up animation-delay-250">En KambiaPe, conectamos personas,</p>
-          <p class="inline-block opacity-0 animate-fade-in-up animation-delay-300">valoramos lo que tienes</p>
-          <p class="inline-block opacity-0 animate-fade-in-up animation-delay-350">y transformamos necesidades</p>
-          <p class="inline-block opacity-0 animate-fade-in-up animation-delay-400">en oportunidades.</p>
+          <p class="opacity-0 animate-fade-in-up animation-delay-250">En KambiaPe, conectamos personas,</p>
+          <p class="opacity-0 animate-fade-in-up animation-delay-300">valoramos lo que tienes</p>
+          <p class="opacity-0 animate-fade-in-up animation-delay-350">y transformamos necesidades </p>
+          <p class="opacity-0 animate-fade-in-up animation-delay-400"> en oportunidades.</p>
         </div>
 
         <div class="[perspective:1000px] animate-fade-in-up animation-delay-500">
