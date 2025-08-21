@@ -1,52 +1,61 @@
 <template>
   <div class="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans text-gray-900 antialiased">
     <Header />
+    <!--Primera seccion-->
+    <section class="relative min-h-screen overflow-hidden bg-[#6d0039] text-white">
 
-    <section class="relative overflow-hidden bg-gradient-to-br from-[#d7037b] to-[#9e0154] text-white py-24 sm:py-32 lg:py-40">
-      <div class="absolute inset-0">
-        <div class="absolute inset-0 opacity-20"
-             style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA4,jIvPjwvcGF0dGVybj48L2RlZnM,PjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybj,jIvPjwvc3ZnPg==')"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full mix-blend-overlay blur-3xl animate-blob"></div>
-        <div class="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#fbcfe8]/5 rounded-full mix-blend-overlay blur-3xl animate-blob animation-delay-2000"></div>
-        <div class="absolute top-1/2 left-1/3 w-72 h-72 bg-[#fbcfe8]/5 rounded-full mix-blend-overlay blur-3xl animate-blob animation-delay-4000"></div>
+      <div class="absolute inset-0 z-0" aria-hidden="true">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#a8025e] to-[#6d0039]"></div>
+        
+        <canvas id="particle-constellation" class="absolute inset-0"></canvas>
+
+        <div class="absolute inset-0">
+          <div class="absolute top-1/4 left-[15%] h-64 w-64 rounded-full bg-pink-300 opacity-0 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-slow_8s_ease-in-out_infinite]"></div>
+          <div class="absolute top-1/2 right-[10%] h-80 w-80 rounded-full bg-pink-200 opacity-0 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-slow_9s_ease-in-out_infinite_1s]"></div>
+          <div class="absolute bottom-1/4 left-[30%] h-52 w-52 rounded-full bg-rose-200 opacity-0 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-slow_7s_ease-in-out_infinite_0.5s]"></div>
+        </div>
+        
+        <div id="mouse-spotlight" class="pointer-events-none absolute inset-0 transition-opacity duration-500 opacity-0"></div>
       </div>
 
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <p class="text-xl sm:text-2xl lg:text-3xl font-light mb-6 overflow-hidden whitespace-nowrap animate-typewriter leading-snug">
-          Más que una plataforma, un movimiento.
-        </p>
+      <div class="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 py-24 sm:px-10 lg:px-8">
+        <div class="max-w-xl">
+          <p class="font-serif text-lg italic text-pink-200/90 opacity-0 motion-safe:animate-[enter-from-bottom_0.8s_ease-out_forwards_200ms]">
+            "KambiaPe nace de la visión de un grupo de jóvenes peruanos..."
+          </p>
+          
+          <h1 class="font-serif text-8xl font-bold text-white lg:text-9xl opacity-0 motion-safe:animate-[enter-from-bottom_0.8s_ease-out_forwards_400ms] title-3d-effect">
+            KambiaPe
+          </h1>
 
-        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight mb-8">
-          <span class="block mb-3">Revolucionando el</span>
-          <span class="bg-gradient-to-r from-white to-[#fbcfe8] bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient-shift">
-            Trueque en Perú
-          </span>
-        </h1>
+          <div class="mt-8 flex flex-wrap gap-3 opacity-0 motion-safe:animate-[enter-from-bottom_0.8s_ease-out_forwards_600ms]">
+            <span class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20">
+              #Comunidad
+            </span>
+            <span class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20">
+              #Sostenibilidad
+            </span>
+            <span class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20">
+              #Innovación
+            </span>
+          </div>
 
-        <div class="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto mb-12 opacity-90 leading-relaxed">
-          <p class="opacity-0 animate-fade-in-up animation-delay-250">En KambiaPe, conectamos personas,</p>
-          <p class="opacity-0 animate-fade-in-up animation-delay-300">valoramos lo que tienes</p>
-          <p class="opacity-0 animate-fade-in-up animation-delay-350">y transformamos necesidades </p>
-          <p class="opacity-0 animate-fade-in-up animation-delay-400"> en oportunidades.</p>
-        </div>
-
-        <div class="[perspective:1000px] animate-fade-in-up animation-delay-500">
-          <router-link
-            to="/publicar"
-            class="inline-flex items-center justify-center px-12 py-5 border-2 border-white text-xl font-bold rounded-full shadow-2xl text-[#d7037b] bg-white hover:bg-gray-50 transition-all duration-300 [transform-style:preserve-3d] hover:[transform:rotateX(5deg)_translateY(-8px)_scale(1.02)] group relative overflow-hidden"
-          >
-            <SparklesIcon class="h-7 w-7 mr-3 animate-sparkle-pulse" />
-            Publica tu Artículo Ahora
-            <span class="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300 [transform:translateZ(-10px)]"></span>
-            <span class="absolute -bottom-2 -right-2 w-8 h-8 bg-[#fbcfe8] rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-[10] transition-transform duration-500 ease-out-back blur-lg"></span>
-          </router-link>
+          <div class="mt-20 opacity-0 motion-safe:animate-[enter-from-bottom_0.8s_ease-out_forwards_800ms]">
+            <a href="#nuestra-mision" class="cta-button group relative inline-flex items-center gap-x-4 rounded-full bg-white/10 px-8 py-4 font-medium text-pink-200 backdrop-blur-sm transition-colors hover:text-white">
+              <span class="z-10 transition-transform duration-300 group-hover:-translate-x-1">Conoce la historia</span>
+              <div class="z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/30 transition-transform duration-300 group-hover:scale-125">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+                </svg>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
-
-      <div class="absolute bottom-[-100px] left-[-100px] w-[300px] h-[300px] rounded-full bg-[#fbcfe8] opacity-20 blur-[80px] animate-float-slow"></div>
     </section>
+<!--Primera seccion-->
 
+<!--Historia de kambiaPe-->
     <section
       class="py-20 bg-white transition-all duration-1000 ease-out-quad"
       v-intersect="{

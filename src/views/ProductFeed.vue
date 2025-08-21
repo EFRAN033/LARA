@@ -96,85 +96,126 @@
       </div>
     </transition>
 
-    <div class="bg-gradient-to-br from-rose-50 to-pink-100 py-16 sm:py-20 text-center relative overflow-hidden shadow-md rounded-lg mb-8">
-      <div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml,%3Csvg width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 100 100\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cpath d=\\'M0 0h50v50H0z\\' fill=\\'%23d7037b\\' fill-opacity=\\'0.1\\' fill-rule=\\'evenodd\\'/%3E%3Cpath d=\\'M50 50h50v50H50z\\' fill=\\'%23ffffff\\' fill-opacity=\\'0.05\\' fill-rule=\\'evenodd\\'/%3E%3C/svg%3E');"></div>
-      <div class="relative z-10">
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4 animate-fade-in-up">
-          Explora Intercambios Disponibles
-        </h1>
-        <p class="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto animate-fade-in-up delay-100">
-          Encuentra el producto perfecto para ti. Conéctate con otros usuarios para un trueque justo y emocionante.
-        </p>
-        <div class="mt-8 animate-fade-in-up delay-200">
-          <router-link
-            to="/publish"
-            class="inline-flex items-center px-8 py-3 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-rose-300 focus:ring-offset-2 focus:ring-offset-rose-50"
-          >
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-            Publica tu Producto
-          </router-link>
+<!-- Banner Principal con Parallax -->
+  <div class="relative bg-slate-50 dark:bg-slate-900 py-16 sm:py-24 rounded-2xl overflow-hidden mb-8">
+    <div class="absolute inset-x-0 top-0 h-[800px] w-full -translate-y-1/3">
+      <div class="absolute inset-0 bg-gradient-to-br from-rose-100 via-transparent to-transparent dark:from-rose-900/20 dark:via-transparent"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16 items-center">
+        
+        <div>
+          <p class="font-semibold text-rose-500 uppercase tracking-wider mb-3">
+            Tu círculo de intercambio
+          </p>
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 dark:text-white mb-6">
+            Dale una segunda vida a tus objetos.
+          </h1>
+          <p class="text-lg text-slate-600 dark:text-slate-300 max-w-lg mb-8">
+            Únete a la comunidad y redescubre el valor de lo que tienes. El trueque perfecto te espera.
+          </p>
+          <div class="flex flex-col sm:flex-row items-start gap-4">
+            <a 
+              href="/publish" 
+              class="inline-flex items-center justify-center px-7 py-3 bg-rose-500 hover:bg-rose-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-rose-300 dark:focus:ring-rose-800"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+              Publicar un Objeto
+            </a>
+            <a 
+              href="/explore" 
+              class="inline-flex items-center justify-center px-7 py-3 text-slate-700 dark:text-slate-200 font-semibold rounded-lg ring-2 ring-slate-300 dark:ring-slate-700 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:focus:ring-slate-600"
+            >
+              Explorar
+            </a>
+          </div>
+        </div>
+
+        <div class="relative w-full h-80 lg:h-96">
+          <div class="group w-full h-full">
+            <div class="absolute top-1/2 left-0 w-40 h-56 -translate-y-[70%] rounded-3xl shadow-xl overflow-hidden transition-all duration-700 ease-out group-hover:-translate-x-16 group-hover:scale-105 animate-[float_6s_ease-in-out_infinite]">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800" alt="Auriculares" class="h-full w-full object-cover">
+            </div>
+            
+            <div class="absolute top-1/2 right-0 w-40 h-56 -translate-y-[30%] rounded-3xl shadow-xl overflow-hidden transition-all duration-700 ease-out group-hover:translate-x-16 group-hover:scale-105 animate-[float_7s_ease-in-out_infinite_0.5s]">
+              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800" alt="Zapatillas Deportivas" class="h-full w-full object-cover">
+            </div>
+
+            <div class="absolute top-1/2 left-1/2 w-56 h-72 -translate-x-1/2 -translate-y-1/2 rounded-3xl shadow-2xl overflow-hidden transition-all duration-700 ease-out group-hover:scale-110 z-10 animate-[float_5s_ease-in-out_infinite_1s]">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800" alt="Cámara de Fotos" class="h-full w-full object-cover">
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+<!--fin del banner principal-->
 
-    <div class="bg-white py-6 shadow-sm border-b border-gray-100 rounded-lg mb-8">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-6">
-        <div class="w-full sm:w-auto flex-grow">
-          <label for="category-filter" class="sr-only">Filtrar por Categoría</label>
-          <div class="relative">
-            <select
-              id="category-filter"
-              v-model="selectedCategory"
-              class="block w-full px-4 py-2.5 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 transition duration-200 text-gray-800 appearance-none pr-10 bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
-            >
-              <option value="">Todas las categorías</option>
-              <option>Electrónica</option>
-              <option>Mobiliario</option>
-              <option>Deportes</option>
-              <option>Libros</option>
-              <option>Ropa y Accesorios</option>
-              <option>Hogar</option>
-              <option>Juguetes</option>
-              <option>Herramientas</option>
-              <option>Música</option>
-              <option>Videojuegos</option>
-              <option>Coleccionables</option>
-              <option>Arte</option>
-              <option>Otros</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700 dark:text-gray-300">
-              <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9z"/></svg>
+<!-- filtros -->
+<div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-md mb-8 p-4">
+  <div class="container mx-auto px-2 sm:px-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+
+      <div class="w-full md:w-1/3 relative">
+        <label for="search-filter" class="sr-only">Buscar productos</label>
+        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+          <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" /></svg>
+        </div>
+        <input 
+          type="search" 
+          id="search-filter" 
+          placeholder="Buscar por nombre, marca..."
+          v-model="searchQuery"
+          class="block w-full rounded-full border-0 bg-gray-50 dark:bg-gray-700/50 py-2.5 pl-11 pr-5 text-gray-900 dark:text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rose-500 transition duration-200 sm:text-sm"
+        />
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <button @click="isCategoryDropdownOpen = !isCategoryDropdownOpen" type="button" class="flex items-center gap-2 rounded-full bg-gray-100 dark:bg-gray-700/50 px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 shadow-sm ring-1 ring-inset ring-transparent hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+            <svg class="h-5 w-5 text-rose-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M3.25 4A2.25 2.25 0 001 6.25v7.5A2.25 2.25 0 003.25 16h7.5A2.25 2.25 0 0013 13.75v-7.5A2.25 2.25 0 0010.75 4h-7.5zM2.5 6.25c0-.414.336-.75.75-.75h7.5c.414 0 .75.336.75.75v7.5c0 .414-.336-.75-.75-.75h-7.5a.75.75 0 01-.75-.75v-7.5z" /><path d="M15.25 5.5a.75.75 0 00-1.5 0v7a.75.75 0 001.5 0v-7zM17.5 5.5a.75.75 0 00-1.5 0v7a.75.75 0 001.5 0v-7z" /></svg>
+            <span class="text-gray-600 dark:text-gray-400">Categoría:</span>
+            <span class="font-bold text-gray-900 dark:text-white">{{ selectedCategory || 'Todas' }}</span>
+            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd" /></svg>
+          </button>
+          <Transition name="dropdown">
+            <div v-if="isCategoryDropdownOpen" class="absolute top-full mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+              <div class="py-1">
+                <a @click="selectCategory('')" href="#" class="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-rose-50 dark:hover:bg-gray-700">Todas las categorías</a>
+                <a v-for="category in categories" :key="category" @click="selectCategory(category)" href="#" class="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-rose-50 dark:hover:bg-gray-700">{{ category }}</a>
+              </div>
             </div>
-          </div>
+          </Transition>
         </div>
 
-        <div class="w-full sm:w-auto flex-grow">
-          <label for="sort-by" class="sr-only">Ordenar por</label>
-          <div class="relative">
-            <select
-              id="sort-by"
-              v-model="sortBy"
-              class="block w-full px-4 py-2.5 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 transition duration-200 text-gray-800 appearance-none pr-10 bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
-            >
-              <option value="date-desc">Más Recientes</option>
-              <option value="date-asc">Más Antiguos</option>
-              <option value="name-asc">Nombre (A-Z)</option>
-              <option value="name-desc">Nombre (Z-A)</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700 dark:text-gray-300">
-              <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9z"/></svg>
+        <div class="relative">
+          <button @click="isSortDropdownOpen = !isSortDropdownOpen" type="button" class="flex items-center gap-2 rounded-full bg-gray-100 dark:bg-gray-700/50 px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 shadow-sm ring-1 ring-inset ring-transparent hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+            <svg class="h-5 w-5 text-rose-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2.24 6.5A.75.75 0 013 6h14a.75.75 0 010 1.5H3a.75.75 0 01-.76-.5zM3 10h14a.75.75 0 010 1.5H3a.75.75 0 010-1.5zM3.75 14a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z" clip-rule="evenodd" /></svg>
+            <span class="text-gray-600 dark:text-gray-400">Ordenar:</span>
+            <span class="font-bold text-gray-900 dark:text-white">{{ sortOptions.find(opt => opt.value === sortBy)?.label }}</span>
+            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd" /></svg>
+          </button>
+          <Transition name="dropdown">
+            <div v-if="isSortDropdownOpen" class="absolute top-full mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+              <div class="py-1">
+                <a v-for="option in sortOptions" :key="option.value" @click="selectSortBy(option.value)" href="#" class="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm hover:bg-rose-50 dark:hover:bg-gray-700">{{ option.label }}</a>
+              </div>
             </div>
-          </div>
+          </Transition>
         </div>
-
-        <button
-          @click="resetFilters"
-          class="w-full sm:w-auto flex-shrink-0 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2.5 px-6 rounded-full transition duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"
-        >
-          Reiniciar Filtros
+      </div>
+      
+      <div class="w-full md:w-auto">
+        <button @click="resetFilters" class="w-full md:w-auto flex-shrink-0 bg-gray-100 dark:bg-gray-700/50 text-gray-600 dark:text-gray-300 font-medium py-2.5 px-6 rounded-full transition duration-200 shadow-sm ring-1 ring-inset ring-transparent hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-rose-600 dark:hover:text-white">
+          Reiniciar
         </button>
       </div>
+
     </div>
+  </div>
+</div>
+<!-- fin de los filstros -->
 
     <div class="py-10 md:py-12 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-inner">
       <div v-if="loading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 sm:px-6 lg:px-8">
@@ -229,25 +270,41 @@
     </div>
   </section>
 </template>
-
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import { useUserStore } from '@/stores/user';
 import axios from 'axios';
 import router from '@/router';
 
+// --- Estado y Lógica del Componente ---
 const products = ref([]);
 const userProducts = ref([]);
 const loading = ref(true);
-const selectedCategory = ref('');
-const sortBy = ref('date-desc');
 const activeProposal = ref(null);
 const selectedProductForProposal = ref(null);
 const showNotification = ref(false);
 
-const userStore = useUserStore();
-const API_BASE_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:8000';
+// --- Estado para Filtros ---
+const selectedCategory = ref('');
+const sortBy = ref('date-desc');
+const searchQuery = ref('');
 
+// --- Estado para UI de Filtros y Parallax ---
+const isCategoryDropdownOpen = ref(false);
+const isSortDropdownOpen = ref(false);
+
+const categories = ref(['Electrónica', 'Mobiliario', 'Deportes', 'Libros', 'Ropa y Accesorios', 'Hogar', 'Juguetes', 'Herramientas', 'Música', 'Videojuegos', 'Coleccionables', 'Arte', 'Otros']);
+const sortOptions = ref([
+  { value: 'date-desc', label: 'Más Recientes' },
+  { value: 'date-asc', label: 'Más Antiguos' },
+  { value: 'name-asc', label: 'Nombre (A-Z)' },
+  { value: 'name-desc', label: 'Nombre (Z-A)' },
+]);
+
+const userStore = useUserStore();
+const API_BASE_URL = 'http://localhost:8000';
+
+// --- Lógica de Fetching y Datos (sin cambios) ---
 const calculateAgeDays = (dateString) => {
   const today = new Date();
   const productDate = new Date(dateString);
@@ -267,7 +324,6 @@ const fetchAllProducts = async () => {
     
     const loggedInUserId = userStore.user?.id;
     if (loggedInUserId) {
-      // Filtra los propios productos del usuario de la lista principal
       products.value = data.filter(product => product.user_id !== loggedInUserId);
     } else {
       products.value = data;
@@ -284,14 +340,8 @@ const fetchLoggedInUserProducts = async () => {
   const loggedInUserId = userStore.user?.id;
   const authToken = userStore.token;
 
-  console.log("--- DEBUG ProductFeed.vue ---");
-  console.log("ID de usuario en userStore:", loggedInUserId);
-  console.log("Token en userStore:", authToken ? 'Token presente' : 'Token AUSENTE');
-
   if (!loggedInUserId || !authToken) {
     userProducts.value = [];
-    console.warn("No hay usuario autenticado o token para cargar productos del usuario.");
-    console.log("userProducts.value después de la advertencia:", userProducts.value);
     return;
   }
   try {
@@ -301,10 +351,6 @@ const fetchLoggedInUserProducts = async () => {
       }
     });
     userProducts.value = response.data;
-
-    console.log("Respuesta de /users/{id}/products:", response.data);
-    console.log("userProducts.value (después de la asignación):", userProducts.value);
-
   } catch (error) {
     console.error("Error al obtener los productos del usuario autenticado:", error);
     userProducts.value = [];
@@ -323,13 +369,34 @@ const fetchLoggedInUserProducts = async () => {
 };
 
 
+// --- onMounted: Inicializa todo ---
 onMounted(() => {
   fetchAllProducts();
+
+  // Lógica para el Parallax Hero Section
+  const container = document.getElementById('parallax-container');
+  if (!container) return;
+  const elements = container.querySelectorAll('.parallax-element');
+  container.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+    const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+    elements.forEach(el => {
+      const depth = parseFloat(el.getAttribute('data-depth'));
+      const moveX = x * depth * 30;
+      const moveY = y * depth * 30;
+      el.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+    });
+  });
+  container.addEventListener('mouseleave', () => {
+    elements.forEach(el => {
+      el.style.transform = 'translate3d(0, 0, 0)';
+    });
+  });
 });
 
-// Observar el estado de autenticación para cargar productos del usuario
+// --- Lógica de Watcher (sin cambios) ---
 watch(() => userStore.isLoggedIn, (newVal) => {
-  console.log('ProductFeed: userStore.isLoggedIn cambió a:', newVal);
   if (newVal) {
     fetchLoggedInUserProducts();
   } else {
@@ -337,39 +404,51 @@ watch(() => userStore.isLoggedIn, (newVal) => {
   }
 }, { immediate: true });
 
+// --- Lógica Central de Filtrado ---
 const filteredProducts = computed(() => {
   let filtered = [...products.value];
-
+  if (searchQuery.value.trim() !== '') {
+    const lowerCaseQuery = searchQuery.value.toLowerCase();
+    filtered = filtered.filter(product => product.title.toLowerCase().includes(lowerCaseQuery));
+  }
   if (selectedCategory.value) {
     filtered = filtered.filter(product => product.category_name === selectedCategory.value);
   }
-
   filtered.sort((a, b) => {
     const dateA = new Date(a.created_at);
     const dateB = new Date(b.created_at);
-    
     switch (sortBy.value) {
-      case 'date-desc':
-        return dateB.getTime() - dateA.getTime();
-      case 'date-asc':
-        return dateA.getTime() - dateB.getTime();
-      case 'name-asc':
-        return a.title.localeCompare(b.title);
-      case 'name-desc':
-        return b.title.localeCompare(a.title);
-      default:
-        return 0;
+      case 'date-desc': return dateB.getTime() - dateA.getTime();
+      case 'date-asc': return dateA.getTime() - dateB.getTime();
+      case 'name-asc': return a.title.localeCompare(b.title);
+      case 'name-desc': return b.title.localeCompare(a.title);
+      default: return 0;
     }
   });
-
   return filtered;
 });
 
+// --- Lógica para los menús desplegables ---
+const selectCategory = (category) => {
+  selectedCategory.value = category;
+  isCategoryDropdownOpen.value = false;
+};
+
+const selectSortBy = (value) => {
+  sortBy.value = value;
+  isSortDropdownOpen.value = false;
+};
+
+const resetFilters = () => {
+  selectedCategory.value = '';
+  sortBy.value = 'date-desc';
+  searchQuery.value = '';
+};
+
+// --- Lógica del Modal de Propuesta (sin cambios) ---
 const openProposalModal = (product) => {
   activeProposal.value = product;
   selectedProductForProposal.value = null;
-  // Solo llama a fetchLoggedInUserProducts si la lista aún no se ha cargado
-  // Esto evita llamadas redundantes si el watch ya lo hizo.
   if (userProducts.value.length === 0 && userStore.isLoggedIn) {
       fetchLoggedInUserProducts(); 
   }
@@ -389,21 +468,13 @@ const sendProposal = async () => {
     alert('Por favor, selecciona un producto para la propuesta.');
     return;
   }
-
-  console.log("Enviando propuesta:", {
-    offeredProductId: selectedProductForProposal.value.id,
-    requestedProductId: activeProposal.value.id,
-    proposerUserId: userStore.user?.id,
-    ownerOfRequestedProductId: activeProposal.value.user_id
-  });
-
   try {
     const authToken = userStore.token;
     if (!authToken) {
       throw new Error("No hay token de autenticación disponible para enviar la propuesta.");
     }
 
-    const response = await axios.post(`${API_BASE_URL}/proposals`, {
+    await axios.post(`${API_BASE_URL}/proposals`, {
       offered_product_id: selectedProductForProposal.value.id,
       requested_product_id: activeProposal.value.id,
       proposer_user_id: userStore.user?.id,
@@ -429,11 +500,6 @@ const sendProposal = async () => {
         alert(`Hubo un error al enviar tu propuesta: ${error.message}. Inténtalo de nuevo.`);
     }
   }
-};
-
-const resetFilters = () => {
-  selectedCategory.value = '';
-  sortBy.value = 'date-desc';
 };
 </script>
 
