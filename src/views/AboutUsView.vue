@@ -2,57 +2,64 @@
   <div class="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans text-gray-900 antialiased">
     <Header />
     <!--Primera seccion-->
-    <section class="relative min-h-screen overflow-hidden bg-[#6d0039] text-white">
-
-      <div class="absolute inset-0 z-0" aria-hidden="true">
-        <div class="absolute inset-0 bg-gradient-to-br from-[#a8025e] to-[#6d0039]"></div>
+    <section class="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#4e022b] to-[#2d0016] text-white font-sans">
+  
+  <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+    
+    <div class="absolute inset-0 bg-gradient-to-br from-[#a8025e] to-[#6d0039] opacity-95"></div>
+    
+    <div class="absolute inset-0 motion-safe:animate-[parallax-bg_30s_linear_infinite]">
+      <div class="absolute top-[15%] left-[5%] h-80 w-80 rounded-full bg-pink-300 opacity-10 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-halo_12s_ease-in-out_infinite_2s]"></div>
+      <div class="absolute top-[45%] right-[0%] h-96 w-96 rounded-full bg-pink-200 opacity-10 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-halo_10s_ease-in-out_infinite_3.5s]"></div>
+      <div class="absolute bottom-[5%] left-[20%] h-64 w-64 rounded-full bg-rose-200 opacity-10 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-halo_11s_ease-in-out_infinite_1s]"></div>
+      <div class="absolute top-[5%] right-[15%] h-48 w-48 rounded-full bg-pink-300 opacity-5 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-halo_15s_ease-in-out_infinite_5s]"></div>
+      <div class="absolute bottom-[15%] right-[25%] h-72 w-72 rounded-full bg-rose-200 opacity-5 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-halo_8s_ease-in-out_infinite_0s]"></div>
+    </div>
+    
+  </div>
+  
+  <div class="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 py-24 sm:px-10 lg:px-8">
+    <div class="max-w-xl space-y-8">
+      
+      <div class="space-y-4">
+        <p class="font-serif text-xl italic text-pink-200/90 leading-relaxed motion-safe:animate-[enter-fade-up_0.8s_ease-out_forwards_200ms]">
+          "KambiaPe nace de la visión de un grupo de jóvenes peruanos..."
+        </p>
         
-        <canvas id="particle-constellation" class="absolute inset-0"></canvas>
-
-        <div class="absolute inset-0">
-          <div class="absolute top-1/4 left-[15%] h-64 w-64 rounded-full bg-pink-300 opacity-0 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-slow_8s_ease-in-out_infinite]"></div>
-          <div class="absolute top-1/2 right-[10%] h-80 w-80 rounded-full bg-pink-200 opacity-0 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-slow_9s_ease-in-out_infinite_1s]"></div>
-          <div class="absolute bottom-1/4 left-[30%] h-52 w-52 rounded-full bg-rose-200 opacity-0 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-slow_7s_ease-in-out_infinite_0.5s]"></div>
-        </div>
-        
-        <div id="mouse-spotlight" class="pointer-events-none absolute inset-0 transition-opacity duration-500 opacity-0"></div>
+        <h1 class="font-serif text-8xl font-bold text-white lg:text-9xl motion-safe:animate-[enter-fade-up_0.8s_ease-out_forwards_400ms] text-shadow-3d transition-all duration-300 hover:scale-105">
+          KambiaPe
+        </h1>
       </div>
 
-      <div class="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 py-24 sm:px-10 lg:px-8">
-        <div class="max-w-xl">
-          <p class="font-serif text-lg italic text-pink-200/90 opacity-0 motion-safe:animate-[enter-from-bottom_0.8s_ease-out_forwards_200ms]">
-            "KambiaPe nace de la visión de un grupo de jóvenes peruanos..."
-          </p>
-          
-          <h1 class="font-serif text-8xl font-bold text-white lg:text-9xl opacity-0 motion-safe:animate-[enter-from-bottom_0.8s_ease-out_forwards_400ms] title-3d-effect">
-            KambiaPe
-          </h1>
-
-          <div class="mt-8 flex flex-wrap gap-3 opacity-0 motion-safe:animate-[enter-from-bottom_0.8s_ease-out_forwards_600ms]">
-            <span class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20">
-              #Comunidad
-            </span>
-            <span class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20">
-              #Sostenibilidad
-            </span>
-            <span class="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20">
-              #Innovación
-            </span>
-          </div>
-
-          <div class="mt-20 opacity-0 motion-safe:animate-[enter-from-bottom_0.8s_ease-out_forwards_800ms]">
-            <a href="#nuestra-mision" class="cta-button group relative inline-flex items-center gap-x-4 rounded-full bg-white/10 px-8 py-4 font-medium text-pink-200 backdrop-blur-sm transition-colors hover:text-white">
-              <span class="z-10 transition-transform duration-300 group-hover:-translate-x-1">Conoce la historia</span>
-              <div class="z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/30 transition-transform duration-300 group-hover:scale-125">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-                </svg>
-              </div>
-            </a>
-          </div>
-        </div>
+      <div class="flex flex-wrap gap-3 motion-safe:animate-[enter-fade-up_0.8s_ease-out_forwards_600ms]">
+        <a href="#" class="group relative rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-pink-300 hover:bg-white/20 hover:text-pink-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
+          #Comunidad
+          <span class="absolute inset-0 rounded-full bg-pink-300 opacity-0 transition-opacity duration-300 group-hover:opacity-20 -z-10"></span>
+        </a>
+        <a href="#" class="group relative rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-pink-300 hover:bg-white/20 hover:text-pink-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
+          #Sostenibilidad
+          <span class="absolute inset-0 rounded-full bg-pink-300 opacity-0 transition-opacity duration-300 group-hover:opacity-20 -z-10"></span>
+        </a>
+        <a href="#" class="group relative rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-pink-300 hover:bg-white/20 hover:text-pink-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
+          #Innovación
+          <span class="absolute inset-0 rounded-full bg-pink-300 opacity-0 transition-opacity duration-300 group-hover:opacity-20 -z-10"></span>
+        </a>
       </div>
-    </section>
+      
+      <div class="mt-16 motion-safe:animate-[enter-fade-up_0.8s_ease-out_forwards_800ms]">
+        <a href="#nuestra-mision" class="group relative inline-flex items-center gap-x-4 rounded-full bg-white/10 px-8 py-4 font-medium text-pink-200 backdrop-blur-sm transition-all duration-500 hover:text-white hover:bg-white/20 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
+          <span class="z-10 transition-transform duration-500 group-hover:-translate-x-1">Conoce la historia</span>
+          <div class="z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/30 transition-transform duration-500 group-hover:scale-125 group-hover:rotate-[360deg] group-hover:border-pink-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 transition-colors duration-500 group-hover:text-pink-300">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+            </svg>
+          </div>
+          <span class="absolute inset-0 rounded-full bg-pink-300 opacity-0 transition-opacity duration-500 group-hover:opacity-10"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 <!--Primera seccion-->
 
 <!--Historia de kambiaPe-->
@@ -167,7 +174,9 @@
         </div>
       </div>
     </section>
+<!--Historia de kambiaPe-->
 
+<!--Valores que nos impulsan-->
     <section class="py-16 sm:py-24 bg-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-16 relative inline-block">
@@ -227,7 +236,7 @@
         </div>
       </div>
     </section>
-
+<!--Valores que nos impulsan-->
     <section class="py-16 sm:py-24 bg-gray-50 border-y border-gray-100">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-16 text-center relative">
@@ -311,7 +320,9 @@
         </div>
       </div>
     </section>
+<!--Valores que nos impulsan-->
 
+<!--Equipo-->
     <section class="py-16 sm:py-24 bg-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
@@ -381,7 +392,9 @@
         </div>
       </div>
     </section>
+<!--Equipo-->
 
+<!--Footer-->
     <section class="relative py-24 sm:py-32 bg-gradient-to-r from-[#9e0154] to-[#d7037b] text-white text-center overflow-hidden">
       <div class="absolute inset-0 overflow-hidden">
         <div v-for="i in 30" :key="i"
@@ -429,6 +442,7 @@
         </div>
       </div>
     </section>
+    <!--Footer-->
   </div>
 </template>
 <script setup>
