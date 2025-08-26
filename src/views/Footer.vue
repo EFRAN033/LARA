@@ -1,68 +1,115 @@
 <template>
   <footer class="bg-gray-950 text-white font-sans antialiased">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-      <div class="md:hidden space-y-3">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <!-- MOBILE COMPACT -->
+      <div class="md:hidden space-y-2.5">
         <Disclosure
           v-for="(section, idx) in mobileSections"
           :key="idx"
           as="div"
           class="rounded-lg border border-white/10 bg-white/5 backdrop-blur"
         >
-          <DisclosureButton class="flex w-full items-center justify-between px-3 py-2.5 text-left">
-            <span class="text-sm font-semibold text-pink-300">{{ section.title }}</span>
-            <svg class="h-4 w-4 text-pink-300 ui-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <DisclosureButton class="flex w-full items-center justify-between px-3 py-2 text-left">
+            <span class="text-[13px] font-semibold text-pink-300">{{ section.title }}</span>
+            <svg class="h-4 w-4 text-pink-300 ui-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </DisclosureButton>
 
           <DisclosurePanel class="px-3 pb-3 text-gray-300">
+            <!-- Sección especial: newsletter -->
             <div v-if="section.type === 'newsletter'" class="space-y-2">
-              <p class="text-xs text-gray-400">Recibe novedades y oportunidades solidarias.</p>
-              <form @submit.prevent="submitNewsletter" class="flex gap-2">
+              <p class="text-[12px] leading-4 text-gray-400">Recibe novedades y oportunidades solidarias.</p>
+
+              <form @submit.prevent="submitNewsletter" class="flex gap-1.5">
                 <input
                   v-model="newsletterEmail"
                   type="email"
                   required
                   autocomplete="email"
                   placeholder="tu@email.com"
-                  class="flex-1 rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  class="flex-1 rounded-md border border-white/10 bg-white/10 px-2.5 py-2 text-[13px] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
                 />
                 <button
                   :disabled="newsletterSubmitting"
-                  class="rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-3.5 py-2 text-sm font-semibold text-white shadow disabled:opacity-50"
+                  class="rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-3 py-2 text-[13px] font-semibold text-white shadow disabled:opacity-50"
                 >
                   {{ newsletterSubmitting ? 'Enviando…' : 'Suscribirme' }}
                 </button>
               </form>
-              <p v-if="newsletterMsg" class="text-xs" :class="newsletterOk ? 'text-emerald-400' : 'text-rose-400'">
+
+              <p v-if="newsletterMsg" class="text-[12px]" :class="newsletterOk ? 'text-emerald-400' : 'text-rose-400'">
                 {{ newsletterMsg }}
               </p>
-              <div class="flex items-center gap-3 pt-1">
-                <a v-for="s in socialLinks" :key="s.name" :href="s.href" target="_blank" rel="noopener" class="text-gray-300 hover:text-white transition">
-                  <component :is="s.icon" class="h-4 w-4" />
+
+              <!-- Redes sociales (MOBILE COMPACT) -->
+              <div class="flex items-center gap-2 pt-1">
+                <a
+                  v-for="s in socialLinks"
+                  :key="s.name"
+                  :href="s.href"
+                  target="_blank"
+                  rel="noopener"
+                  :aria-label="s.name"
+                  :title="s.name"
+                  class="group relative inline-flex h-8 w-8 items-center justify-center rounded-full
+                         border border-white/10 bg-white/5 backdrop-blur
+                         ring-0 ring-pink-400/0 transition
+                         hover:border-white/15 hover:bg-white/10 hover:shadow-[0_0_0_3px_rgba(236,72,153,0.15)]
+                         hover:ring-4 hover:ring-pink-400/10
+                         focus:outline-none focus-visible:ring-4 focus-visible:ring-pink-400/40"
+                >
+                  <span class="absolute inset-0 rounded-full opacity-0 blur-[6px] transition-opacity
+                               group-hover:opacity-30 bg-gradient-to-tr from-white/10 to-white/0"></span>
+
+                  <span class="relative text-gray-300 transition-transform duration-150 group-hover:scale-110 group-hover:text-white">
+                    <!-- X -->
+                    <svg v-if="s.icon === 'x'" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M17.53 3H20l-7.06 8.08L20.5 21h-5.1l-4.02-4.83L6.7 21H3l7.54-8.64L3.5 3h5.18l3.62 4.35L17.53 3z"/>
+                    </svg>
+                    <!-- Instagram -->
+                    <svg v-else-if="s.icon === 'instagram'" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm10 2H7a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm-5 3a5 5 0 110 10 5 5 0 010-10zm5.8-1.8a1 1 0 110 2 1 1 0 010-2z"/>
+                    </svg>
+                    <!-- Facebook -->
+                    <svg v-else-if="s.icon === 'facebook'" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M13 22v-8h3l1-4h-4V7a1 1 0 011-1h3V2h-3a5 5 0 00-5 5v3H6v4h3v8h4z"/>
+                    </svg>
+                  </span>
+
+                  <!-- Tooltip mini -->
+                  <span
+                    class="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2
+                           whitespace-nowrap rounded-md bg-gray-800/95 px-1.5 py-0.5
+                           text-[10.5px] font-medium leading-4 text-gray-100 opacity-0 shadow
+                           transition-opacity duration-150 group-hover:opacity-100"
+                  >
+                    {{ s.name }}
+                  </span>
                 </a>
               </div>
             </div>
 
-            <ul v-else class="space-y-1.5">
+            <!-- Enlaces genéricos -->
+            <ul v-else class="space-y-1">
               <li v-for="(link, i) in section.links" :key="i">
                 <router-link
                   v-if="link.to && link.to.startsWith('/')"
                   :to="link.to"
-                  class="block rounded-md px-2 py-1 text-sm hover:text-pink-300"
+                  class="block rounded-md px-2 py-1 text-[13px] hover:text-pink-300"
                   @click="link.action === 'comment' && openCommentModal()"
                 >{{ link.label }}</router-link>
 
                 <a
                   v-else-if="link.to"
                   :href="link.to"
-                  class="block rounded-md px-2 py-1 text-sm hover:text-pink-300"
+                  class="block rounded-md px-2 py-1 text-[13px] hover:text-pink-300"
                   target="_blank" rel="noopener"
                 >{{ link.label }}</a>
 
                 <button
                   v-else
-                  class="block w-full rounded-md px-2 py-1 text-left text-sm hover:text-pink-300"
+                  class="block w-full rounded-md px-2 py-1 text-left text-[13px] hover:text-pink-300"
                   @click="handleAction(link)"
                 >{{ link.label }}</button>
               </li>
@@ -72,49 +119,94 @@
 
         <button
           @click="navigateToRegister"
-          class="mt-2 w-full rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-4 py-2.5 text-sm font-semibold shadow hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-gray-950"
+          class="mt-1.5 w-full rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-4 py-2 text-[13px] font-semibold shadow hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-gray-950"
         >
           Subir mis productos
         </button>
       </div>
 
-      <div class="hidden md:grid grid-cols-12 gap-6">
+      <!-- DESKTOP (compacto y equilibrado) -->
+      <div class="hidden md:grid grid-cols-12 gap-5">
+        <!-- Brand + newsletter -->
         <div class="col-span-4">
-          <h3 class="text-base font-bold text-pink-300">KambiaPe</h3>
-          <p class="mt-1.5 text-sm text-gray-400">
+          <h3 class="text-sm font-bold text-pink-300">KambiaPe</h3>
+          <p class="mt-1 text-[13px] text-gray-400">
             Intercambia, dona y potencia el impacto social en tu comunidad.
           </p>
 
-          <form @submit.prevent="submitNewsletter" class="mt-3 flex gap-2">
+          <form @submit.prevent="submitNewsletter" class="mt-2.5 flex gap-2">
             <input
               v-model="newsletterEmail"
               type="email"
               required
               autocomplete="email"
               placeholder="tu@email.com"
-              class="w-full rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              class="w-full rounded-md border border-white/10 bg-white/10 px-3 py-2 text-[13px] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
             />
             <button
               :disabled="newsletterSubmitting"
-              class="rounded-md bg-white px-3.5 py-2 text-sm font-semibold text-pink-700 shadow hover:shadow-md disabled:opacity-50"
+              class="rounded-md bg-white px-3.5 py-2 text-[13px] font-semibold text-pink-700 shadow hover:shadow-md disabled:opacity-50"
             >
               {{ newsletterSubmitting ? 'Enviando…' : 'Suscribirme' }}
             </button>
           </form>
-          <p v-if="newsletterMsg" class="mt-1.5 text-xs" :class="newsletterOk ? 'text-emerald-400' : 'text-rose-400'">
+
+          <p v-if="newsletterMsg" class="mt-1 text-[12px]" :class="newsletterOk ? 'text-emerald-400' : 'text-rose-400'">
             {{ newsletterMsg }}
           </p>
 
-          <div class="mt-3.5 flex items-center gap-3">
-            <a v-for="s in socialLinks" :key="s.name" :href="s.href" target="_blank" rel="noopener" class="text-gray-300 hover:text-white transition">
-              <component :is="s.icon" class="h-4 w-4" />
+          <!-- Redes sociales (DESKTOP COMPACT) -->
+          <div class="mt-3 flex items-center gap-2">
+            <a
+              v-for="s in socialLinks"
+              :key="s.name"
+              :href="s.href"
+              target="_blank"
+              rel="noopener"
+              :aria-label="s.name"
+              :title="s.name"
+              class="group relative inline-flex h-9 w-9 items-center justify-center rounded-full
+                     border border-white/10 bg-white/5 backdrop-blur
+                     ring-0 ring-pink-400/0 transition
+                     hover:border-white/15 hover:bg-white/10 hover:shadow-[0_0_0_3px_rgba(236,72,153,0.15)]
+                     hover:ring-4 hover:ring-pink-400/10
+                     focus:outline-none focus-visible:ring-4 focus-visible:ring-pink-400/40"
+            >
+              <span class="absolute inset-0 rounded-full opacity-0 blur-md transition-opacity
+                           group-hover:opacity-30 bg-gradient-to-tr from-white/10 to-white/0"></span>
+
+              <span class="relative text-gray-300 transition-transform duration-150 group-hover:scale-110 group-hover:text-white">
+                <!-- X -->
+                <svg v-if="s.icon === 'x'" class="h-4.5 w-4.5 md:h-5 md:w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.53 3H20l-7.06 8.08L20.5 21h-5.1l-4.02-4.83L6.7 21H3l7.54-8.64L3.5 3h5.18l3.62 4.35L17.53 3z"/>
+                </svg>
+                <!-- Instagram -->
+                <svg v-else-if="s.icon === 'instagram'" class="h-4.5 w-4.5 md:h-5 md:w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm10 2H7a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm-5 3a5 5 0 110 10 5 5 0 010-10zm5.8-1.8a1 1 0 110 2 1 1 0 010-2z"/>
+                </svg>
+                <!-- Facebook -->
+                <svg v-else-if="s.icon === 'facebook'" class="h-4.5 w-4.5 md:h-5 md:w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M13 22v-8h3l1-4h-4V7a1 1 0 011-1h3V2h-3a5 5 0 00-5 5v3H6v4h3v8h4z"/>
+                </svg>
+              </span>
+
+              <!-- Tooltip -->
+              <span
+                class="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2
+                       whitespace-nowrap rounded-md bg-gray-800/95 px-2 py-1
+                       text-[11px] font-medium text-gray-100 opacity-0 shadow
+                       transition-opacity duration-150 group-hover:opacity-100"
+              >
+                {{ s.name }}
+              </span>
             </a>
           </div>
         </div>
 
+        <!-- Navegación -->
         <div class="col-span-3">
-          <h3 class="text-base font-bold text-pink-300 mb-3">Navegación</h3>
-          <ul class="space-y-1.5 text-gray-300 text-sm">
+          <h3 class="text-sm font-bold text-pink-300 mb-2.5">Navegación</h3>
+          <ul class="space-y-1.5 text-gray-300 text-[13px]">
             <li><router-link to="/" class="hover:text-pink-300">Inicio</router-link></li>
             <li><router-link to="/explorar" class="hover:text-pink-300">Explorar productos</router-link></li>
             <li><router-link to="/como-funciona" class="hover:text-pink-300">Cómo funciona</router-link></li>
@@ -122,35 +214,39 @@
           </ul>
         </div>
 
+        <!-- Soporte -->
         <div class="col-span-3">
-          <h3 class="text-base font-bold text-pink-300 mb-3">Soporte</h3>
-          <ul class="space-y-1.5 text-gray-300 text-sm">
+          <h3 class="text-sm font-bold text-pink-300 mb-2.5">Soporte</h3>
+          <ul class="space-y-1.5 text-gray-300 text-[13px]">
             <li><a href="mailto:soporte@kambiape.com" class="hover:text-pink-300">soporte@kambiape.com</a></li>
             <li><button @click="openCommentModal" class="hover:text-pink-300">Dejar un comentario</button></li>
           </ul>
         </div>
 
+        <!-- Acción -->
         <div class="col-span-2">
-          <h3 class="text-base font-bold text-pink-300 mb-3">¿Quieres publicar?</h3>
-          <p class="text-gray-300 text-sm mb-3">Sube tus productos y dales una segunda vida.</p>
+          <h3 class="text-sm font-bold text-pink-300 mb-2.5">¿Quieres publicar?</h3>
+          <p class="text-gray-300 text-[13px] mb-2.5">Sube tus productos y dales una segunda vida.</p>
           <button
             @click="navigateToRegister"
-            class="w-full rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-5 py-2.5 text-sm font-semibold shadow hover:brightness-110"
+            class="w-full rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-4 py-2.5 text-[13px] font-semibold shadow hover:brightness-110"
           >
             Comenzar ahora
           </button>
         </div>
       </div>
 
-      <div class="mt-8 border-t border-white/10 pt-4 text-center text-sm text-gray-400">
+      <!-- Línea inferior -->
+      <div class="mt-6 sm:mt-8 border-t border-white/10 pt-3.5 sm:pt-4 text-center text-[13px] text-gray-400">
         <div class="flex flex-col items-center gap-2 sm:flex-row sm:justify-between">
-          <p class="text-xs sm:text-sm">© {{ year }} KambiaPe. Todos los derechos reservados.</p>
-          <div class="flex items-center gap-4">
-            <router-link to="/terminos" class="text-xs sm:text-sm hover:text-white">Términos</router-link>
-            <router-link to="/privacidad" class="text-xs sm:text-sm hover:text-white">Privacidad</router-link>
+          <p class="text-[12px] sm:text-[13px]">© {{ year }} KambiaPe. Todos los derechos reservados.</p>
+          <div class="flex items-center gap-3 sm:gap-4">
+            <router-link to="/terminos" class="text-[12px] sm:text-[13px] hover:text-white">Términos</router-link>
+            <router-link to="/privacidad" class="text-[12px] sm:text-[13px] hover:text-white">Privacidad</router-link>
             <select
               v-model="lang"
-              class="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-xs text-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              class="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[12px] text-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              aria-label="Idioma"
             >
               <option value="es">ES</option>
               <option value="en">EN</option>
@@ -160,6 +256,7 @@
       </div>
     </div>
 
+    <!-- Modal de comentarios - Headless UI (compactada) -->
     <TransitionRoot :show="isCommentModalVisible" as="template">
       <Dialog @close="closeCommentModal" class="relative z-50">
         <TransitionChild
@@ -186,11 +283,11 @@
               leave-to="opacity-0 translate-y-3 scale-95"
             >
               <DialogPanel class="w-full max-w-md rounded-lg border border-white/10 bg-gray-900 p-5 shadow-xl">
-                <DialogTitle class="text-center text-xl font-bold text-pink-300">Envíanos tus Comentarios</DialogTitle>
+                <DialogTitle class="text-center text-lg font-bold text-pink-300">Envíanos tus Comentarios</DialogTitle>
 
-                <form class="mt-5 space-y-3" @submit.prevent="submitComment">
+                <form class="mt-4 space-y-3" @submit.prevent="submitComment">
                   <div>
-                    <label for="commentType" class="mb-1.5 block text-sm text-gray-300">Tipo (opcional)</label>
+                    <label for="commentType" class="mb-1 block text-[13px] text-gray-300">Tipo (opcional)</label>
                     <select
                       id="commentType"
                       v-model="comment.type"
@@ -205,7 +302,7 @@
                   </div>
 
                   <div>
-                    <label for="commentMessage" class="mb-1.5 block text-sm text-gray-300">
+                    <label for="commentMessage" class="mb-1 block text-[13px] text-gray-300">
                       Mensaje <span class="text-rose-400">*</span>
                     </label>
                     <textarea
@@ -220,7 +317,7 @@
 
                   <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <div>
-                      <label for="commentName" class="mb-1.5 block text-sm text-gray-300">Tu nombre (opcional)</label>
+                      <label for="commentName" class="mb-1 block text-[13px] text-gray-300">Tu nombre (opcional)</label>
                       <input
                         id="commentName"
                         v-model="comment.name"
@@ -229,32 +326,32 @@
                       />
                     </div>
                     <div>
-                      <label for="commentEmail" class="mb-1.5 block text-sm text-gray-300">Correo (opcional)</label>
+                      <label for="commentEmail" class="mb-1 block text-[13px] text-gray-300">Correo (opcional)</label>
                       <input
                         id="commentEmail"
                         v-model="comment.email"
                         type="email"
                         class="w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
                       />
-                      <p v-if="emailError" class="mt-1 text-xs text-rose-400">{{ emailError }}</p>
+                      <p v-if="emailError" class="mt-1 text-[12px] text-rose-400">{{ emailError }}</p>
                     </div>
                   </div>
 
-                  <div class="flex justify-end gap-2.5 pt-1">
+                  <div class="flex justify-end gap-2 pt-1">
                     <button
                       type="button"
                       @click="closeCommentModal"
-                      class="rounded-md border border-gray-600 px-4 py-2 text-sm text-gray-300 hover:bg-gray-800"
+                      class="rounded-md border border-gray-600 px-4 py-2 text-[13px] text-gray-300 hover:bg-gray-800"
                     >
                       Cancelar
                     </button>
                     <button
                       type="submit"
                       :disabled="isSubmitting"
-                      class="inline-flex items-center rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-4 py-2 text-sm font-medium text-white shadow hover:brightness-110 disabled:opacity-50"
+                      class="inline-flex items-center rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-4 py-2 text-[13px] font-medium text-white shadow hover:brightness-110 disabled:opacity-50"
                     >
                       <span v-if="!isSubmitting">Enviar</span>
-                      <svg v-else class="ml-1 h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                      <svg v-else class="ml-1 h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0A12 12 0 000 12h4z"/>
                       </svg>
@@ -264,7 +361,7 @@
 
                 <p
                   v-if="feedbackMessage"
-                  class="mt-3 text-center text-sm"
+                  class="mt-3 text-center text-[13px]"
                   :class="isSuccess ? 'text-gray-300' : 'text-rose-400'"
                 >
                   {{ feedbackMessage }}
@@ -282,13 +379,6 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-
-/* Iconos sociales compactos */
-const IconX = { name: 'IconX', template: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.53 3H20l-7.06 8.08L20.5 21h-5.1l-4.02-4.83L6.7 21H3l7.54-8.64L3.5 3h5.18l3.62 4.35L17.53 3z"/></svg>' }
-const IconInstagram = { name: 'IconInstagram', template: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M12.315 2.518a.75.75 0 01.63 0C13.232 2.72 13.914 3 14.75 3h.25a7.5 7.5 0 017.5 7.5v.25c0 .836.28 1.518.482 2.315a.75.75 0 010 .63c-.202.797-.482 1.479-.482 2.315v.25a7.5 7.5 0 01-7.5 7.5h-.25c-.836 0-1.518-.28-2.315-.482a.75.75 0 01-.63 0c-.797.202-1.479.482-2.315.482h-.25a7.5 7.5 0 01-7.5-7.5v-.25c0-.836-.28-1.518-.482-2.315a.75.75 0 010-.63c.202-.797.482-1.479.482-2.315v-.25a7.5 7.5 0 017.5-7.5h.25c.836 0 1.518.28 2.315.482zM12 17.25a5.25 5.25 0 100-10.5 5.25 5.25 0 000 10.5zM12 15a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd" /><path d="M18.75 5.25h.008v.008h-.008V5.25z" /></svg>' }
-const IconFacebook = { name: 'IconFacebook', template: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7a1 1 0 011-1h3V2h-3a5 5 0 00-5 5v3H6v4h3v8h4z"/></svg>' }
-
-const router = useRouter()
 
 /* ------- Newsletter ------- */
 const newsletterEmail = ref('')
@@ -311,10 +401,11 @@ const submitNewsletter = async () => {
   newsletterEmail.value = ''
 }
 
+/* ------- Social links (Instagram actualizado a @kambia_pe) ------- */
 const socialLinks = [
-  { name: 'X', href: 'https://x.com/', icon: IconX },
-  { name: 'Instagram', href: 'https://www.instagram.com/kambia_pe', icon: IconInstagram },
-  { name: 'Facebook', href: 'https://facebook.com/', icon: IconFacebook },
+  { name: 'X',         href: 'https://x.com/', icon: 'x' },
+  { name: 'Instagram', href: 'https://www.instagram.com/kambia_pe?igsh=d2Q5NWhwM2E0dGE3', icon: 'instagram' },
+  { name: 'Facebook',  href: 'https://facebook.com/', icon: 'facebook' },
 ]
 
 /* ------- Mobile sections ------- */
@@ -345,19 +436,12 @@ const mobileSections = [
   },
 ]
 
+/* ------- Enrutado y acciones ------- */
+const router = useRouter()
 const handleAction = (link) => {
   if (link.action === 'comment') openCommentModal()
   else if (link.to?.startsWith('/')) router.push(link.to)
 }
-
-/* ------- Warehouses ------- */
-const warehouses = [
-  {
-    city: 'Chincha',
-    address: 'Av. Mariscal Sucre #1032, Pueblo Nuevo. Ref: Frente al colegio Fe y Alegría N°30',
-    map: 'https://maps.google.com/?q=Av.+Mariscal+Sucre+1032+Chincha',
-  },
-]
 
 /* ------- CTA navegación ------- */
 const navigateToRegister = () => router.push('/Register')
@@ -399,7 +483,7 @@ const submitComment = async () => {
     await new Promise((r) => setTimeout(r, 900))
     isSuccess.value = true
     feedbackMessage.value = '¡Gracias! Recibimos tu comentario.'
-    setTimeout(() => closeCommentModal(), 1800)
+    setTimeout(() => closeCommentModal(), 1500)
   } catch {
     isSuccess.value = false
     feedbackMessage.value = 'Ocurrió un error. Intenta nuevamente.'
