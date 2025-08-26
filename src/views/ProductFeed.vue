@@ -97,59 +97,145 @@
     </transition>
 
 <!-- Banner Principal con Parallax -->
-  <div class="relative bg-slate-50 dark:bg-slate-900 py-16 sm:py-24 rounded-2xl overflow-hidden mb-8">
-    <div class="absolute inset-x-0 top-0 h-[800px] w-full -translate-y-1/3">
-      <div class="absolute inset-0 bg-gradient-to-br from-rose-100 via-transparent to-transparent dark:from-rose-900/20 dark:via-transparent"></div>
-    </div>
-    
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16 items-center">
-        
-        <div>
-          <p class="font-semibold text-rose-500 uppercase tracking-wider mb-3">
-            Tu círculo de intercambio
-          </p>
-          <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 dark:text-white mb-6">
-            Dale una segunda vida a tus objetos.
-          </h1>
-          <p class="text-lg text-slate-600 dark:text-slate-300 max-w-lg mb-8">
-            Únete a la comunidad y redescubre el valor de lo que tienes. El trueque perfecto te espera.
-          </p>
-          <div class="flex flex-col sm:flex-row items-start gap-4">
-            <a 
-              href="/publish" 
-              class="inline-flex items-center justify-center px-7 py-3 bg-rose-500 hover:bg-rose-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-rose-300 dark:focus:ring-rose-800"
-            >
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-              Publicar un Objeto
-            </a>
-            <a 
-              href="/explore" 
-              class="inline-flex items-center justify-center px-7 py-3 text-slate-700 dark:text-slate-200 font-semibold rounded-lg ring-2 ring-slate-300 dark:ring-slate-700 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:focus:ring-slate-600"
-            >
-              Explorar
-            </a>
-          </div>
+<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-900 rounded-3xl">
+  <!-- Overlays de branding (muy sutiles, no cambian el fondo base) -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <!-- halo suave centrado -->
+    <div class="absolute left-1/2 -top-28 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-gradient-to-r from-[#d7037b]/12 to-[#9e0154]/12 blur-3xl"></div>
+    <!-- patrón de puntos diagonal muy tenue -->
+    <div class="absolute inset-0 opacity-[0.06] dark:opacity-[0.09] mix-blend-multiply"
+         style="background-image: radial-gradient(circle at 1px 1px, #9e0154 1px, transparent 1.5px);
+                background-size: 22px 22px;"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="grid items-center grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14 py-12 sm:py-16">
+
+      <!-- Columna izquierda -->
+      <header class="lg:col-span-6">
+        <!-- Eyebrow con pulso de marca -->
+        <div class="mb-3 inline-flex items-center gap-2 rounded-full border border-[#d7037b]/35 bg-white/60 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-[#9e0154] shadow-sm backdrop-blur-sm dark:bg-white/5">
+          <span class="relative inline-flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#d7037b]/60"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-[#d7037b]"></span>
+          </span>
+          Tu círculo de intercambio
         </div>
 
-        <div class="relative w-full h-80 lg:h-96">
-          <div class="group w-full h-full">
-            <div class="absolute top-1/2 left-0 w-40 h-56 -translate-y-[70%] rounded-3xl shadow-xl overflow-hidden transition-all duration-700 ease-out group-hover:-translate-x-16 group-hover:scale-105 animate-[float_6s_ease-in-out_infinite]">
-              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800" alt="Auriculares" class="h-full w-full object-cover">
-            </div>
-            
-            <div class="absolute top-1/2 right-0 w-40 h-56 -translate-y-[30%] rounded-3xl shadow-xl overflow-hidden transition-all duration-700 ease-out group-hover:translate-x-16 group-hover:scale-105 animate-[float_7s_ease-in-out_infinite_0.5s]">
-              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800" alt="Zapatillas Deportivas" class="h-full w-full object-cover">
-            </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-snug">
+          Donde <span class="bg-gradient-to-r from-[#d7037b] to-[#9e0154] bg-clip-text text-transparent">tu historia</span> encuentra un nuevo comienzo
+        </h1>
 
-            <div class="absolute top-1/2 left-1/2 w-56 h-72 -translate-x-1/2 -translate-y-1/2 rounded-3xl shadow-2xl overflow-hidden transition-all duration-700 ease-out group-hover:scale-110 z-10 animate-[float_5s_ease-in-out_infinite_1s]">
-              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800" alt="Cámara de Fotos" class="h-full w-full object-cover">
+        <p class="mt-4 max-w-md text-base text-slate-600 dark:text-slate-300">
+          Intercambia, dona y potencia el impacto social. Crea conexiones reales con una experiencia segura y sin comisiones.
+        </p>
+
+        <!-- CTA con acentos de marca -->
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <a href="/publish"
+             class="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#d7037b] to-[#9e0154] text-white font-semibold shadow-lg shadow-[#d7037b]/25 transition-all hover:brightness-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#d7037b]/30 text-sm">
+            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6"/>
+            </svg>
+            Publicar Objeto
+          </a>
+          <a href="/explore"
+             class="inline-flex items-center justify-center px-6 py-2.5 rounded-xl ring-1 ring-inset ring-[#d7037b]/35 text-[#9e0154] font-medium hover:bg-[#d7037b]/5 dark:text-rose-200 dark:ring-rose-400/40 text-sm transition">
+            Explorar
+          </a>
+        </div>
+
+        <!-- mini indicadores de seguridad -->
+        <ul class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[11px] text-slate-500 dark:text-slate-400">
+          <li class="inline-flex items-center gap-1.5">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#d7037b]"></span> Puntos verificados
+          </li>
+          <li class="inline-flex items-center gap-1.5">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#9e0154]"></span> Sin comisiones
+          </li>
+          <li class="inline-flex items-center gap-1.5">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#d7037b]"></span> Transacciones seguras
+          </li>
+        </ul>
+      </header>
+
+      <!-- Columna derecha: stack sin degradado inferior -->
+      <div class="relative lg:col-span-6">
+        <div class="relative mx-auto w-full max-w-md group"
+             @mouseenter="hovering = true"
+             @mouseleave="hovering = false">
+
+          <!-- Orbe con gradiente corporativo -->
+          <svg class="absolute -z-10 left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 opacity-55" viewBox="0 0 200 200" fill="none">
+            <defs>
+              <radialGradient id="kambiaRingX" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100 100) rotate(90) scale(100)">
+                <stop offset="0" stop-color="#d7037b" stop-opacity="0.6"/>
+                <stop offset="1" stop-color="#9e0154" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="100" cy="100" r="92" stroke="url(#kambiaRingX)" stroke-width="1.6"/>
+          </svg>
+
+          <!-- Cartas -->
+          <div class="relative h-[24rem] select-none">
+            <div
+              v-for="(card, i) in orderedCards"
+              :key="card.id"
+              :class="[
+                'absolute left-1/2 top-1/2 h-[20rem] w-[16rem] -translate-x-1/2 -translate-y-1/2 rounded-2xl overflow-hidden transition-all duration-500 ease-out',
+                'bg-white/40 backdrop-blur-md dark:bg-white/5 shadow-lg',
+                positionClass(i)
+              ]"
+              :style="transformStyle(i)"
+              @click="shuffle()"
+            >
+              <img :src="card.img" :alt="card.alt" class="h-full w-full object-cover">
+
+              <!-- brillo diagonal -->
+              <div class="pointer-events-none absolute inset-0 overflow-hidden">
+                <div class="absolute -left-1/3 top-0 h-full w-1/2 bg-gradient-to-r from-white/35 to-transparent opacity-0 group-hover:opacity-40 transition duration-700 translate-x-[-120%] group-hover:translate-x-[180%]"></div>
+              </div>
+
+              <!-- contenido inferior (sin degradado rosa) -->
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                <span class="text-white text-xs font-medium drop-shadow">{{ card.alt }}</span>
+                <span class="px-2 py-0.5 text-[10px] rounded-full bg-gradient-to-r from-[#d7037b] to-[#9e0154] text-white shadow">
+                  {{ card.badge }}
+                </span>
+              </div>
+
+              <!-- chip activo -->
+              <div class="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-black/10 px-2.5 py-1 text-[10px] font-semibold text-white backdrop-blur">
+                Activo
+                <span v-if="i === frontIndex" class="ml-1 h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+              </div>
             </div>
           </div>
+
+          <!-- Línea de guías -->
+          <div class="mt-4 grid grid-cols-3 gap-3 text-[10px] font-medium text-slate-500 dark:text-slate-400">
+            <div class="flex items-center gap-2">
+              <span class="h-1.5 w-6 rounded-full bg-[#d7037b]/70"></span> Publica
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="h-1.5 w-6 rounded-full bg-[#9e0154]/70"></span> Recibe propuestas
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="h-1.5 w-6 rounded-full bg-[#d7037b]/70"></span> Intercambia
+            </div>
+          </div>
+
         </div>
       </div>
+
     </div>
   </div>
+</section>
+
+
+
+
+
 <!--fin del banner principal-->
 
 <!-- filtros -->
@@ -271,7 +357,7 @@
   </section>
 </template>
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue';
 import { useUserStore } from '@/stores/user';
 import axios from 'axios';
 import router from '@/router';
@@ -501,7 +587,101 @@ const sendProposal = async () => {
     }
   }
 };
+
+
+
+/* =========================================================
+   SHUFFLE CARDS HERO (barajar tarjetas del header)
+   - Usa con la sección que te pasé (evento @click="shuffle()" y v-models)
+   - No interfiere con tu lógica existente
+========================================================= */
+
+// Tarjetas (puedes cambiar imágenes y badges)
+const cards = ref([
+  {
+    id: 1,
+    img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80',
+    alt: 'Cámara',
+    badge: 'Preferido'
+  },
+  {
+    id: 2,
+    img: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80',
+    alt: 'Mochila',
+    badge: 'Outdoor'
+  },
+  {
+    id: 3,
+    img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1000&q=80',
+    alt: 'Teclado',
+    badge: 'Tech'
+  }
+]);
+
+
+// Índice del frente
+const frontIndex = ref(0);
+// Estado hover para acelerar el orbe SVG
+const hovering = ref(false);
+// Auto barajar on/off
+const autoShuffle = ref(true);
+// Timer interno
+let shuffleTimer = null;
+
+// Array visual rotado según frontIndex
+const orderedCards = computed(() => {
+  const arr = [...cards.value];
+  return arr.slice(frontIndex.value).concat(arr.slice(0, frontIndex.value));
+});
+
+// Acción de barajar (rota el índice)
+const shuffle = () => {
+  frontIndex.value = (frontIndex.value + 1) % cards.value.length;
+};
+
+// Clases por posición (0=front, 1=mid, 2=back)
+const positionClass = (pos) => {
+  if (pos === 0) return 'z-30 ring-slate-200 shadow-2xl dark:ring-white/10';
+  if (pos === 1) return 'z-20 ring-slate-200 shadow-xl opacity-95 dark:ring-white/10';
+  return 'z-10 ring-slate-200 shadow opacity-85 dark:ring-white/10';
+};
+
+// Transform por posición para profundidad y leve rotación
+const transformStyle = (pos) => {
+  if (pos === 0) {
+    return { transform: 'translate(-50%, -50%) rotate(0deg) scale(1)' };
+  } else if (pos === 1) {
+    return { transform: 'translate(calc(-50% + 18px), calc(-50% + 10px)) rotate(6deg) scale(0.96)' };
+  }
+  return { transform: 'translate(calc(-50% - 18px), calc(-50% + 18px)) rotate(-8deg) scale(0.92)' };
+};
+
+// Inicia/Detiene el intervalo de auto-barajado
+const startShuffleTimer = () => {
+  stopShuffleTimer();
+  shuffleTimer = setInterval(() => {
+    if (autoShuffle.value) shuffle();
+  }, hovering.value ? 1800 : 2800);
+};
+const stopShuffleTimer = () => {
+  if (shuffleTimer) {
+    clearInterval(shuffleTimer);
+    shuffleTimer = null;
+  }
+};
+
+// Montaje / Desmontaje y reacciones
+onMounted(() => {
+  startShuffleTimer();
+});
+onBeforeUnmount(() => {
+  stopShuffleTimer();
+});
+watch([autoShuffle, hovering], () => {
+  startShuffleTimer();
+});
 </script>
+
 
 <style scoped>
 /* Las animaciones y estilos existentes se mantienen */

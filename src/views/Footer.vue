@@ -1,395 +1,424 @@
 <template>
-  <footer class="bg-gray-900 text-white py-6 px-4 font-sans antialiased">
-    <div class="container mx-auto">
-      <div class="md:hidden space-y-6">
-        <div v-for="(section, index) in mobileSections" :key="index">
-          <button
-            @click="toggleSection(index)"
-            class="flex justify-between items-center w-full text-left font-bold py-2 focus:outline-none text-lg text-pink-300 hover:text-pink-400"
-          >
-            <span>{{ section.title }}</span>
-            <svg
-              class="w-5 h-5 transition-transform duration-200"
-              :class="{ 'transform rotate-180': openSections[index] }"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+  <footer class="bg-gray-950 text-white font-sans antialiased">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <!-- MOBILE: acordeón accesible (más compacto) -->
+      <div class="md:hidden space-y-3">
+        <Disclosure
+          v-for="(section, idx) in mobileSections"
+          :key="idx"
+          as="div"
+          class="rounded-lg border border-white/10 bg-white/5 backdrop-blur"
+        >
+          <DisclosureButton class="flex w-full items-center justify-between px-3 py-2.5 text-left">
+            <span class="text-sm font-semibold text-pink-300">{{ section.title }}</span>
+            <svg class="h-4 w-4 text-pink-300 ui-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
-          </button>
+          </DisclosureButton>
 
-          <div
-            v-show="openSections[index]"
-            class="pl-2 space-y-2 mt-2 text-gray-300"
-          >
-            <router-link
-              v-for="(link, linkIndex) in section.links"
-              :key="linkIndex"
-              :to="link.path"
-              class="block py-1 hover:text-pink-400 transition"
-              @click="link.label === 'Dejar un comentario' && openCommentModal()"
+          <DisclosurePanel class="px-3 pb-3 text-gray-300">
+            <!-- Sección especial: newsletter -->
+            <div v-if="section.type === 'newsletter'" class="space-y-2">
+              <p class="text-xs text-gray-400">Recibe novedades y oportunidades solidarias.</p>
+              <form @submit.prevent="submitNewsletter" class="flex gap-2">
+                <input
+                  v-model="newsletterEmail"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  placeholder="tu@email.com"
+                  class="flex-1 rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+                <button
+                  :disabled="newsletterSubmitting"
+                  class="rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-3.5 py-2 text-sm font-semibold text-white shadow disabled:opacity-50"
+                >
+                  {{ newsletterSubmitting ? 'Enviando…' : 'Suscribirme' }}
+                </button>
+              </form>
+              <p v-if="newsletterMsg" class="text-xs" :class="newsletterOk ? 'text-emerald-400' : 'text-rose-400'">
+                {{ newsletterMsg }}
+              </p>
+              <div class="flex items-center gap-3 pt-1">
+                <a v-for="s in socialLinks" :key="s.name" :href="s.href" target="_blank" rel="noopener" class="text-gray-300 hover:text-white transition">
+                  <component :is="s.icon" class="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+
+            <!-- Enlaces genéricos -->
+            <ul v-else class="space-y-1.5">
+              <li v-for="(link, i) in section.links" :key="i">
+                <router-link
+                  v-if="link.to && link.to.startsWith('/')"
+                  :to="link.to"
+                  class="block rounded-md px-2 py-1 text-sm hover:text-pink-300"
+                  @click="link.action === 'comment' && openCommentModal()"
+                >{{ link.label }}</router-link>
+
+                <a
+                  v-else-if="link.to"
+                  :href="link.to"
+                  class="block rounded-md px-2 py-1 text-sm hover:text-pink-300"
+                  target="_blank" rel="noopener"
+                >{{ link.label }}</a>
+
+                <button
+                  v-else
+                  class="block w-full rounded-md px-2 py-1 text-left text-sm hover:text-pink-300"
+                  @click="handleAction(link)"
+                >{{ link.label }}</button>
+              </li>
+            </ul>
+          </DisclosurePanel>
+        </Disclosure>
+
+        <button
+          @click="navigateToRegister"
+          class="mt-2 w-full rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-4 py-2.5 text-sm font-semibold shadow hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-gray-950"
+        >
+          Subir mis productos
+        </button>
+      </div>
+
+      <!-- DESKTOP (más compacto y equilibrado) -->
+      <div class="hidden md:grid grid-cols-12 gap-6">
+        <!-- Brand + newsletter -->
+        <div class="col-span-4">
+          <h3 class="text-base font-bold text-pink-300">KambiaPe</h3>
+          <p class="mt-1.5 text-sm text-gray-400">
+            Intercambia, dona y potencia el impacto social en tu comunidad.
+          </p>
+
+          <form @submit.prevent="submitNewsletter" class="mt-3 flex gap-2">
+            <input
+              v-model="newsletterEmail"
+              type="email"
+              required
+              autocomplete="email"
+              placeholder="tu@email.com"
+              class="w-full rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+            />
+            <button
+              :disabled="newsletterSubmitting"
+              class="rounded-md bg-white px-3.5 py-2 text-sm font-semibold text-pink-700 shadow hover:shadow-md disabled:opacity-50"
             >
-              {{ link.label }}
-            </router-link>
+              {{ newsletterSubmitting ? 'Enviando…' : 'Suscribirme' }}
+            </button>
+          </form>
+          <p v-if="newsletterMsg" class="mt-1.5 text-xs" :class="newsletterOk ? 'text-emerald-400' : 'text-rose-400'">
+            {{ newsletterMsg }}
+          </p>
+
+          <div class="mt-3.5 flex items-center gap-3">
+            <a v-for="s in socialLinks" :key="s.name" :href="s.href" target="_blank" rel="noopener" class="text-gray-300 hover:text-white transition">
+              <component :is="s.icon" class="h-4 w-4" />
+            </a>
           </div>
         </div>
 
-        <div class="pt-4 border-t border-gray-700">
-          <button
-            @click="navigateToRegister"
-            class="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-4 py-3 rounded-lg transition transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-gray-900 shadow-lg"
-          >
-            Subir mis productos
-          </button>
-        </div>
-      </div>
-
-      <div class="hidden md:grid md:grid-cols-5 gap-8">
-        <div>
-          <h3 class="text-lg font-bold mb-4 text-pink-300">KambiaPe</h3>
-          <ul class="space-y-2">
-            <li><router-link to="/" class="hover:text-pink-400 transition">Inicio</router-link></li>
-            <li><router-link to="/explorar" class="hover:text-pink-400 transition">Explorar productos</router-link></li>
-            <li><router-link to="/como-funciona" class="hover:text-pink-400 transition">Cómo funciona</router-link></li>
-            <li><router-link to="/faqs" class="hover:text-pink-400 transition">FAQs</router-link></li>
+        <!-- Navegación -->
+        <div class="col-span-3">
+          <h3 class="text-base font-bold text-pink-300 mb-3">Navegación</h3>
+          <ul class="space-y-1.5 text-gray-300 text-sm">
+            <li><router-link to="/" class="hover:text-pink-300">Inicio</router-link></li>
+            <li><router-link to="/explorar" class="hover:text-pink-300">Explorar productos</router-link></li>
+            <li><router-link to="/como-funciona" class="hover:text-pink-300">Cómo funciona</router-link></li>
+            <li><router-link to="/faqs" class="hover:text-pink-300">FAQs</router-link></li>
           </ul>
         </div>
 
-        <div>
-          <h3 class="text-lg font-bold mb-4 text-pink-300">Contacto</h3>
-          <p class="mb-2 text-gray-300">¿Necesitas ayuda?</p>
-          <a href="mailto:soporte@kambiape.com" class="text-pink-400 hover:underline hover:text-pink-300 transition">soporte@kambiape.com</a>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-bold mb-4 text-pink-300">Comentarios</h3>
-          <p class="mb-4 text-gray-300">Tu opinión nos ayuda a mejorar. ¡Déjanos tus comentarios!</p>
-          <button
-            @click="openCommentModal"
-            class="inline-block bg-pink-600 hover:bg-pink-700 text-white px-5 py-2.5 rounded-lg transition transform hover:scale-105 shadow-md"
-          >
-            Enviar Comentario
-          </button>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-bold mb-4 text-pink-300">Nuestros Almacenes</h3>
-          <ul class="space-y-2 text-gray-300">
-            <li><p>Av. Mariscal Sucre #1032, en Pueblo Nuevo, Chincha (Ref. Frente al colegio Fe y AlegríaN°30)</p></li>
-            <li><router-link to="/almacenes" class="text-pink-400 hover:underline hover:text-pink-300 transition">Ver en mapa</router-link></li>
+        <!-- Soporte -->
+        <div class="col-span-3">
+          <h3 class="text-base font-bold text-pink-300 mb-3">Soporte</h3>
+          <ul class="space-y-1.5 text-gray-300 text-sm">
+            <li><a href="mailto:soporte@kambiape.com" class="hover:text-pink-300">soporte@kambiape.com</a></li>
+            <li><button @click="openCommentModal" class="hover:text-pink-300">Dejar un comentario</button></li>
           </ul>
         </div>
 
-        <div>
-          <h3 class="text-lg font-bold mb-4 text-pink-300">¿Quieres subir tus productos para intercambio?</h3>
-          <p class="mb-4 text-gray-300">Únete como facilitador de intercambios y da nueva vida a tus productos.</p>
+        <!-- Acción -->
+        <div class="col-span-2">
+          <h3 class="text-base font-bold text-pink-300 mb-3">¿Quieres publicar?</h3>
+          <p class="text-gray-300 text-sm mb-3">Sube tus productos y dales una segunda vida.</p>
           <button
             @click="navigateToRegister"
-            class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-6 py-3 rounded-lg transition transform hover:scale-105 shadow-md"
+            class="w-full rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-5 py-2.5 text-sm font-semibold shadow hover:brightness-110"
           >
             Comenzar ahora
           </button>
         </div>
       </div>
 
-      <div class="border-t border-gray-700 mt-8 pt-4 text-center text-gray-400 text-sm">
-        <p>© 2025 KambiaPe. Todos los derechos reservados.</p>
-        <div class="mt-2 flex justify-center space-x-4">
-          <router-link to="/terminos" class="hover:text-white transition">Términos y Condiciones</router-link>
-          <router-link to="/privacidad" class="hover:text-white transition">Política de Privacidad</router-link>
+      <!-- Línea inferior -->
+      <div class="mt-8 border-t border-white/10 pt-4 text-center text-sm text-gray-400">
+        <div class="flex flex-col items-center gap-2 sm:flex-row sm:justify-between">
+          <p class="text-xs sm:text-sm">© {{ year }} KambiaPe. Todos los derechos reservados.</p>
+          <div class="flex items-center gap-4">
+            <router-link to="/terminos" class="text-xs sm:text-sm hover:text-white">Términos</router-link>
+            <router-link to="/privacidad" class="text-xs sm:text-sm hover:text-white">Privacidad</router-link>
+            <select
+              v-model="lang"
+              class="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-xs text-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-500"
+            >
+              <option value="es">ES</option>
+              <option value="en">EN</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
 
-    <transition name="modal-fade">
-      <div v-if="isCommentModalVisible" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div
-          class="absolute inset-0 bg-gray-900 bg-opacity-75 backdrop-blur-sm"
-          @click="closeCommentModal"
-        ></div>
-
-        <div
-          class="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md relative z-10
-                 border border-pink-500 transform transition-all duration-300 ease-out"
-          :class="{'scale-95 opacity-0': !isCommentModalVisible, 'scale-100 opacity-100': isCommentModalVisible}"
+    <!-- Modal de comentarios - Headless UI (compactada) -->
+    <TransitionRoot :show="isCommentModalVisible" as="template">
+      <Dialog @close="closeCommentModal" class="relative z-50">
+        <TransitionChild
+          as="template"
+          enter="transition ease-out duration-200"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="transition ease-in duration-150"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
         >
-          <button
-            @click="closeCommentModal"
-            class="absolute top-3 right-3 text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-gray-800 rounded-full p-1"
-            aria-label="Cerrar"
-          >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-          </button>
+          <div class="fixed inset-0 bg-black/70 backdrop-blur-sm" />
+        </TransitionChild>
 
-          <h2 class="text-2xl font-bold text-pink-300 mb-6 text-center">Envíanos tus Comentarios</h2>
+        <div class="fixed inset-0 overflow-y-auto">
+          <div class="flex min-h-full items-center justify-center p-4">
+            <TransitionChild
+              as="template"
+              enter="transition ease-out duration-200"
+              enter-from="opacity-0 translate-y-3 scale-95"
+              enter-to="opacity-100 translate-y-0 scale-100"
+              leave="transition ease-in duration-150"
+              leave-from="opacity-100 translate-y-0 scale-100"
+              leave-to="opacity-0 translate-y-3 scale-95"
+            >
+              <DialogPanel class="w-full max-w-md rounded-lg border border-white/10 bg-gray-900 p-5 shadow-xl">
+                <DialogTitle class="text-center text-xl font-bold text-pink-300">Envíanos tus Comentarios</DialogTitle>
 
-          <form @submit.prevent="submitComment">
-            <div class="mb-4">
-              <label for="commentType" class="block text-gray-300 text-sm font-medium mb-2">Tipo de comentario (opcional)</label>
-              <select
-                id="commentType"
-                v-model="comment.type"
-                class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-pink-500 focus:border-pink-500 placeholder-gray-400"
-              >
-                <option value="">Selecciona una opción</option>
-                <option value="suggestion">Sugerencia</option>
-                <option value="problem">Reportar un problema</option>
-                <option value="question">Pregunta general</option>
-                <option value="compliment">Felicitación</option>
-              </select>
-            </div>
+                <form class="mt-5 space-y-3" @submit.prevent="submitComment">
+                  <div>
+                    <label for="commentType" class="mb-1.5 block text-sm text-gray-300">Tipo (opcional)</label>
+                    <select
+                      id="commentType"
+                      v-model="comment.type"
+                      class="w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    >
+                      <option value="">Selecciona</option>
+                      <option value="suggestion">Sugerencia</option>
+                      <option value="problem">Reportar un problema</option>
+                      <option value="question">Pregunta</option>
+                      <option value="compliment">Felicitación</option>
+                    </select>
+                  </div>
 
-            <div class="mb-4">
-              <label for="commentMessage" class="block text-gray-300 text-sm font-medium mb-2">Tu mensaje <span class="text-red-400">*</span></label>
-              <textarea
-                id="commentMessage"
-                v-model="comment.message"
-                rows="5"
-                required
-                class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-pink-500 focus:border-pink-500 placeholder-gray-400 resize-y"
-                placeholder="Escribe tu comentario aquí..."
-              ></textarea>
-            </div>
+                  <div>
+                    <label for="commentMessage" class="mb-1.5 block text-sm text-gray-300">
+                      Mensaje <span class="text-rose-400">*</span>
+                    </label>
+                    <textarea
+                      id="commentMessage"
+                      v-model="comment.message"
+                      rows="4"
+                      required
+                      class="w-full resize-y rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      placeholder="Escribe tu comentario..."
+                    ></textarea>
+                  </div>
 
-            <div class="mb-4">
-              <label for="commentName" class="block text-gray-300 text-sm font-medium mb-2">Tu nombre (opcional)</label>
-              <input
-                type="text"
-                id="commentName"
-                v-model="comment.name"
-                class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-pink-500 focus:border-pink-500 placeholder-gray-400"
-                placeholder="Ej. Juan Pérez"
-              />
-            </div>
+                  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <div>
+                      <label for="commentName" class="mb-1.5 block text-sm text-gray-300">Tu nombre (opcional)</label>
+                      <input
+                        id="commentName"
+                        v-model="comment.name"
+                        type="text"
+                        class="w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      />
+                    </div>
+                    <div>
+                      <label for="commentEmail" class="mb-1.5 block text-sm text-gray-300">Correo (opcional)</label>
+                      <input
+                        id="commentEmail"
+                        v-model="comment.email"
+                        type="email"
+                        class="w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      />
+                      <p v-if="emailError" class="mt-1 text-xs text-rose-400">{{ emailError }}</p>
+                    </div>
+                  </div>
 
-            <div class="mb-6">
-              <label for="commentEmail" class="block text-gray-300 text-sm font-medium mb-2">Tu correo electrónico (opcional)</label>
-              <input
-                type="email"
-                id="commentEmail"
-                v-model="comment.email"
-                class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-pink-500 focus:border-pink-500 placeholder-gray-400"
-                placeholder="ejemplo@dominio.com"
-              />
-              <p v-if="emailError" class="text-red-400 text-xs mt-1">{{ emailError }}</p>
-            </div>
+                  <div class="flex justify-end gap-2.5 pt-1">
+                    <button
+                      type="button"
+                      @click="closeCommentModal"
+                      class="rounded-md border border-gray-600 px-4 py-2 text-sm text-gray-300 hover:bg-gray-800"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="submit"
+                      :disabled="isSubmitting"
+                      class="inline-flex items-center rounded-md bg-gradient-to-r from-pink-600 to-rose-600 px-4 py-2 text-sm font-medium text-white shadow hover:brightness-110 disabled:opacity-50"
+                    >
+                      <span v-if="!isSubmitting">Enviar</span>
+                      <svg v-else class="ml-1 h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0A12 12 0 000 12h4z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </form>
 
-            <div class="flex justify-end space-x-4">
-              <button
-                type="button"
-                @click="closeCommentModal"
-                class="px-6 py-2 border border-gray-600 text-gray-300 rounded-md hover:bg-gray-700 transition focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-              >
-                Cancelar
-              </button>
-              <button
-                type="submit"
-                :disabled="isSubmitting"
-                class="bg-gradient-to-r from-pink-600 to-rose-600 text-white px-8 py-2 rounded-md transition transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-              >
-                <span v-if="!isSubmitting">Enviar Comentario</span>
-                <svg v-else class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-              </button>
-            </div>
-          </form>
-
-          <div v-if="feedbackMessage" :class="{'text-gray-300': isSuccess, 'text-red-400': !isSuccess}" class="mt-6 text-center text-lg font-semibold">
-            {{ feedbackMessage }}
+                <p
+                  v-if="feedbackMessage"
+                  class="mt-3 text-center text-sm"
+                  :class="isSuccess ? 'text-gray-300' : 'text-rose-400'"
+                >
+                  {{ feedbackMessage }}
+                </p>
+              </DialogPanel>
+            </TransitionChild>
           </div>
         </div>
-      </div>
-    </transition>
+      </Dialog>
+    </TransitionRoot>
   </footer>
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onUnmounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 
-const router = useRouter();
+/* Iconos sociales compactos */
+const IconX = { name: 'IconX', template: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.53 3H20l-7.06 8.08L20.5 21h-5.1l-4.02-4.83L6.7 21H3l7.54-8.64L3.5 3h5.18l3.62 4.35L17.53 3z"/></svg>' }
+const IconInstagram = { name: 'IconInstagram', template: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm10 2H7a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm-5 3a5 5 0 110 10 5 5 0 010-10zm5.8-1.8a1 1 0 110 2 1 1 0 010-2z"/></svg>' }
+const IconFacebook = { name: 'IconFacebook', template: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7a1 1 0 011-1h3V2h-3a5 5 0 00-5 5v3H6v4h3v8h4z"/></svg>' }
 
-// Estado para controlar la apertura/cierre de secciones en móvil
-const openSections = ref([false, false, false, false]);
+const router = useRouter()
 
-// Estado para controlar la visibilidad de la modal de comentarios
-const isCommentModalVisible = ref(false);
+/* ------- Newsletter ------- */
+const newsletterEmail = ref('')
+const newsletterSubmitting = ref(false)
+const newsletterMsg = ref('')
+const newsletterOk = ref(false)
 
-// Datos del formulario de comentarios
-const comment = ref({
-  type: '',
-  message: '',
-  name: '',
-  email: ''
-});
+const submitNewsletter = async () => {
+  newsletterMsg.value = ''
+  newsletterOk.value = false
+  if (!newsletterEmail.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterEmail.value)) {
+    newsletterMsg.value = 'Ingresa un correo válido.'
+    return
+  }
+  newsletterSubmitting.value = true
+  await new Promise(r => setTimeout(r, 900))
+  newsletterSubmitting.value = false
+  newsletterOk.value = true
+  newsletterMsg.value = '¡Gracias por suscribirte!'
+  newsletterEmail.value = ''
+}
 
-const isSubmitting = ref(false);
-const feedbackMessage = ref('');
-const isSuccess = ref(false); // Mantener para la lógica, pero ajustamos la clase de color
-const emailError = ref('');
+const socialLinks = [
+  { name: 'X', href: 'https://x.com/', icon: IconX },
+  { name: 'Instagram', href: 'https://instagram.com/', icon: IconInstagram },
+  { name: 'Facebook', href: 'https://facebook.com/', icon: IconFacebook },
+]
 
-// Definición de las secciones para la vista móvil
-const mobileSections = ref([
+/* ------- Mobile sections ------- */
+const mobileSections = [
+  { title: 'KambiaPe', type: 'newsletter' },
   {
     title: 'Enlaces rápidos',
     links: [
-      { label: 'Inicio', path: '/' },
-      { label: 'Explorar productos', path: '/explorar' },
-      { label: 'Cómo funciona', path: '/como-funciona' },
-      { label: 'FAQs', path: '/faqs' }
-    ]
+      { label: 'Inicio', to: '/' },
+      { label: 'Explorar productos', to: '/explorar' },
+      { label: 'Cómo funciona', to: '/como-funciona' },
+      { label: 'FAQs', to: '/faqs' },
+    ],
   },
   {
-    title: 'Contacto',
+    title: 'Soporte',
     links: [
-      { label: 'soporte@kambiape.com', path: 'mailto:soporte@kambiape.com' },
-      { label: 'Lima, Perú', path: '#' }
-    ]
+      { label: 'soporte@kambiape.com', to: 'mailto:soporte@kambiape.com' },
+      { label: 'Dejar un comentario', action: 'comment' },
+    ],
   },
   {
-    title: 'Comentarios',
+    title: 'Almacenes',
     links: [
-      { label: 'Dejar un comentario', path: '#' } // Cambiado a '#' para abrir la modal
-    ]
+      { label: 'Chincha – Av. Mariscal Sucre #1032', to: 'https://maps.google.com/?q=Av.+Mariscal+Sucre+1032+Chincha' },
+      { label: 'Ver todos', to: '/almacenes' },
+    ],
   },
+]
+
+const handleAction = (link) => {
+  if (link.action === 'comment') openCommentModal()
+  else if (link.to?.startsWith('/')) router.push(link.to)
+}
+
+/* ------- Warehouses ------- */
+const warehouses = [
   {
-    title: 'Nuestros Almacenes',
-    links: [
-      { label: 'Lima, Perú', path: '#' },
-      { label: 'Arequipa, Perú', path: '#' },
-      { label: 'Ver en mapa', path: '/almacenes' }
-    ]
-  }
-]);
+    city: 'Chincha',
+    address: 'Av. Mariscal Sucre #1032, Pueblo Nuevo. Ref: Frente al colegio Fe y Alegría N°30',
+    map: 'https://maps.google.com/?q=Av.+Mariscal+Sucre+1032+Chincha',
+  },
+]
 
-// Función para alternar la visibilidad de las secciones móviles
-const toggleSection = (index) => {
-  openSections.value[index] = !openSections.value[index];
-};
+/* ------- CTA navegación ------- */
+const navigateToRegister = () => router.push('/Register')
 
-// Función para navegar a la página de registro
-const navigateToRegister = () => {
-  router.push('/Register');
-};
+/* ------- Modal Comentarios (compacta) ------- */
+const isCommentModalVisible = ref(false)
+const comment = ref({ type: '', message: '', name: '', email: '' })
+const isSubmitting = ref(false)
+const feedbackMessage = ref('')
+const isSuccess = ref(false)
+const emailError = ref('')
 
-// --- Lógica de la Modal de Comentarios ---
 const openCommentModal = () => {
-  isCommentModalVisible.value = true;
-  // Resetear el formulario y mensajes cuando se abre la modal
-  comment.value = {
-    type: '',
-    message: '',
-    name: '',
-    email: ''
-  };
-  feedbackMessage.value = '';
-  isSuccess.value = false; // Resetear también
-  emailError.value = '';
-  isSubmitting.value = false;
-};
+  isCommentModalVisible.value = true
+  comment.value = { type: '', message: '', name: '', email: '' }
+  feedbackMessage.value = ''
+  isSuccess.value = false
+  emailError.value = ''
+  isSubmitting.value = false
+}
+const closeCommentModal = () => (isCommentModalVisible.value = false)
 
-const closeCommentModal = () => {
-  isCommentModalVisible.value = false;
-};
-
-const validateEmail = (email) => {
-  if (!email) return true; // Si es opcional y está vacío, es válido
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(String(email).toLowerCase());
-};
+const validateEmail = (email) => !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase())
 
 const submitComment = async () => {
-  emailError.value = '';
-  if (comment.value.email && !validateEmail(comment.value.email)) {
-    emailError.value = 'Por favor, ingresa un correo electrónico válido.';
-    return;
+  emailError.value = ''
+  if (!validateEmail(comment.value.email)) {
+    emailError.value = 'Correo inválido.'
+    return
   }
-
   if (!comment.value.message.trim()) {
-    feedbackMessage.value = 'El mensaje no puede estar vacío.';
-    isSuccess.value = false;
-    return;
+    feedbackMessage.value = 'El mensaje no puede estar vacío.'
+    isSuccess.value = false
+    return
   }
-
-  isSubmitting.value = true;
-  feedbackMessage.value = ''; // Limpiar mensaje anterior
-
+  isSubmitting.value = true
+  feedbackMessage.value = ''
   try {
-    // --- AQUÍ IRÍA TU LÓGICA DE ENVÍO AL BACKEND ---
-    // En un entorno real, harías una llamada HTTP a tu API aquí.
-    // Ejemplo:
-    // const response = await fetch('/api/comments', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(comment.value),
-    // });
-    // if (!response.ok) {
-    //   throw new Error('Error al enviar el comentario.');
-    // }
-
-    // Simulación de una llamada a la API exitosa
-    await new Promise(resolve => setTimeout(resolve, 1500)); // Simula un retraso de 1.5 segundos
-
-    isSuccess.value = true; // El envío fue exitoso
-    feedbackMessage.value = '¡Gracias por tu comentario! Lo hemos recibido exitosamente.';
-
-    // Opcional: Cerrar la modal automáticamente después de un tiempo si fue exitoso
-    setTimeout(() => {
-      closeCommentModal();
-    }, 2500);
-
-  } catch (error) {
-    isSuccess.value = false; // Hubo un error
-    feedbackMessage.value = 'Hubo un error al enviar tu comentario. Inténtalo de nuevo.';
-    console.error('Error al enviar comentario:', error);
+    await new Promise((r) => setTimeout(r, 900))
+    isSuccess.value = true
+    feedbackMessage.value = '¡Gracias! Recibimos tu comentario.'
+    setTimeout(() => closeCommentModal(), 1800)
+  } catch {
+    isSuccess.value = false
+    feedbackMessage.value = 'Ocurrió un error. Intenta nuevamente.'
   } finally {
-    isSubmitting.value = false;
+    isSubmitting.value = false
   }
-};
+}
 
-// --- Accesibilidad: Escuchar la tecla 'Escape' para cerrar la modal ---
-const handleEscapeKey = (e) => {
-  if (e.key === 'Escape' && isCommentModalVisible.value) {
-    closeCommentModal();
-  }
-};
-
-onMounted(() => {
-  window.addEventListener('keydown', handleEscapeKey);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('keydown', handleEscapeKey);
-});
-
+/* ------- Barra inferior ------- */
+const year = computed(() => new Date().getFullYear())
+const lang = ref('es')
 </script>
-
-<style scoped>
-/* Transiciones de entrada y salida para la modal */
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.modal-fade-enter-from,
-.modal-fade-leave-to {
-  opacity: 0;
-}
-
-/* Transición para el contenido de la modal (transform/scale) */
-.modal-fade-enter-active > div:last-child, /* Selecciona el contenedor de la modal */
-.modal-fade-leave-active > div:last-child {
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-}
-
-.modal-fade-enter-from > div:last-child,
-.modal-fade-leave-to > div:last-child {
-  transform: translateY(-20px) scale(0.95);
-  opacity: 0;
-}
-</style>

@@ -3,341 +3,633 @@
     <Header />
 
     <main class="relative z-10">
-      <section class="relative overflow-hidden bg-[url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center text-white py-28 sm:py-36 text-center shadow-xl">
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-[#9e0154]/90"></div>
-        
-        <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 0h50v50H0z\' fill=\'%23d7037b\' fill-opacity=\'0.4\' fill-rule=\'evenodd\'/%3E%3Cpath d=\'M50 50h50v50H50z\' fill=\'%23ffffff\' fill-opacity=\'0.2\' fill-rule=\'evenodd\'/%3E%3C/svg%3E')"></div>
-        
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div class="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-[#d7037b]/20 blur-xl"></div>
-          <div class="absolute -bottom-5 -right-5 w-40 h-40 rounded-full bg-white/10 blur-xl"></div>
-          
-          <div class="max-w-4xl mx-auto">
-            <div class="inline-flex items-center justify-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6 border border-white/30 animate-pulse-slow">
-              <HandHeartIcon class="h-6 w-6 mr-2 text-white" />
-              <span class="text-sm font-semibold tracking-wider">JUNTOS CREAMOS IMPACTO</span>
-            </div>
-            
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-up">
-              <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-[#fce4ec]">Eventos que Transforman</span>
-            </h1>
-            
-            <p class="text-xl sm:text-2xl opacity-95 max-w-3xl mx-auto mb-8 animate-fade-in-up delay-100">
-              Conectamos corazones solidarios a través de experiencias significativas en todo el Perú.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-200">
-              <router-link 
-                to="/premium" 
-                class="px-8 py-4 bg-white text-[#9e0154] font-bold rounded-full shadow-lg hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
-              >
-                <StarIcon class="h-5 w-5 mr-2" />
-                Unirme a Premium
-              </router-link>
-              <button 
-                @click="scrollToEvents"
-                class="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white/10 transition-all duration-300 flex items-center justify-center"
-              >
-                <CalendarDaysIcon class="h-5 w-5 mr-2" />
-                Ver Eventos
-              </button>
-            </div>
-          </div>
+      <!--Eventos que transforman-->
+      <section
+        class="relative isolate overflow-hidden bg-white text-gray-900"
+        aria-label="Sección principal de eventos"
+         >
+        <!-- Fondo: imagen + gradiente radial + malla -->
+        <div class="absolute inset-0 -z-10">
+          <div
+            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center opacity-25"
+            aria-hidden="true"
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-white/90 via-white/75 to-[#9e0154]/20"
+            aria-hidden="true"
+          ></div>
+          <div
+            class="pointer-events-none absolute inset-0 opacity-15 [background-image:radial-gradient(#d7037b_1px,transparent_1px)] [background-size:18px_18px]"
+            aria-hidden="true"
+          ></div>
+          <div
+            class="absolute -top-20 -right-24 h-80 w-80 rounded-full bg-[#9e0154]/20 blur-3xl"
+            aria-hidden="true"
+          ></div>
         </div>
-        
-        <div class="absolute -bottom-1 left-0 right-0 overflow-hidden">
-          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-16 sm:h-24">
-            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="white"></path>
-            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="white"></path>
-            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="white"></path>
-          </svg>
-        </div>
-      </section>
 
-      <section id="events" class="py-20 sm:py-28 bg-white relative">
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5">
-          <div class="absolute top-0 left-0 w-full h-full" style="background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\' fill=\'%239e0154\' fill-opacity=\'0.2\' fill-rule=\'evenodd\'/%3E%3C/svg%3E')"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div class="text-center mb-16">
-            <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              <span class="relative inline-block">
-                <span class="relative z-10">Encuentra Tu Causa</span>
-                <span class="absolute bottom-0 left-0 w-full h-3 bg-[#fce4ec] opacity-60 -z-0" style="transform: skewX(-15deg);"></span>
-              </span>
-            </h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-              Descubre oportunidades para marcar la diferencia en tu comunidad
-            </p>
-          </div>
-          
-          <div class="mb-12 bg-gray-50 p-4 rounded-2xl shadow-inner border border-gray-100">
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-              <div class="flex-1 w-full">
-                <label for="search" class="sr-only">Buscar eventos</label>
-                <div class="relative">
-                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <MagnifyingGlassIcon class="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input 
-                    type="text" 
-                    id="search" 
-                    class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-full bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#d7037b] focus:border-transparent" 
-                    placeholder="Buscar eventos por ubicación o tema..."
-                  >
-                </div>
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-36">
+          <div class="grid items-center gap-10 md:grid-cols-2">
+            <!-- Columna izquierda -->
+            <header class="space-y-6">
+              <div
+                class="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 px-4 py-2 text-sm font-semibold text-[#9e0154] backdrop-blur-md shadow-sm"
+              >
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path stroke="currentColor" stroke-width="1.5" d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.65-7 10-7 10Z"/>
+                  <path stroke="currentColor" stroke-width="1.5" d="M15.5 12.5l-2.2.7a3 3 0 0 1-2.6-.34l-1.2-.8M7 15h2.2c.6 0 1.2.2 1.7.6l.7.6c.5.4 1.1.6 1.7.6H16"/>
+                </svg>
+                <span class="tracking-wide">JUNTOS CREAMOS IMPACTO</span>
               </div>
-              
-              <div class="flex items-center gap-2 flex-wrap justify-center">
-                <button 
-                  v-for="(filter, index) in filters" 
-                  :key="index"
-                  @click="toggleFilter(filter)"
-                  :class="[
-                    'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200',
-                    activeFilters.includes(filter) 
-                      ? 'bg-[#d7037b] text-white shadow-md'
-                      : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                  ]"
+
+              <h1 class="font-serif text-4xl leading-tight md:text-6xl">
+                Eventos que
+                <span class="relative whitespace-nowrap">
+                  <span class="relative z-10 text-[#9e0154]">Transforman</span>
+                  <span
+                    aria-hidden="true"
+                    class="absolute -bottom-1 left-0 right-0 h-3 rounded-md bg-[#d7037b]/25"
+                  ></span>
+                </span>
+              </h1>
+
+              <p class="max-w-xl text-lg text-gray-700 md:text-xl">
+                Conectamos corazones solidarios a través de experiencias significativas en todo el Perú.
+                Súmate a una comunidad que convierte la intención en acción.
+              </p>
+
+              <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                <router-link
+                  to="/premium"
+                  class="group inline-flex items-center justify-center rounded-full px-7 py-4 font-semibold text-white shadow-lg bg-gradient-to-r from-[#9e0154] to-[#d7037b] transition
+                        hover:brightness-105 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d7037b]"
                 >
-                  {{ filter }}
+                  <svg class="mr-2 h-5 w-5 transition group-hover:scale-110" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 17l-5.878 3.09 1.123-6.545L2.49 8.91l6.562-.953L12 2l2.948 5.957 6.562.953-4.755 4.635 1.123 6.545z"
+                          stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                  </svg>
+                  Unirme a Premium
+                </router-link>
+
+                <button
+                  @click="scrollToEvents"
+                  class="inline-flex items-center justify-center rounded-full border-2 border-[#9e0154] px-7 py-4 font-semibold text-[#9e0154] transition
+                        hover:bg-[#9e0154]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d7037b]"
+                >
+                  <svg class="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M8 7V3m8 4V3M4 11h16M5 21h14a2 2 0 0 0 2-2v-9H3v9a2 2 0 0 0 2 2Z"
+                          stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  Ver Eventos
                 </button>
               </div>
+
+              <dl class="mt-6 grid grid-cols-3 gap-4 max-w-lg">
+                <div class="rounded-2xl bg-white/70 backdrop-blur-md p-4 text-center shadow-sm">
+                  <dt class="text-xs text-gray-600">Voluntarios</dt>
+                  <dd class="text-2xl font-bold">8k+</dd>
+                </div>
+                <div class="rounded-2xl bg-white/70 backdrop-blur-md p-4 text-center shadow-sm">
+                  <dt class="text-xs text-gray-600">Eventos</dt>
+                  <dd class="text-2xl font-bold">450+</dd>
+                </div>
+                <div class="rounded-2xl bg-white/70 backdrop-blur-md p-4 text-center shadow-sm">
+                  <dt class="text-xs text-gray-600">Ciudades</dt>
+                  <dd class="text-2xl font-bold">20+</dd>
+                </div>
+              </dl>
+            </header>
+
+            <!-- Columna derecha -->
+            <div class="relative">
+              <article
+                class="relative rounded-3xl bg-white/80 backdrop-blur-md shadow-xl ring-1 ring-black/5 p-6 sm:p-8"
+              >
+                <div class="flex items-start justify-between gap-4">
+                  <h2 class="text-xl font-semibold">Próximo evento destacado</h2>
+                  <span class="inline-flex items-center rounded-full bg-[#9e0154]/10 px-3 py-1 text-xs font-semibold text-[#9e0154]">
+                    Nuevo
+                  </span>
+                </div>
+                <p class="mt-2 text-sm text-gray-600">
+                  Voluntariado de invierno · Lima · 12 de septiembre
+                </p>
+
+                <div class="mt-4 overflow-hidden rounded-2xl">
+                  <img
+                    src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2400&auto=format&fit=crop"
+                    alt="Personas colaborando en una actividad solidaria"
+                    class="aspect-[16/9] w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+
+                <ul class="mt-6 space-y-3 text-sm text-gray-700">
+                  <li class="flex items-center gap-2">
+                    <span class="inline-block h-2 w-2 rounded-full bg-[#9e0154]" aria-hidden="true"></span>
+                    Cupos limitados · Registro gratuito
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="inline-block h-2 w-2 rounded-full bg-[#9e0154]" aria-hidden="true"></span>
+                    Certificado de participación
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="inline-block h-2 w-2 rounded-full bg-[#9e0154]" aria-hidden="true"></span>
+                    Accesible + apto para principiantes
+                  </li>
+                </ul>
+
+                <div class="mt-6 flex flex-wrap gap-3">
+                  <router-link
+                    to="/eventos/voluntariado-invierno"
+                    class="inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:translate-y-[-2px] hover:shadow-md
+                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-900"
+                  >
+                    Inscribirme
+                  </router-link>
+
+                  <router-link
+                    to="/eventos"
+                    class="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-50
+                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300"
+                  >
+                    Explorar todos
+                  </router-link>
+                </div>
+              </article>
+
+              <div class="pointer-events-none absolute -right-4 -top-4 hidden md:block">
+                <div class="rounded-2xl bg-white/80 backdrop-blur-md px-4 py-2 text-xs font-semibold text-gray-800 shadow-md ring-1 ring-black/5">
+                  +120 nuevas inscripciones
+                </div>
+              </div>
             </div>
           </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div 
-              v-for="event in paginatedEvents" 
-              :key="event.id" 
-              class="group relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <div v-if="event.featured" class="absolute top-4 right-4 z-10">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#d7037b] text-white shadow-lg">
-                  <StarIcon class="h-3 w-3 mr-1" />
-                  Destacado
-                </span>
+        </div>
+      </section>
+      <!--Eventos que transforman-->
+
+      <!--Explora eventos-->
+     <!-- Sección 2 – Explorá por causas (Layout marketplace con sidebar sticky + feed editorial) -->
+<section id="events" class="relative bg-white py-16 sm:py-24" aria-label="Explorar eventos por causa">
+  <!-- Marca/ornamentos: grilla radial sutil -->
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 opacity-10 [background-image:radial-gradient(#d7037b_1px,transparent_1.5px)] [background-size:18px_18px]"
+    aria-hidden="true"
+  ></div>
+
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Cabecera con tabs de causas -->
+    <header class="mb-10 sm:mb-14">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="text-sm font-semibold tracking-wide text-[#9e0154]">Explora & Actúa</p>
+          <h2 class="mt-1 text-3xl font-bold text-gray-900 sm:text-4xl">Encuentra tu causa</h2>
+          <p class="mt-2 max-w-2xl text-gray-600">
+            Filtra por impacto y descubre acciones concretas cerca de ti.
+          </p>
+        </div>
+
+        <!-- Tabs / Causas principales -->
+        <nav class="flex flex-wrap gap-2" aria-label="Categorías principales">
+          <button
+            v-for="cause in topCauses"
+            :key="cause"
+            @click="selectCause(cause)"
+            :aria-pressed="activeCause === cause"
+            :class="[
+              'rounded-full px-4 py-2 text-sm font-medium transition',
+              activeCause === cause
+                ? 'bg-[#9e0154] text-white shadow'
+                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+            ]"
+          >
+            {{ cause }}
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- GRID 12 cols: Sidebar (sticky) + Feed -->
+    <div class="grid grid-cols-12 gap-8 lg:gap-10">
+      <!-- Sidebar sticky -->
+      <aside class="col-span-12 md:col-span-4 lg:col-span-3">
+        <div class="sticky top-24 space-y-6">
+          <!-- Buscador -->
+          <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+            <label for="search" class="mb-2 block text-sm font-semibold text-gray-800">Buscar</label>
+            <div class="relative">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <MagnifyingGlassIcon class="h-5 w-5 text-gray-400" />
               </div>
-              
-              <div class="relative h-56 overflow-hidden">
-                <img 
-                  :src="event.imageUrl || 'https://via.placeholder.com/600x400?text=Evento+KambiaPe'" 
-                  :alt="event.name" 
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                >
+              <input
+                id="search"
+                v-model="searchQuery"
+                @input="onSearchInput"
+                type="search"
+                autocomplete="off"
+                placeholder="Ciudad, tema, organización…"
+                class="block w-full rounded-xl border border-gray-300 bg-white py-2.5 pl-10 pr-3 text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#d7037b]"
+                aria-label="Buscar eventos"
+              />
+            </div>
+          </div>
+
+          <!-- Filtros avanzados -->
+          <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+            <h3 class="text-sm font-semibold text-gray-800">Filtros</h3>
+            <div class="mt-4 space-y-4">
+              <!-- Chiplist temática -->
+              <div>
+                <p class="mb-2 text-xs font-medium text-gray-600">Temas</p>
+                <div class="flex flex-wrap gap-2">
+                  <button
+                    v-for="tag in filters"
+                    :key="tag"
+                    @click="toggleFilter(tag)"
+                    :aria-pressed="activeFilters.includes(tag)"
+                    :class="[
+                      'rounded-full px-3 py-1.5 text-xs font-medium transition',
+                      activeFilters.includes(tag)
+                        ? 'bg-[#d7037b] text-white shadow'
+                        : 'bg-gray-50 text-gray-700 border border-gray-200 hover:bg-white'
+                    ]"
+                  >
+                    {{ tag }}
+                  </button>
+                </div>
+              </div>
+
+              <!-- Switches -->
+              <div class="grid grid-cols-2 gap-3">
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" v-model="onlyFree" class="h-4 w-4 rounded border-gray-300 text-[#9e0154] focus:ring-[#d7037b]" />
+                  Solo gratuitos
+                </label>
+                <label class="flex items-center gap-2 text-xs text-gray-700">
+                  <input type="checkbox" v-model="accessible" class="h-4 w-4 rounded border-gray-300 text-[#9e0154] focus:ring-[#d7037b]" />
+                  Accesibles
+                </label>
+              </div>
+
+              <!-- Rango de fecha (chips) -->
+              <div>
+                <p class="mb-2 text-xs font-medium text-gray-600">Cuándo</p>
+                <div class="flex flex-wrap gap-2">
+                  <button
+                    v-for="r in dateRanges"
+                    :key="r.value"
+                    @click="setDateRange(r.value)"
+                    :aria-pressed="activeDateRange === r.value"
+                    :class="[
+                      'rounded-full px-3 py-1.5 text-xs font-medium transition',
+                      activeDateRange === r.value
+                        ? 'bg-gray-900 text-white'
+                        : 'bg-white text-gray-800 border border-gray-300 hover:bg-gray-50'
+                    ]"
+                  >
+                    {{ r.label }}
+                  </button>
+                </div>
+              </div>
+
+              <!-- Ubicación rápida -->
+              <div>
+                <p class="mb-2 text-xs font-medium text-gray-600">Cerca de</p>
+                <div class="flex gap-2">
+                  <input
+                    v-model="nearbyCity"
+                    type="text"
+                    placeholder="Ej: Lima, Cusco"
+                    class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#d7037b]"
+                    aria-label="Ciudad cercana"
+                  />
+                  <button
+                    @click="applyNearby"
+                    class="rounded-xl bg-gray-900 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+                  >
+                    Aplicar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resumen de filtros activos -->
+          <div v-if="activeFilters.length || searchQuery || activeDateRange || nearbyCity"
+               class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-semibold text-gray-800">Activos</h4>
+              <button @click="resetFilters" class="text-xs font-medium text-[#d7037b] hover:text-[#9e0154]">
+                Limpiar
+              </button>
+            </div>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span
+                v-if="searchQuery"
+                class="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs text-gray-700"
+              >
+                Buscar: “{{ searchQuery }}”
+              </span>
+              <span
+                v-if="activeDateRange"
+                class="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs text-gray-700"
+              >
+                Fecha: {{ activeDateRange }}
+              </span>
+              <span
+                v-if="nearbyCity"
+                class="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs text-gray-700"
+              >
+                Cerca de: {{ nearbyCity }}
+              </span>
+              <span
+                v-for="t in activeFilters"
+                :key="t"
+                class="inline-flex items-center gap-1 rounded-full bg-[#fdf2f8] px-2.5 py-1 text-xs text-[#d7037b]"
+              >
+                {{ t }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Feed editorial -->
+      <main class="col-span-12 md:col-span-8 lg:col-span-9">
+        <!-- Héroe destacado dentro del feed -->
+        <article v-if="featuredEvent" class="relative mb-8 overflow-hidden rounded-3xl">
+          <img
+            :src="featuredEvent.imageUrl"
+            :alt="featuredEvent.name"
+            class="h-64 w-full object-cover sm:h-80 lg:h-96"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+          <div class="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+            <span class="mb-2 inline-flex items-center rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
+              Evento destacado
+            </span>
+            <h3 class="max-w-3xl text-2xl font-bold text-white sm:text-3xl">
+              {{ featuredEvent.name }}
+            </h3>
+            <div class="mt-2 flex flex-wrap items-center gap-3 text-sm text-white/90">
+              <div class="flex items-center">
+                <MapPinIcon class="mr-1.5 h-4 w-4" />
+                <span>{{ featuredEvent.location }}</span>
+              </div>
+              <div class="flex items-center">
+                <CalendarIcon class="mr-1.5 h-4 w-4" />
+                <span>{{ featuredEvent.date }}</span>
+              </div>
+              <div class="flex items-center">
+                <ClockIcon class="mr-1.5 h-4 w-4" />
+                <span>{{ featuredEvent.time }}</span>
+              </div>
+            </div>
+            <div class="mt-4 flex gap-3">
+              <button
+                v-if="isPremium"
+                @click="joinEvent(featuredEvent.id)"
+                class="inline-flex items-center rounded-full bg-[#9e0154] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
+              >
+                Participar
+              </button>
+              <router-link
+                v-else
+                to="/premium"
+                class="inline-flex items-center rounded-full bg-[#d7037b] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
+              >
+                Desbloquear
+              </router-link>
+              <router-link
+                :to="`/eventos/${featuredEvent.slug}`"
+                class="inline-flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-white"
+              >
+                Ver detalles
+              </router-link>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bloques por causa (secciones dentro del feed) -->
+        <section
+          v-for="block in sectionedEvents"
+          :key="block.cause"
+          class="mb-12"
+          aria-labelledby="heading-{{ block.cause }}"
+        >
+          <div class="mb-4 flex items-center justify-between">
+            <h3 :id="'heading-' + block.cause" class="text-xl font-bold text-gray-900">
+              {{ block.cause }}
+            </h3>
+            <router-link
+              :to="`/eventos?cause=${encodeURIComponent(block.cause)}`"
+              class="text-sm font-semibold text-[#9e0154] hover:text-[#d7037b]"
+            >
+              Ver todos
+            </router-link>
+          </div>
+
+          <!-- Masonry responsivo con tarjetas “ticket” -->
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <article
+              v-for="event in block.items"
+              :key="event.id"
+              class="group relative overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              <!-- Encabezado visual -->
+              <div class="relative h-40 overflow-hidden">
+                <img
+                  :src="event.imageUrl || 'https://via.placeholder.com/800x500?text=Evento+KambiaPe'"
+                  :alt="event.name"
+                  class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                
-                <div class="absolute bottom-4 left-4 flex items-center">
-                  <div class="flex -space-x-2">
-                    <img 
-                      v-for="i in Math.min(event.participants, 5)" 
-                      :key="i" 
-                      :src="`https://i.pravatar.cc/150?img=${i + 10}`" 
-                      class="w-8 h-8 rounded-full border-2 border-white" 
-                      :alt="`Participante ${i}`"
-                    >
-                  </div>
-                  <span class="ml-2 text-xs font-medium text-white bg-black/40 px-2 py-1 rounded-full">
-                    +{{ event.participants }} unidos
+
+                <!-- Chip featured -->
+                <div v-if="event.featured" class="absolute right-4 top-4">
+                  <span class="inline-flex items-center rounded-full bg-[#d7037b] px-3 py-1 text-xs font-bold text-white shadow">
+                    <StarIcon class="mr-1 h-3 w-3" /> Destacado
                   </span>
                 </div>
               </div>
-              
-              <div class="p-6">
-                <div class="flex flex-wrap gap-2 mb-3">
-                  <span 
-                    v-for="(tag, i) in event.tags" 
+
+              <!-- Cuerpo -->
+              <div class="p-5">
+                <!-- Etiquetas -->
+                <div class="mb-2 flex flex-wrap gap-2">
+                  <span
+                    v-for="(tag, i) in event.tags"
                     :key="i"
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                    :class="{
-                      'bg-[#fdf2f8] text-[#d7037b]': i === 0,
-                      'bg-gray-100 text-gray-800': i !== 0
-                    }"
+                    class="inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-medium"
+                    :class="i === 0 ? 'bg-[#fdf2f8] text-[#d7037b]' : 'bg-gray-100 text-gray-800'"
                   >
                     {{ tag }}
                   </span>
                 </div>
-                
-                <h3 class="text-xl font-bold text-gray-900 mb-2 leading-snug group-hover:text-[#d7037b] transition-colors">
+
+                <!-- Título -->
+                <h4 class="line-clamp-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-[#9e0154]">
                   {{ event.name }}
-                </h3>
-                
-                <div class="flex items-center text-sm text-gray-500 mb-3">
-                  <MapPinIcon class="h-4 w-4 mr-1.5 flex-shrink-0" />
-                  <span>{{ event.location }}</span>
+                </h4>
+
+                <!-- Metas -->
+                <div class="mt-2 flex flex-wrap items-center gap-x-3 text-sm text-gray-500">
+                  <span class="flex items-center">
+                    <MapPinIcon class="mr-1.5 h-4 w-4" />
+                    {{ event.location }}
+                  </span>
+                  <span aria-hidden="true">•</span>
+                  <span class="flex items-center">
+                    <CalendarIcon class="mr-1.5 h-4 w-4" />
+                    {{ event.date }}
+                  </span>
+                  <span class="hidden md:inline" aria-hidden="true">•</span>
+                  <span class="hidden md:inline flex items-center">
+                    <ClockIcon class="mr-1.5 h-4 w-4" />
+                    {{ event.time }}
+                  </span>
                 </div>
-                
-                <div class="flex items-center text-sm text-gray-500 mb-4">
-                  <CalendarIcon class="h-4 w-4 mr-1.5 flex-shrink-0" />
-                  <span>{{ event.date }}</span>
-                  <span class="mx-2">•</span>
-                  <ClockIcon class="h-4 w-4 mr-1.5 flex-shrink-0" />
-                  <span>{{ event.time }}</span>
-                </div>
-                
-                <p class="text-gray-600 mb-5 line-clamp-2">
+
+                <!-- Descripción breve -->
+                <p class="mt-3 line-clamp-2 text-sm text-gray-600">
                   {{ event.description }}
                 </p>
-                
-                <div class="flex items-center justify-between">
+
+                <!-- Organizadores -->
+                <div class="mt-4 flex items-center justify-between">
                   <div class="flex items-center">
-                    <div class="flex items-center -space-x-2">
-                      <img 
-                        v-for="i in Math.min(event.organizers.length, 3)" 
-                        :key="i" 
-                        :src="`https://i.pravatar.cc/150?img=${i + 20}`" 
-                        class="w-8 h-8 rounded-full border-2 border-white" 
+                    <div class="-space-x-2 flex items-center">
+                      <img
+                        v-for="i in Math.min(event.organizers.length, 3)"
+                        :key="i"
+                        :src="`https://i.pravatar.cc/150?img=${i + 30}`"
+                        class="h-7 w-7 rounded-full border-2 border-white"
                         :alt="`Organizador ${i}`"
-                      >
+                        loading="lazy"
+                      />
                     </div>
-                    <span class="ml-2 text-xs text-gray-500">
-                      Organizado por {{ event.organizers.join(', ') }}
+                    <span class="ml-2 text-[12px] text-gray-500">
+                      {{ event.organizers.slice(0, 2).join(', ') }}<span v-if="event.organizers.length > 2"> +{{ event.organizers.length - 2 }}</span>
                     </span>
                   </div>
-                  
-                  <button 
-                    v-if="!isPremium"
-                    @click="showPremiumModal = true"
-                    class="text-[#d7037b] hover:text-[#9e0154] transition-colors"
-                    aria-label="Ver requisitos para participar"
-                  >
-                    <LockClosedIcon class="h-5 w-5" />
-                  </button>
-                </div>
-                
-                <div class="mt-6 pt-5 border-t border-gray-100 flex items-center justify-between">
-                  <div class="flex items-center text-sm text-gray-500">
-                    <HeartOutlineIcon class="h-4 w-4 mr-1.5 text-[#d7037b]" />
-                    <span>{{ event.likes }} personas interesadas</span>
+
+                  <!-- Like/interés -->
+                  <div class="flex items-center text-xs text-gray-500">
+                    <HeartOutlineIcon class="mr-1.5 h-4 w-4 text-[#d7037b]" />
+                    {{ event.likes }}
                   </div>
-                  
-                  <button 
+                </div>
+              </div>
+
+              <!-- Pie tipo “ticket” con perforación -->
+              <div class="flex items-center justify-between border-t border-dashed border-gray-200 bg-gray-50/60 px-5 py-3">
+                <div class="flex items-center text-xs text-gray-600">
+                  <img
+                    :src="event.qr || 'https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=KambiaPe'"
+                    alt=""
+                    class="mr-2 h-6 w-6 rounded"
+                    loading="lazy"
+                  />
+                  <span>Código rápido</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <button
                     v-if="isPremium"
                     @click="joinEvent(event.id)"
-                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-[#d7037b] to-[#9e0154] hover:from-[#9e0154] hover:to-[#d7037b] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d7037b]"
+                    class="inline-flex items-center rounded-full bg-gray-900 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:opacity-90"
                   >
                     Participar
                   </button>
-                  
-                  <router-link 
+                  <router-link
                     v-else
                     to="/premium"
-                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-[#d7037b] to-[#9e0154] hover:from-[#9e0154] hover:to-[#d7037b] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d7037b]"
+                    class="inline-flex items-center rounded-full bg-[#9e0154] px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:brightness-110"
                   >
                     Desbloquear
                   </router-link>
+                  <router-link
+                    :to="`/eventos/${event.slug}`"
+                    class="inline-flex items-center rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-semibold text-gray-800 transition hover:bg-gray-50"
+                  >
+                    Detalles
+                  </router-link>
                 </div>
               </div>
-              
-              <div class="absolute inset-0 border-2 border-transparent group-hover:border-[#fce4ec] rounded-2xl pointer-events-none transition-all duration-300"></div>
-            </div>
-          </div>
-          
-          <div v-if="filteredEvents.length === 0" class="text-center py-16">
-            <div class="mx-auto h-24 w-24 text-gray-400 mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">No encontramos eventos</h3>
-            <p class="text-gray-500 max-w-md mx-auto">Parece que no hay eventos que coincidan con tus filtros. Prueba con otros criterios o revisa más tarde.</p>
-            <button 
-              @click="resetFilters"
-              class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#d7037b] hover:bg-[#9e0154] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d7037b]"
-            >
-              <ArrowPathIcon class="h-4 w-4 mr-2" />
-              Reiniciar filtros
-            </button>
-          </div>
-          
-          <div v-if="filteredEvents.length > 0" class="mt-12 flex items-center justify-between border-t border-gray-200 pt-8">
-            <button 
-              class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-              :disabled="currentPage === 1"
-              @click="currentPage--"
-            >
-              Anterior
-            </button>
-            <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-center">
-              <div>
-                <nav class="inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                  <button 
-                    v-for="page in totalPages" 
-                    :key="page"
-                    @click="currentPage = page"
-                    :class="[
-                      'relative inline-flex items-center px-4 py-2 border text-sm font-medium',
-                      page === currentPage 
-                        ? 'z-10 bg-[#d7037b] border-[#d7037b] text-white'
-                        : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
-                    ]"
-                  >
-                    {{ page }}
-                  </button>
-                </nav>
-              </div>
-            </div>
-            <button 
-              class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-              :disabled="currentPage === totalPages"
-              @click="currentPage++"
-            >
-              Siguiente
-            </button>
-          </div>
-        </div>
-      </section>
 
-      <section v-if="!isPremium" class="relative py-20 sm:py-28 bg-gradient-to-br from-[#9e0154] to-[#d7037b] text-white overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full opacity-10">
-          <div class="absolute top-1/4 -left-20 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
-          <div class="absolute bottom-1/3 -right-20 w-80 h-80 rounded-full bg-white/10 blur-3xl"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-flex items-center justify-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full mb-8 border border-white/30">
-              <StarIcon class="h-6 w-6 mr-2 text-white animate-pulse" />
-              <span class="text-sm font-semibold tracking-wider">EXPERIENCIA PREMIUM</span>
-            </div>
-            
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight">
-              <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-[#fce4ec]">Acceso Exclusivo a Eventos Solidarios</span>
-            </h2>
-            
-            <p class="text-lg sm:text-xl opacity-95 max-w-2xl mx-auto mb-10">
-              Como miembro Premium de KambiaPe, tendrás acceso prioritario a eventos exclusivos, beneficios especiales y la oportunidad de crear un impacto aún mayor.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <router-link 
-                to="/premium" 
-                class="px-8 py-4 bg-white text-[#9e0154] font-bold rounded-full shadow-lg hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
-              >
-                <SparklesIcon class="h-5 w-5 mr-2" />
-                Ver Beneficios Premium
-              </router-link>
-              
-              <button 
-                @click="showPremiumModal = true"
-                class="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white/10 transition-all duration-300 flex items-center justify-center"
-              >
-                <QuestionMarkCircleIcon class="h-5 w-5 mr-2" />
-                Saber Más
-              </button>
-            </div>
+              <!-- Perforaciones laterales -->
+              <div class="pointer-events-none absolute inset-y-0 left-0 my-6 w-2 bg-gradient-to-b from-transparent via-gray-200 to-transparent [mask-image:radial-gradient(circle,black_2px,transparent_2.5px)] [mask-size:6px_12px] [mask-repeat:repeat-y]"></div>
+              <div class="pointer-events-none absolute inset-y-0 right-0 my-6 w-2 bg-gradient-to-b from-transparent via-gray-200 to-transparent [mask-image:radial-gradient(circle,black_2px,transparent_2.5px)] [mask-size:6px_12px] [mask-repeat:repeat-y]"></div>
+            </article>
           </div>
+        </section>
+
+        <!-- Empty state -->
+        <div v-if="filteredEvents.length === 0" class="py-20 text-center">
+          <div class="mx-auto mb-6 h-20 w-20 text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="mb-2 text-lg font-semibold text-gray-900">No encontramos eventos</h3>
+          <p class="mx-auto max-w-md text-gray-500">No hay coincidencias con tus criterios. Ajusta filtros o intenta otra búsqueda.</p>
+          <button
+            @click="resetFilters"
+            class="mt-6 inline-flex items-center rounded-md bg-[#d7037b] px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-[#9e0154] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d7037b]"
+          >
+            <ArrowPathIcon class="mr-2 h-4 w-4" />
+            Reiniciar filtros
+          </button>
         </div>
-        
-        <div class="absolute -bottom-1 left-0 right-0 overflow-hidden transform rotate-180">
-          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-16 sm:h-24">
-            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="white"></path>
-            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="white"></path>
-            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="white"></path>
-          </svg>
+
+        <!-- Paginación -->
+        <div
+          v-if="filteredEvents.length > 0"
+          class="mt-12 flex items-center justify-between border-t border-gray-200 pt-8"
+        >
+          <button
+            class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:opacity-50"
+            :disabled="currentPage === 1"
+            @click="currentPage--"
+          >
+            Anterior
+          </button>
+
+          <nav class="hidden sm:block" role="navigation" aria-label="Paginación de eventos">
+            <ul class="inline-flex -space-x-px overflow-hidden rounded-md border border-gray-300 shadow-sm">
+              <li v-for="page in totalPages" :key="page">
+                <button
+                  @click="currentPage = page"
+                  :aria-current="page === currentPage ? 'page' : undefined"
+                  :class="[
+                    'relative inline-flex items-center px-4 py-2 text-sm font-medium border-l border-gray-300 first:border-l-0 focus-visible:outline-none',
+                    page === currentPage
+                      ? 'z-10 bg-[#d7037b] text-white'
+                      : 'bg-white text-gray-700 hover:bg-gray-50'
+                  ]"
+                >
+                  {{ page }}
+                </button>
+              </li>
+            </ul>
+          </nav>
+
+          <button
+            class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:opacity-50"
+            :disabled="currentPage === totalPages"
+            @click="currentPage++"
+          >
+            Siguiente
+          </button>
         </div>
-      </section>
+      </main>
+    </div>
+  </div>
+</section>
+      <!--Explora eventos-->
     </main>
 
     <TransitionRoot as="template" :show="showPremiumModal">
@@ -429,9 +721,8 @@
     <Footer />
   </div>
 </template>
-
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import Header from './Header.vue';
 import Footer from './Footer.vue'; // Import the Footer component
 import { 
@@ -463,255 +754,454 @@ import {
   TransitionRoot 
 } from '@headlessui/vue';
 
-// Estado del modal
+/* ==========================
+   Estado global sección
+========================== */
+// Modal premium
 const showPremiumModal = ref(false);
 
-// Dummy data for user premium status
+// Estado premium (mock)
 const isPremium = ref(false); // Cambia a true para probar la vista premium
 
-// Filtros
-const filters = ref(['Todos', 'Educación', 'Alimentación', 'Medio Ambiente', 'Salud', 'Animales', 'Comunidad']);
+// Búsqueda y filtros avanzados
+const searchQuery = ref('');
+const topCauses = ref(['Salud', 'Educación', 'Ambiente', 'Inclusión', 'Animales', 'Cultura']);
+const activeCause = ref(''); // tab de causa activa
+
+// Chips de filtro (temas/etiquetas). Incluye "Todos" por compatibilidad con tu lógica previa.
+const filters = ref(['Todos', 'Recolección', 'Capacitación', 'Donación', 'Limpieza', 'Mentoría', 'Cocina', 'Primeros Auxilios', 'Cultura']);
 const activeFilters = ref(['Todos']);
 
-const toggleFilter = (filter) => {
-  if (filter === 'Todos') {
-    activeFilters.value = ['Todos'];
-  } else {
-    const index = activeFilters.value.indexOf(filter);
-    if (index > -1) {
-      activeFilters.value.splice(index, 1);
-      // Si no hay filtros seleccionados, volver a "Todos"
-      if (activeFilters.value.length === 0) {
-        activeFilters.value = ['Todos'];
-      }
-    } else {
-      // Eliminar "Todos" si se selecciona otro filtro
-      const allIndex = activeFilters.value.indexOf('Todos');
-      if (allIndex > -1) {
-        activeFilters.value.splice(allIndex, 1);
-      }
-      activeFilters.value.push(filter);
-    }
-  }
-  currentPage.value = 1; // Resetear a la primera página al cambiar filtros
-};
-
-const resetFilters = () => {
-  activeFilters.value = ['Todos'];
-  currentPage.value = 1;
-};
+const onlyFree = ref(false);
+const accessibleFilter = ref(false);
+const dateRanges = ref([
+  { label: 'Este fin de semana', value: 'weekend' },
+  { label: 'Próximos 7 días', value: '7d' },
+  { label: 'Este mes', value: 'month' },
+  { label: 'Todos', value: 'all' },
+]);
+const activeDateRange = ref('all');
+const nearbyCity = ref('');
 
 // Paginación
 const currentPage = ref(1);
 const eventsPerPage = 6;
 
+/* ==========================
+   Datos (mock) eventos
+   Nota: date -> para mostrar
+         dateISO -> para filtrar
+========================== */
 const events = ref([
   { 
     id: 1, 
+    cause: 'Educación',
     name: 'Donación de Útiles para Niños de Cusco', 
     date: '15 de Julio, 2025', 
+    dateISO: '2025-07-15',
     time: '9:00 AM - 2:00 PM',
     description: 'Recolección y entrega de material escolar a comunidades rurales en los Andes de Cusco. Un día para dibujar sonrisas y apoyar la educación en zonas alejadas.',
-    location: 'Cusco, Cusco',
-    imageUrl: 'https://images.unsplash.com/photo-1579782531093-68d830b533b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHw0fHxjdXNjbyUyMGNoaWxkcmVuJTIwZWR1Y2F0aW9ufGVufDB8fHx8MTcwMTU1NDg3NHww&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Educación', 'Niños', 'Andes'],
+    location: 'Cusco',
+    imageUrl: 'https://images.unsplash.com/photo-1579782531093-68d830b533b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Donación', 'Educación', 'Niños'],
     participants: 42,
     likes: 87,
     organizers: ['Fundación Aprendiendo Juntos'],
-    featured: true
+    featured: true,
+    price: 0,
+    accessible: true,
+    slug: 'donacion-utiles-cusco',
+    qr: ''
   },
   { 
     id: 2, 
+    cause: 'Comunidad',
     name: 'Apoyo a Ollas Comunes de Ventanilla', 
     date: '1 de Agosto, 2025', 
+    dateISO: '2025-08-01',
     time: '8:00 AM - 4:00 PM',
-    description: 'Jornada de apoyo en ollas comunes de Ventanilla, brindando alimentos y víveres esenciales a familias necesitadas. Ayúdanos a preparar y servir comidas.',
-    location: 'Ventanilla, Callao',
-    imageUrl: 'https://images.unsplash.com/photo-1627993046200-ee710b1a0d8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwzfHxvbGxhJTIwY29tdW4lMjBsaW1hfGVufDB8fHx8MTcwMTU1NDg3NXww&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Alimentación', 'Comunidad', 'Lima'],
+    description: 'Jornada de apoyo en ollas comunes, brindando alimentos y víveres esenciales a familias. Ayúdanos a preparar y servir comidas.',
+    location: 'Ventanilla',
+    imageUrl: 'https://images.unsplash.com/photo-1627993046200-ee710b1a0d8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Cocina', 'Comunidad', 'Donación'],
     participants: 35,
     likes: 64,
     organizers: ['Ollas Comunes Unidos'],
-    featured: false
+    featured: false,
+    price: 0,
+    accessible: true,
+    slug: 'ollas-comunes-ventanilla',
+    qr: ''
   },
   { 
     id: 3, 
+    cause: 'Ambiente',
     name: 'Reforestación en la Selva Central', 
     date: '10 de Septiembre, 2025', 
+    dateISO: '2025-09-10',
     time: '7:00 AM - 1:00 PM',
-    description: 'Campaña de reforestación en Chanchamayo para restaurar áreas verdes y fomentar la conciencia ambiental. Plantaremos árboles nativos y aprenderemos sobre conservación.',
-    location: 'Chanchamayo, Junín',
-    imageUrl: 'https://images.unsplash.com/photo-1610492801453-2b225c52c2c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHw3fHxwZXJ1JTIwcmFpbmZvcmVzdGF0aW9ufGVufDB8fHx8MTcwMTU1NDg3OXww&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Medio Ambiente', 'Selva', 'Sostenibilidad'],
+    description: 'Campaña de reforestación en Chanchamayo: plantaremos especies nativas y aprenderemos sobre conservación.',
+    location: 'Chanchamayo',
+    imageUrl: 'https://images.unsplash.com/photo-1610492801453-2b225c52c2c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Recolección', 'Limpieza', 'Sostenibilidad'],
     participants: 28,
     likes: 53,
     organizers: ['EcoPerú', 'Municipalidad de Chanchamayo'],
-    featured: true
+    featured: true,
+    price: 0,
+    accessible: false,
+    slug: 'reforestacion-selva-central',
+    qr: ''
   },
   { 
     id: 4, 
-    name: 'Visita y Entrega en Asilo de Ancianos de Arequipa', 
-    date: '5 de Octubre, 2025', 
+    cause: 'Inclusión',
+    name: 'Visita y Entrega en Asilo de Arequipa', 
+    date: '5 de Octubre, 2025',
+    dateISO: '2025-10-05', 
     time: '10:00 AM - 3:00 PM',
-    description: 'Compartiremos un día con los adultos mayores, llevando donaciones y alegría a un hogar de ancianos en Arequipa. Actividades recreativas y acompañamiento.',
-    location: 'Arequipa, Arequipa',
-    imageUrl: 'https://images.unsplash.com/photo-1627049870344-e224e7828c46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwzfHxwZXJ1JTIwZWxkZXJseSUyMGNhcmV8ZW58MHx8fHwxNzAxNTU0ODgzfDA&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Adultos Mayores', 'Solidaridad', 'Sur'],
+    description: 'Compartiremos un día con adultos mayores, llevando donaciones y actividades recreativas.',
+    location: 'Arequipa',
+    imageUrl: 'https://images.unsplash.com/photo-1627049870344-e224e7828c46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Donación', 'Solidaridad'],
     participants: 19,
     likes: 41,
     organizers: ['Hogar San Vicente'],
-    featured: false
+    featured: false,
+    price: 0,
+    accessible: true,
+    slug: 'visita-asilo-arequipa',
+    qr: ''
   },
   { 
     id: 5, 
-    name: 'Taller de Nutrición para Madres en Villa El Salvador', 
+    cause: 'Salud',
+    name: 'Taller de Nutrición en Villa El Salvador', 
     date: '12 de Agosto, 2025', 
+    dateISO: '2025-08-12',
     time: '2:00 PM - 5:00 PM',
-    description: 'Taller práctico sobre nutrición infantil para madres de familia en situación vulnerable. Incluye entrega de canastas nutricionales.',
-    location: 'Villa El Salvador, Lima',
-    imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxwZXJ1JTIwY2hpbGRyZW4lMjBudXRyaXRpb258ZW58MHx8fHwxNzAxNTU0ODg0fDA&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Salud', 'Niños', 'Taller'],
+    description: 'Taller práctico de nutrición infantil para madres. Incluye entrega de canastas.',
+    location: 'Villa El Salvador',
+    imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Capacitación', 'Salud'],
     participants: 15,
     likes: 32,
     organizers: ['Nutriendo Perú'],
-    featured: false
+    featured: false,
+    price: 0,
+    accessible: true,
+    slug: 'taller-nutricion-ves',
+    qr: ''
   },
   { 
     id: 6, 
-    name: 'Rescate y Rehabilitación de Animales Callejeros', 
+    cause: 'Animales',
+    name: 'Rescate y Rehabilitación de Animales', 
     date: '22 de Septiembre, 2025', 
+    dateISO: '2025-09-22',
     time: '9:00 AM - 6:00 PM',
-    description: 'Jornada de rescate, atención veterinaria y rehabilitación para animales en situación de calle en el distrito de Miraflores.',
-    location: 'Miraflores, Lima',
-    imageUrl: 'https://images.unsplash.com/photo-1552053831-71594a27632d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxwZXJ1JTIwZG9nfGVufDB8fHx8MTcwMTU1NDg4NXww&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Animales', 'Rescate', 'Veterinaria'],
+    description: 'Jornada de rescate, atención veterinaria y adopciones responsables.',
+    location: 'Miraflores',
+    imageUrl: 'https://images.unsplash.com/photo-1494256997604-768d1f608cac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Donación', 'Recolección', 'Animales'],
     participants: 23,
     likes: 56,
     organizers: ['Patitas Perú'],
-    featured: true
+    featured: true,
+    price: 0,
+    accessible: true,
+    slug: 'rescate-animales-miraflores',
+    qr: ''
   },
   { 
     id: 7, 
-    name: 'Limpieza de Playas en la Costa Verde', 
+    cause: 'Ambiente',
+    name: 'Limpieza de Playas Costa Verde', 
     date: '30 de Julio, 2025', 
+    dateISO: '2025-07-30',
     time: '8:00 AM - 12:00 PM',
-    description: 'Campaña de limpieza para reducir la contaminación plástica en las playas de la Costa Verde. Ayúdanos a mantener nuestros océanos limpios.',
-    location: 'Lima, Lima',
-    imageUrl: 'https://images.unsplash.com/photo-1519046967733-a3ad230059c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxwZXJ1JTIwcGxhc3RpYyUyMGNvbmluYXRpb258ZW58MHx8fHwxNzAxNTU0ODg2fDA&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Medio Ambiente', 'Playas', 'Voluntariado'],
+    description: 'Campaña de limpieza para reducir contaminación plástica en la Costa Verde.',
+    location: 'Lima',
+    imageUrl: 'https://images.unsplash.com/photo-1519046967733-a3ad230059c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Limpieza', 'Voluntariado', 'Recolección'],
     participants: 50,
     likes: 95,
     organizers: ['Conservación Marina Perú'],
-    featured: false
+    featured: false,
+    price: 0,
+    accessible: true,
+    slug: 'limpieza-playas-costa-verde',
+    qr: ''
   },
   { 
     id: 8, 
-    name: 'Charlas de Conciencia Ciudadana en Comas', 
+    cause: 'Cultura',
+    name: 'Charlas de Conciencia Ciudadana', 
     date: '8 de Agosto, 2025', 
+    dateISO: '2025-08-08',
     time: '3:00 PM - 6:00 PM',
-    description: 'Serie de charlas educativas sobre derechos y deberes ciudadanos, fomentando la participación activa en la comunidad de Comas.',
-    location: 'Comas, Lima',
-    imageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxwZXJ1JTIwY2l0aXplbnNoaXAlMjBlZHVjYXRpb258ZW58MHx8fHwxNzAxNTU0ODg3fDA&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Comunidad', 'Educación', 'Derechos'],
+    description: 'Derechos y deberes ciudadanos para fomentar participación activa.',
+    location: 'Comas',
+    imageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Capacitación', 'Cultura', 'Comunidad'],
     participants: 20,
     likes: 40,
     organizers: ['Vecinos Unidos por Comas'],
-    featured: false
+    featured: false,
+    price: 0,
+    accessible: true,
+    slug: 'charlas-conciencia-comas',
+    qr: ''
   },
   { 
     id: 9, 
+    cause: 'Salud',
     name: 'Campaña de Salud Gratuita en Puno', 
     date: '1 de Noviembre, 2025', 
+    dateISO: '2025-11-01',
     time: '8:00 AM - 5:00 PM',
-    description: 'Atención médica general, despistaje de enfermedades y entrega de medicamentos básicos en comunidades rurales de Puno.',
-    location: 'Puno, Puno',
-    imageUrl: 'https://images.unsplash.com/photo-1582759714856-11f2780650d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxwZXJ1JTIwaGVhbHRoJTIwY2FtcGFpZ258ZW58MHx8fHwxNzAxNTU0ODg5fDA&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Salud', 'Comunidad', 'Andes'],
+    description: 'Atención médica general, despistaje y entrega de medicamentos básicos.',
+    location: 'Puno',
+    imageUrl: 'https://images.unsplash.com/photo-1582759714856-11f2780650d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Salud', 'Donación'],
     participants: 30,
     likes: 70,
     organizers: ['Médicos Solidarios'],
-    featured: true
+    featured: true,
+    price: 0,
+    accessible: true,
+    slug: 'campana-salud-puno',
+    qr: ''
   },
   { 
     id: 10, 
+    cause: 'Educación',
     name: 'Apoyo Escolar para Niños de Ayacucho', 
     date: '20 de Septiembre, 2025', 
+    dateISO: '2025-09-20',
     time: '9:00 AM - 1:00 PM',
-    description: 'Reforzamiento escolar en matemáticas y comunicación para niños de primaria en Ayacucho. Voluntarios para tutorías personalizadas.',
-    location: 'Ayacucho, Ayacucho',
-    imageUrl: 'https://images.unsplash.com/photo-1529712490130-9b6d6f2e8f1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxwZXJ1JTIwc2Nob29sJTIwY2hpbGRyZW58ZW58MHx8fHwxNzAxNTU0ODkwfDA&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Educación', 'Niños', 'Tutoría'],
+    description: 'Refuerzo en matemáticas y comunicación para primaria.',
+    location: 'Ayacucho',
+    imageUrl: 'https://images.unsplash.com/photo-1529712490130-9b6d6f2e8f1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Mentoría', 'Educación', 'Capacitación'],
     participants: 18,
     likes: 35,
     organizers: ['Maestros sin Fronteras'],
-    featured: false
+    featured: false,
+    price: 0,
+    accessible: true,
+    slug: 'apoyo-escolar-ayacucho',
+    qr: ''
   },
   { 
     id: 11, 
+    cause: 'Animales',
     name: 'Caminata Canina Solidaria en Barranco', 
     date: '10 de Octubre, 2025', 
+    dateISO: '2025-10-10',
     time: '10:00 AM - 1:00 PM',
-    description: 'Paseo con perros rescatados del albergue de Barranco para promover su adopción y recaudar fondos para su cuidado.',
-    location: 'Barranco, Lima',
-    imageUrl: 'https://images.unsplash.com/photo-1596700864319-f538e1e7e4a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxwZXJ1JTIwYW5pbWFsJTIwYWRvcHRpb258ZW58MHx8fHwxNzAxNTU0ODkxfDA&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Animales', 'Adopción', 'Recaudación'],
+    description: 'Paseo con perros rescatados para promover adopción y recaudar fondos.',
+    location: 'Barranco',
+    imageUrl: 'https://images.unsplash.com/photo-1596700864319-f538e1e7e4a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Animales', 'Cultura'],
     participants: 25,
     likes: 60,
     organizers: ['Adopta un Amigo'],
-    featured: false
+    featured: false,
+    price: 0,
+    accessible: true,
+    slug: 'caminata-canina-barranco',
+    qr: ''
   },
   { 
     id: 12, 
-    name: 'Construcción de Biohuertos en Colegios Rurales de Cajamarca', 
+    cause: 'Ambiente',
+    name: 'Biohuertos en Colegios Rurales de Cajamarca', 
     date: '5 de Noviembre, 2025', 
+    dateISO: '2025-11-05',
     time: '8:00 AM - 4:00 PM',
-    description: 'Creación de biohuertos escolares para fomentar la agricultura sostenible y la educación ambiental en zonas rurales de Cajamarca.',
-    location: 'Cajamarca, Cajamarca',
-    imageUrl: 'https://images.unsplash.com/photo-1534066597-e85d99723223?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxwZXJ1JTIwYmlvaHVlcnRvJTIwZXNjb2xhcnxlbnwwfHx8fDE3MDE1NTQ4OTJ8MA&ixlib=rb-4.0.3&q=80&w=1080',
-    tags: ['Medio Ambiente', 'Educación', 'Sostenibilidad'],
+    description: 'Creación de biohuertos escolares para educación ambiental y alimentación.',
+    location: 'Cajamarca',
+    imageUrl: 'https://images.unsplash.com/photo-1534066597-e85d99723223?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    tags: ['Sostenibilidad', 'Capacitación', 'Recolección'],
     participants: 22,
     likes: 48,
     organizers: ['Sembrando Futuro'],
-    featured: true
+    featured: true,
+    price: 0,
+    accessible: true,
+    slug: 'biohuertos-cajamarca',
+    qr: ''
   },
 ]);
 
-// Filtrar eventos
-const filteredEvents = computed(() => {
-  let filtered = events.value;
-  
-  // Aplicar filtros de categoría
-  if (!activeFilters.value.includes('Todos')) {
-    filtered = filtered.filter(event => 
-      event.tags.some(tag => activeFilters.value.includes(tag))
-    );
+/* ==========================
+   Helpers de fecha / lógica
+========================== */
+const parseISO = (s) => new Date(s + 'T00:00:00');
+const today = () => new Date();
+const isWeekend = (d) => [0, 6].includes(d.getDay());
+const withinNextDays = (iso, n) => {
+  const now = today();
+  const target = parseISO(iso);
+  const diff = (target - now) / (1000 * 60 * 60 * 24);
+  return diff >= 0 && diff <= n;
+};
+const isThisMonth = (iso) => {
+  const now = today();
+  const dt = parseISO(iso);
+  return dt.getMonth() === now.getMonth() && dt.getFullYear() === now.getFullYear();
+};
+
+/* ==========================
+   Acciones de filtros
+========================== */
+const toggleFilter = (filter) => {
+  // Compatibilidad con "Todos"
+  if (filter === 'Todos') {
+    activeFilters.value = ['Todos'];
+  } else {
+    const idx = activeFilters.value.indexOf(filter);
+    if (idx > -1) activeFilters.value.splice(idx, 1);
+    else {
+      const allIdx = activeFilters.value.indexOf('Todos');
+      if (allIdx > -1) activeFilters.value.splice(allIdx, 1);
+      activeFilters.value.push(filter);
+    }
+    if (activeFilters.value.length === 0) activeFilters.value = ['Todos'];
   }
-    
-  return filtered;
-});
+  currentPage.value = 1;
+};
 
-// Paginar eventos
-const paginatedEvents = computed(() => {
-  const start = (currentPage.value - 1) * eventsPerPage;
-  const end = start + eventsPerPage;
-  return filteredEvents.value.slice(start, end);
-});
+const setDateRange = (v) => {
+  activeDateRange.value = v;
+  currentPage.value = 1;
+};
 
-const totalPages = computed(() => {
-  return Math.ceil(filteredEvents.value.length / eventsPerPage);
-});
+const selectCause = (c) => {
+  activeCause.value = activeCause.value === c ? '' : c;
+  currentPage.value = 1;
+};
 
+const onSearchInput = () => {
+  currentPage.value = 1;
+};
+
+const applyNearby = () => {
+  currentPage.value = 1;
+};
+
+const resetFilters = () => {
+  searchQuery.value = '';
+  activeFilters.value = ['Todos'];
+  activeCause.value = '';
+  onlyFree.value = false;
+  accessibleFilter.value = false;
+  activeDateRange.value = 'all';
+  nearbyCity.value = '';
+  currentPage.value = 1;
+};
+
+/* ==========================
+   CTA / UX helpers
+========================== */
 const joinEvent = (eventId) => {
-  // Aquí iría la lógica para registrar al usuario premium en el evento.
   alert(`¡Genial! Te has unido al evento ID: ${eventId}. Revisa tu correo para más detalles.`);
 };
 
 const scrollToEvents = () => {
   const eventsSection = document.getElementById('events');
-  if (eventsSection) {
-    eventsSection.scrollIntoView({ behavior: 'smooth' });
-  }
+  if (eventsSection) eventsSection.scrollIntoView({ behavior: 'smooth' });
 };
+
+/* ==========================
+   Filtrado / Agrupado / Paginación
+========================== */
+// Filtro base (aplica causa, búsqueda, chips, gratis, accesible, fecha, cerca de…)
+function filteredEventsAll() {
+  return events.value.filter((e) => {
+    // Causa (tab)
+    if (activeCause.value && e.cause !== activeCause.value) return false;
+
+    // Búsqueda textual
+    const q = searchQuery.value.trim().toLowerCase();
+    if (q) {
+      const hay =
+        e.name.toLowerCase().includes(q) ||
+        e.description.toLowerCase().includes(q) ||
+        e.location.toLowerCase().includes(q) ||
+        e.organizers.join(' ').toLowerCase().includes(q);
+      if (!hay) return false;
+    }
+
+    // Chips de filtro (tags)
+    if (!activeFilters.value.includes('Todos')) {
+      const ok = activeFilters.value.every((t) => e.tags.includes(t));
+      if (!ok) return false;
+    }
+
+    // Gratis / Accesibles
+    if (onlyFree.value && e.price > 0) return false;
+    if (accessibleFilter.value && !e.accessible) return false;
+
+    // Fecha
+    if (activeDateRange.value !== 'all') {
+      if (activeDateRange.value === 'weekend') {
+        if (!isWeekend(parseISO(e.dateISO))) return false;
+      } else if (activeDateRange.value === '7d') {
+        if (!withinNextDays(e.dateISO, 7)) return false;
+      } else if (activeDateRange.value === 'month') {
+        if (!isThisMonth(e.dateISO)) return false;
+      }
+    }
+
+    // Cerca de
+    if (nearbyCity.value.trim()) {
+      const c = nearbyCity.value.trim().toLowerCase();
+      if (!e.location.toLowerCase().includes(c)) return false;
+    }
+
+    return true;
+  });
+}
+
+// Evento destacado que respete filtros globales (si existe)
+const featuredEvent = computed(() => {
+  return filteredEventsAll().find((e) => e.featured) || null;
+});
+
+// Secciones por causa (para feed editorial). Excluye el destacado.
+const sectionedEvents = computed(() => {
+  const pool = filteredEventsAll().filter((e) => !e.featured);
+  const byCause = {};
+  for (const e of pool) {
+    if (!byCause[e.cause]) byCause[e.cause] = [];
+    byCause[e.cause].push(e);
+  }
+  const order = [
+    ...topCauses.value,
+    ...Object.keys(byCause).filter((c) => !topCauses.value.includes(c)),
+  ];
+  return order
+    .filter((c) => byCause[c]?.length)
+    .map((c) => ({ cause: c, items: byCause[c] }));
+});
+
+// Lista plana para la grilla “clásica” (si la usás en otra vista)
+const filteredEvents = computed(() => filteredEventsAll());
+
+// Paginación plana (para la grilla clásica o para el bloque "paginatedEvents" existente)
+const paginatedEvents = computed(() => {
+  const start = (currentPage.value - 1) * eventsPerPage;
+  return filteredEvents.value.slice(start, start + eventsPerPage);
+});
+
+const totalPages = computed(() => Math.max(1, Math.ceil(filteredEvents.value.length / eventsPerPage)));
+
+// Asegura que currentPage siempre sea válido
+watch([filteredEvents], () => {
+  if (currentPage.value > totalPages.value) currentPage.value = 1;
+});
 </script>
 
 <style scoped>

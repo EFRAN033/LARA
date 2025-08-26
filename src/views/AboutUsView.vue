@@ -6,14 +6,12 @@
   
   <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
     
-    <div class="absolute inset-0 bg-gradient-to-br from-[#a8025e] to-[#6d0039] opacity-95"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-[#a8025e] to-[#6d0039] opacity-80"></div>
     
     <div class="absolute inset-0 motion-safe:animate-[parallax-bg_30s_linear_infinite]">
-      <div class="absolute top-[15%] left-[5%] h-80 w-80 rounded-full bg-pink-300 opacity-10 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-halo_12s_ease-in-out_infinite_2s]"></div>
-      <div class="absolute top-[45%] right-[0%] h-96 w-96 rounded-full bg-pink-200 opacity-10 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-halo_10s_ease-in-out_infinite_3.5s]"></div>
-      <div class="absolute bottom-[5%] left-[20%] h-64 w-64 rounded-full bg-rose-200 opacity-10 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-halo_11s_ease-in-out_infinite_1s]"></div>
-      <div class="absolute top-[5%] right-[15%] h-48 w-48 rounded-full bg-pink-300 opacity-5 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-halo_15s_ease-in-out_infinite_5s]"></div>
-      <div class="absolute bottom-[15%] right-[25%] h-72 w-72 rounded-full bg-rose-200 opacity-5 mix-blend-soft-light filter blur-3xl motion-safe:animate-[pulse-halo_8s_ease-in-out_infinite_0s]"></div>
+      <div class="absolute top-[10%] left-[0%] h-[40rem] w-[40rem] rounded-full bg-pink-300 opacity-5 mix-blend-screen filter blur-[100px] motion-safe:animate-[pulse-halo_12s_ease-in-out_infinite_2s]"></div>
+      <div class="absolute bottom-[0%] right-[0%] h-[50rem] w-[50rem] rounded-full bg-pink-200 opacity-5 mix-blend-screen filter blur-[100px] motion-safe:animate-[pulse-halo_10s_ease-in-out_infinite_3.5s]"></div>
+      <div class="absolute top-[50%] left-[10%] h-[30rem] w-[30rem] rounded-full bg-rose-200 opacity-5 mix-blend-screen filter blur-[100px] motion-safe:animate-[pulse-halo_11s_ease-in-out_infinite_1s]"></div>
     </div>
     
   </div>
@@ -22,39 +20,35 @@
     <div class="max-w-xl space-y-8">
       
       <div class="space-y-4">
-        <p class="font-serif text-xl italic text-pink-200/90 leading-relaxed motion-safe:animate-[enter-fade-up_0.8s_ease-out_forwards_200ms]">
+        <p class="font-sans text-base italic text-pink-200/90 leading-relaxed motion-safe:animate-[enter-fade-up_0.8s_ease-out_forwards_200ms] tracking-wide">
           "KambiaPe nace de la visión de un grupo de jóvenes peruanos..."
         </p>
         
-        <h1 class="font-serif text-8xl font-bold text-white lg:text-9xl motion-safe:animate-[enter-fade-up_0.8s_ease-out_forwards_400ms] text-shadow-3d transition-all duration-300 hover:scale-105">
+        <h1 class="font-sans text-8xl font-bold text-white lg:text-9xl tracking-tight motion-safe:animate-[enter-fade-up_0.8s_ease-out_forwards_400ms] transition-all duration-300 hover:scale-[1.02] transform-gpu">
           KambiaPe
         </h1>
       </div>
 
       <div class="flex flex-wrap gap-3 motion-safe:animate-[enter-fade-up_0.8s_ease-out_forwards_600ms]">
-        <a href="#" class="group relative rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-pink-300 hover:bg-white/20 hover:text-pink-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
+        <a href="#" class="group relative rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-pink-300 hover:bg-white/10 hover:text-pink-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
           #Comunidad
-          <span class="absolute inset-0 rounded-full bg-pink-300 opacity-0 transition-opacity duration-300 group-hover:opacity-20 -z-10"></span>
         </a>
-        <a href="#" class="group relative rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-pink-300 hover:bg-white/20 hover:text-pink-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
+        <a href="#" class="group relative rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-pink-300 hover:bg-white/10 hover:text-pink-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
           #Sostenibilidad
-          <span class="absolute inset-0 rounded-full bg-pink-300 opacity-0 transition-opacity duration-300 group-hover:opacity-20 -z-10"></span>
         </a>
-        <a href="#" class="group relative rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-pink-300 hover:bg-white/20 hover:text-pink-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
+        <a href="#" class="group relative rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-pink-300 hover:bg-white/10 hover:text-pink-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
           #Innovación
-          <span class="absolute inset-0 rounded-full bg-pink-300 opacity-0 transition-opacity duration-300 group-hover:opacity-20 -z-10"></span>
         </a>
       </div>
       
       <div class="mt-16 motion-safe:animate-[enter-fade-up_0.8s_ease-out_forwards_800ms]">
-        <a href="#nuestra-mision" class="group relative inline-flex items-center gap-x-4 rounded-full bg-white/10 px-8 py-4 font-medium text-pink-200 backdrop-blur-sm transition-all duration-500 hover:text-white hover:bg-white/20 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
+        <a href="#nuestra-mision" class="group relative inline-flex items-center gap-x-4 rounded-full bg-pink-500/10 px-8 py-4 font-bold text-pink-200 backdrop-blur-sm transition-all duration-500 hover:text-white hover:bg-pink-500/20 hover:shadow-xl hover:shadow-pink-500/30 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-[#4e022b]">
           <span class="z-10 transition-transform duration-500 group-hover:-translate-x-1">Conoce la historia</span>
           <div class="z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/30 transition-transform duration-500 group-hover:scale-125 group-hover:rotate-[360deg] group-hover:border-pink-300">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 transition-colors duration-500 group-hover:text-pink-300">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
             </svg>
           </div>
-          <span class="absolute inset-0 rounded-full bg-pink-300 opacity-0 transition-opacity duration-500 group-hover:opacity-10"></span>
         </a>
       </div>
     </div>
@@ -63,117 +57,125 @@
 <!--Primera seccion-->
 
 <!--Historia de kambiaPe-->
-    <section
-      class="py-20 bg-white transition-all duration-1000 ease-out-quad"
-      v-intersect="{
-        handler: onHistoryIntersect,
-        options: { threshold: 0.1 }
-      }"
-      :class="{ 'opacity-100 translate-y-0 scale-100': historyVisible, 'opacity-0 translate-y-10 scale-98': !historyVisible }"
+<section
+  class="py-20 bg-white transition-all duration-1000 ease-out"
+  v-intersect="{
+    handler: onHistoryIntersect,
+    options: { threshold: 0.1 }
+  }"
+  :class="{ 'opacity-100 translate-y-0': historyVisible, 'opacity-0 translate-y-10': !historyVisible }"
+>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
+    <p class="text-xl sm:text-2xl text-gray-700 leading-relaxed mb-8 transition-all duration-1000 delay-150 tracking-wide">
+      KambiaPe nace de la visión de un grupo de jóvenes peruanos, comprometidos con la innovación social y la economía circular. Buscamos revivir el ancestral arte del trueque, adaptándolo a la era digital para construir una comunidad más unida y consciente.
+    </p>
+    <div class="inline-block px-6 py-4 bg-gradient-to-r from-[#fdf2f8] to-[#fce7f3] rounded-full shadow-2xl mt-8 transition-all duration-1000 delay-300 transform hover:scale-105 hover:shadow-lg">
+      <p class="text-xl sm:text-2xl font-semibold text-[#9e0154]">
+        No solo intercambiamos cosas; intercambiamos <strong class="text-[#d7037b]">confianza</strong>, <strong class="text-[#d7037b]">historias</strong> y <strong class="text-[#d7037b]">oportunidades</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+---
+
+<section class="py-16 sm:py-24 bg-gray-50 border-y border-gray-100">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+    <div
+      class="[perspective:1200px] h-full group"
+      @mouseenter="flipCard('mission')"
+      @mouseleave="unflipCard('mission')"
     >
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
-        <p class="text-xl sm:text-2xl text-gray-700 leading-relaxed mb-8 transition-all duration-1000 delay-150">
-          KambiaPe nace de la visión de un grupo de jóvenes peruanos, comprometidos con la innovación social y la economía circular. Buscamos revivir el ancestral arte del trueque, adaptándolo a la era digital para construir una comunidad más unida y consciente.
-        </p>
-        <div class="inline-block px-6 py-3 bg-gradient-to-r from-[#fdf2f8] to-[#fce7f3] rounded-full shadow-inner mt-8 transition-all duration-1000 delay-300 transform hover:scale-105 hover:shadow-lg">
-          <p class="text-xl sm:text-2xl font-semibold text-[#9e0154]">
-            No solo intercambiamos cosas; intercambiamos <strong class="text-[#d7037b]">confianza</strong>, <strong class="text-[#d7037b]">historias</strong> y <strong class="text-[#d7037b]">oportunidades</strong>.
+      <div
+        class="h-full transition-all duration-700 ease-in-out [transform-style:preserve-3d]"
+        :class="{ '[transform:rotateY(180deg)]': missionFlipped }"
+        role="group"
+        aria-roledescription="card"
+        aria-live="polite"
+      >
+        <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100 h-full flex flex-col [backface-visibility:hidden] [transform:rotateY(0deg)]">
+          <div class="flex items-center mb-6">
+            <div class="w-14 h-14 rounded-full bg-[#fdf2f8] flex items-center justify-center mr-4 shadow-md">
+              <RocketLaunchIcon class="h-8 w-8 text-[#d7037b] animate-bounce-slow" aria-hidden="true" />
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-800">Nuestra <span class="text-[#d7037b]">Misión</span></h2>
+          </div>
+          <p class="text-lg text-gray-700 leading-relaxed flex-grow">
+            Facilitar el intercambio justo de productos, servicios y conocimientos entre personas, a través de una plataforma digital confiable, segura y fácil de usar.
           </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-16 sm:py-24 bg-gray-50 border-y border-gray-100">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-        <div
-          class="[perspective:1200px] h-full"
-          @mouseenter="flipCard('mission')"
-          @mouseleave="unflipCard('mission')"
-        >
-          <div
-            class="h-full transition-all duration-700 ease-in-out-cubic [transform-style:preserve-3d]"
-            :class="{ '[transform:rotateY(180deg)]': missionFlipped }"
-          >
-            <div class="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 h-full flex flex-col [backface-visibility:hidden]">
-              <div class="flex items-center mb-6">
-                <div class="w-14 h-14 rounded-full bg-[#fdf2f8] flex items-center justify-center mr-4 shadow-md">
-                  <RocketLaunchIcon class="h-8 w-8 text-[#d7037b] animate-bounce-slow" />
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800">Nuestra <span class="text-[#d7037b]">Misión</span></h2>
-              </div>
-              <p class="text-lg text-gray-700 leading-relaxed flex-grow">
-                Facilitar el intercambio justo de productos, servicios y conocimientos entre personas, a través de una plataforma digital confiable, segura y fácil de usar.
-              </p>
-              <div class="mt-6 text-sm text-[#d7037b] font-medium flex items-center group cursor-pointer">
-                <span>Pasa el cursor para más detalles</span>
-                <ArrowRightIcon class="h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-2" />
-              </div>
-            </div>
-            <div class="bg-gradient-to-br from-[#d7037b] to-[#9e0154] rounded-3xl shadow-2xl p-8 text-white h-full flex flex-col justify-center absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden]">
-              <h3 class="text-2xl font-bold mb-4 border-b border-white/30 pb-2">Impacto que buscamos</h3>
-              <ul class="space-y-3 text-gray-100">
-                <li class="flex items-start">
-                  <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Generar un ecosistema de <strong class="font-semibold">economía colaborativa</strong></span>
-                </li>
-                <li class="flex items-start">
-                  <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Promover <strong class="font-semibold">inclusión económica</strong> y desarrollo local</span>
-                </li>
-                <li class="flex items-start">
-                  <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Reducir el desperdicio mediante la <strong class="font-semibold">reutilización</strong></span>
-                </li>
-              </ul>
-            </div>
+          <div class="mt-6 text-sm text-[#d7037b] font-medium flex items-center group cursor-pointer">
+            <span>Pasa el cursor para más detalles</span>
+            <ArrowRightIcon class="h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-2" />
           </div>
         </div>
-
-        <div
-          class="[perspective:1200px] h-full"
-          @mouseenter="flipCard('vision')"
-          @mouseleave="unflipCard('vision')"
-        >
-          <div
-            class="h-full transition-all duration-700 ease-in-out-cubic [transform-style:preserve-3d]"
-            :class="{ '[transform:rotateY(180deg)]': visionFlipped }"
-          >
-            <div class="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 h-full flex flex-col [backface-visibility:hidden]">
-              <div class="flex items-center mb-6">
-                <div class="w-14 h-14 rounded-full bg-[#fdf2f8] flex items-center justify-center mr-4 shadow-md">
-                  <EyeIcon class="h-8 w-8 text-[#9e0154] animate-pulse-slow" />
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800">Nuestra <span class="text-[#9e0154]">Visión</span></h2>
-              </div>
-              <p class="text-lg text-gray-700 leading-relaxed flex-grow">
-                Convertirnos en la plataforma líder de intercambio solidario en Perú, impulsando una nueva economía basada en la colaboración y sostenibilidad.
-              </p>
-              <div class="mt-6 text-sm text-[#9e0154] font-medium flex items-center group cursor-pointer">
-                <span>Pasa el cursor para más detalles</span>
-                <ArrowRightIcon class="h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-2" />
-              </div>
-            </div>
-            <div class="bg-gradient-to-br from-[#9e0154] to-[#7a0142] rounded-3xl shadow-2xl p-8 text-white h-full flex flex-col justify-center absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden]">
-              <h3 class="text-2xl font-bold mb-4 border-b border-white/30 pb-2">Metas a 2025</h3>
-              <ul class="space-y-3 text-gray-100">
-                <li class="flex items-start">
-                  <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" />
-                  <span><strong class="font-semibold">+50,000</strong> usuarios activos en la plataforma</span>
-                </li>
-                <li class="flex items-start">
-                  <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Presencia en <strong class="font-semibold">15 regiones</strong> del Perú</span>
-                </li>
-                <li class="flex items-start">
-                  <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Reducir <strong class="font-semibold">+10 toneladas</strong> de desperdicio anual</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+        <div class="bg-gradient-to-br from-[#d7037b] to-[#9e0154] rounded-3xl shadow-2xl p-8 text-white h-full flex flex-col justify-center absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+          <h3 class="text-2xl font-bold mb-4 border-b border-white/30 pb-2">Impacto que buscamos</h3>
+          <ul class="space-y-3 text-gray-100">
+            <li class="flex items-start">
+              <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span>Generar un ecosistema de <strong class="font-semibold">economía colaborativa</strong></span>
+            </li>
+            <li class="flex items-start">
+              <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span>Promover <strong class="font-semibold">inclusión económica</strong> y desarrollo local</span>
+            </li>
+            <li class="flex items-start">
+              <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span>Reducir el desperdicio mediante la <strong class="font-semibold">reutilización</strong></span>
+            </li>
+          </ul>
         </div>
       </div>
-    </section>
+    </div>
+
+    <div
+      class="[perspective:1200px] h-full group"
+      @mouseenter="flipCard('vision')"
+      @mouseleave="unflipCard('vision')"
+    >
+      <div
+        class="h-full transition-all duration-700 ease-in-out [transform-style:preserve-3d]"
+        :class="{ '[transform:rotateY(180deg)]': visionFlipped }"
+        role="group"
+        aria-roledescription="card"
+        aria-live="polite"
+      >
+        <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100 h-full flex flex-col [backface-visibility:hidden]">
+          <div class="flex items-center mb-6">
+            <div class="w-14 h-14 rounded-full bg-[#fdf2f8] flex items-center justify-center mr-4 shadow-md">
+              <EyeIcon class="h-8 w-8 text-[#9e0154] animate-pulse-slow" aria-hidden="true" />
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-800">Nuestra <span class="text-[#9e0154]">Visión</span></h2>
+          </div>
+          <p class="text-lg text-gray-700 leading-relaxed flex-grow">
+            Convertirnos en la plataforma líder de intercambio solidario en Perú, impulsando una nueva economía basada en la colaboración y sostenibilidad.
+          </p>
+          <div class="mt-6 text-sm text-[#9e0154] font-medium flex items-center group cursor-pointer">
+            <span>Pasa el cursor para más detalles</span>
+            <ArrowRightIcon class="h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-2" />
+          </div>
+        </div>
+        <div class="bg-gradient-to-br from-[#9e0154] to-[#7a0142] rounded-3xl shadow-2xl p-8 text-white h-full flex flex-col justify-center absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+          <h3 class="text-2xl font-bold mb-4 border-b border-white/30 pb-2">Metas a 2025</h3>
+          <ul class="space-y-3 text-gray-100">
+            <li class="flex items-start">
+              <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span><strong class="font-semibold">+50,000</strong> usuarios activos en la plataforma</span>
+            </li>
+            <li class="flex items-start">
+              <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span>Presencia en <strong class="font-semibold">15 regiones</strong> del Perú</span>
+            </li>
+            <li class="flex items-start">
+              <CheckCircleIcon class="h-5 w-5 text-white mr-2 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span>Reducir <strong class="font-semibold">+10 toneladas</strong> de desperdicio anual</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!--Historia de kambiaPe-->
 
 <!--Valores que nos impulsan-->
@@ -237,89 +239,98 @@
       </div>
     </section>
 <!--Valores que nos impulsan-->
-    <section class="py-16 sm:py-24 bg-gray-50 border-y border-gray-100">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-16 text-center relative">
-          <span class="inline-flex items-center justify-center px-6 py-3 bg-[#fdf2f8] rounded-full shadow-lg">
-            <QuestionMarkCircleIcon class="h-8 w-8 text-[#9e0154] mr-3 animate-bounce-custom" />
-            Por Qué Elegir KambiaPe
-          </span>
-          <span class="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-20 h-1 bg-[#d7037b] rounded-full"></span>
-        </h2>
+<section class="py-16 sm:py-24 bg-gray-50 relative overflow-hidden">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    
+    <div class="mb-16 text-center">
+      <h2 class="text-4xl sm:text-5xl font-extralight text-gray-800 tracking-wide relative inline-block">
+        <span class="inline-flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-10 w-10 text-[#d7037b] mr-4 animate-pulse-slow">
+            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 16a6 6 0 100-12 6 6 0 000 12z" />
+            <path fill-rule="evenodd" d="M13.25 10a.75.75 0 00-1.5 0v3.25a.75.75 0 001.5 0V10z" clip-rule="evenodd" />
+            <path fill-rule="evenodd" d="M12 7a.75.75 0 00-.75.75V11a.75.75 0 001.5 0V7.75A.75.75 0 0012 7z" clip-rule="evenodd" />
+          </svg>
+          <span class="border-b-2 border-[#d7037b] pb-2">Por Qué Elegir KambiaPe</span>
+        </span>
+      </h2>
+    </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div class="space-y-8">
-            <div
-              v-for="(benefit, index) in benefits"
-              :key="index"
-              class="flex items-start bg-white rounded-xl p-6 shadow-lg border-l-8 transition-all duration-500 ease-out-back transform hover:scale-[1.02] hover:shadow-xl cursor-pointer"
-              :class="[
-                activeBenefit === index ? 'border-[#d7037b] shadow-2xl scale-[1.03]' : 'border-transparent',
-              ]"
-              @mouseenter="activeBenefit = index"
-            >
-              <div class="flex-shrink-0 mr-5">
-                <div class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300" :class="activeBenefit === index ? 'bg-[#fdf2f8] shadow-inner' : 'bg-gray-100'">
-                  <component
-                    :is="benefit.icon"
-                    class="h-7 w-7 transition-colors duration-300"
-                    :class="activeBenefit === index ? 'text-[#d7037b] animate-spin-slow' : 'text-gray-500'"
-                  />
-                </div>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2 transition-colors duration-300" :class="activeBenefit === index ? 'text-[#d7037b]' : ''">
-                  {{ benefit.title }}
-                </h3>
-                <p class="text-gray-600 leading-relaxed">
-                  {{ benefit.description }}
-                </p>
-              </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div class="space-y-6">
+        <div
+          v-for="(benefit, index) in benefits"
+          :key="index"
+          class="flex items-start rounded-xl p-6 transition-all duration-700 ease-in-out cursor-pointer group relative overflow-hidden [perspective:1000px] transform-gpu"
+          :class="[
+            activeBenefit === index ? 'bg-white shadow-2xl scale-[1.02] transform translate-z-10' : 'bg-gray-100 hover:scale-[1.01] hover:translate-z-5',
+          ]"
+          @mouseenter="activeBenefit = index"
+          :style="{ 'transition-delay': `${index * 100}ms` }"
+        >
+          <span class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#d7037b] to-transparent transform -translate-x-full transition-all duration-700 ease-in-out group-hover:translate-x-0"></span>
+
+          <div class="flex-shrink-0 mr-6">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500" :class="activeBenefit === index ? 'bg-[#d7037b] shadow-inner' : 'bg-gray-200'">
+              <component
+                :is="benefit.icon"
+                class="h-8 w-8 transition-colors duration-500"
+                :class="activeBenefit === index ? 'text-white animate-spin-slow' : 'text-gray-500'"
+              />
             </div>
           </div>
-
-          <div class="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white animate-fade-in-scale">
-            <div class="absolute inset-0 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
-              <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy5wMy5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgxMDIsMTI2LDIzNCwwLjEpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+')"></div>
-
-              <transition
-                enter-active-class="transition-opacity duration-500 ease-out"
-                enter-from-class="opacity-0 translate-y-4"
-                enter-to-class="opacity-100 translate-y-0"
-                leave-active-class="transition-opacity duration-300 ease-in absolute w-full"
-                leave-from-class="opacity-100"
-                leave-to-class="opacity-0 -translate-y-4"
-                mode="out-in"
-              >
-                <div :key="activeBenefit" class="text-center px-8 relative z-10">
-                  <div class="w-28 h-28 mx-auto mb-6 flex items-center justify-center rounded-full shadow-lg animate-pop-in" :class="benefits[activeBenefit].bgColor">
-                    <component
-                      :is="benefits[activeBenefit].icon"
-                      class="h-14 w-14 text-white animate-pulse-slight"
-                    />
-                  </div>
-                  <h3 class="text-2xl font-bold text-gray-800 mb-3 animate-fade-in-up-delay">
-                    {{ benefits[activeBenefit].visualTitle }}
-                  </h3>
-                  <p class="text-gray-600 max-w-md mx-auto animate-fade-in-up-delay-more">
-                    {{ benefits[activeBenefit].visualDescription }}
-                  </p>
-                  <div class="mt-8 flex justify-center space-x-3">
-                    <div v-for="i in benefits.length" :key="i" class="w-3 h-3 rounded-full transition-all duration-300" :class="i-1 === activeBenefit ? 'bg-[#d7037b] w-6' : 'bg-gray-300'"></div>
-                  </div>
-                </div>
-              </transition>
-            </div>
-
-            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent flex items-end p-6">
-              <p class="text-white text-lg font-bold">
-                "{{ benefits[activeBenefit].tagline }}"
-              </p>
-            </div>
+          <div class="relative z-10">
+            <h3 class="text-xl font-bold text-gray-900 mb-2 transition-colors duration-500" :class="activeBenefit === index ? 'text-[#d7037b]' : ''">
+              {{ benefit.title }}
+            </h3>
+            <p class="text-gray-600 leading-relaxed text-base">
+              {{ benefit.description }}
+            </p>
           </div>
         </div>
       </div>
-    </section>
+
+      <div class="relative h-[550px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl animate-fade-in [perspective:1000px]">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-100 to-purple-100">
+          <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgxMDIsMTI2LDIzNCwwLjEpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+')"></div>
+
+          <transition
+            enter-active-class="transition-all duration-700 ease-in-out-quad transform-gpu"
+            enter-from-class="opacity-0 translate-y-10"
+            enter-to-class="opacity-100 translate-y-0"
+            leave-active-class="transition-all duration-500 ease-in-out absolute w-full transform-gpu"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0 -translate-y-10"
+            mode="out-in"
+          >
+            <div :key="activeBenefit" class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+              <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center rounded-full shadow-lg animate-pop-in" :class="benefits[activeBenefit].bgColor">
+                <component
+                  :is="benefits[activeBenefit].icon"
+                  class="h-12 w-12 text-white transition-transform duration-500 animate-pulse-slight"
+                />
+              </div>
+              <h3 class="text-3xl font-bold text-gray-800 mb-3 tracking-wide animate-fade-in-up-delay">
+                {{ benefits[activeBenefit].visualTitle }}
+              </h3>
+              <p class="text-gray-600 max-w-md mx-auto text-lg leading-relaxed animate-fade-in-up-delay-more">
+                {{ benefits[activeBenefit].visualDescription }}
+              </p>
+              <div class="mt-8 flex justify-center space-x-2">
+                <div v-for="i in benefits.length" :key="i" class="w-2 h-2 rounded-full transition-all duration-300" :class="i-1 === activeBenefit ? 'bg-[#d7037b] w-5' : 'bg-gray-300'"></div>
+              </div>
+            </div>
+          </transition>
+        </div>
+        
+        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent flex items-end p-6">
+          <p class="text-white text-lg font-bold">
+            "{{ benefits[activeBenefit].tagline }}"
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!--Valores que nos impulsan-->
 
 <!--Equipo-->
