@@ -1,7 +1,6 @@
 <template>
   <footer class="bg-gray-950 text-white font-sans antialiased">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-      <!-- MOBILE: acordeón accesible (más compacto) -->
       <div class="md:hidden space-y-3">
         <Disclosure
           v-for="(section, idx) in mobileSections"
@@ -17,7 +16,6 @@
           </DisclosureButton>
 
           <DisclosurePanel class="px-3 pb-3 text-gray-300">
-            <!-- Sección especial: newsletter -->
             <div v-if="section.type === 'newsletter'" class="space-y-2">
               <p class="text-xs text-gray-400">Recibe novedades y oportunidades solidarias.</p>
               <form @submit.prevent="submitNewsletter" class="flex gap-2">
@@ -46,7 +44,6 @@
               </div>
             </div>
 
-            <!-- Enlaces genéricos -->
             <ul v-else class="space-y-1.5">
               <li v-for="(link, i) in section.links" :key="i">
                 <router-link
@@ -81,9 +78,7 @@
         </button>
       </div>
 
-      <!-- DESKTOP (más compacto y equilibrado) -->
       <div class="hidden md:grid grid-cols-12 gap-6">
-        <!-- Brand + newsletter -->
         <div class="col-span-4">
           <h3 class="text-base font-bold text-pink-300">KambiaPe</h3>
           <p class="mt-1.5 text-sm text-gray-400">
@@ -117,7 +112,6 @@
           </div>
         </div>
 
-        <!-- Navegación -->
         <div class="col-span-3">
           <h3 class="text-base font-bold text-pink-300 mb-3">Navegación</h3>
           <ul class="space-y-1.5 text-gray-300 text-sm">
@@ -128,7 +122,6 @@
           </ul>
         </div>
 
-        <!-- Soporte -->
         <div class="col-span-3">
           <h3 class="text-base font-bold text-pink-300 mb-3">Soporte</h3>
           <ul class="space-y-1.5 text-gray-300 text-sm">
@@ -137,7 +130,6 @@
           </ul>
         </div>
 
-        <!-- Acción -->
         <div class="col-span-2">
           <h3 class="text-base font-bold text-pink-300 mb-3">¿Quieres publicar?</h3>
           <p class="text-gray-300 text-sm mb-3">Sube tus productos y dales una segunda vida.</p>
@@ -150,7 +142,6 @@
         </div>
       </div>
 
-      <!-- Línea inferior -->
       <div class="mt-8 border-t border-white/10 pt-4 text-center text-sm text-gray-400">
         <div class="flex flex-col items-center gap-2 sm:flex-row sm:justify-between">
           <p class="text-xs sm:text-sm">© {{ year }} KambiaPe. Todos los derechos reservados.</p>
@@ -169,7 +160,6 @@
       </div>
     </div>
 
-    <!-- Modal de comentarios - Headless UI (compactada) -->
     <TransitionRoot :show="isCommentModalVisible" as="template">
       <Dialog @close="closeCommentModal" class="relative z-50">
         <TransitionChild
@@ -295,7 +285,7 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Disc
 
 /* Iconos sociales compactos */
 const IconX = { name: 'IconX', template: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.53 3H20l-7.06 8.08L20.5 21h-5.1l-4.02-4.83L6.7 21H3l7.54-8.64L3.5 3h5.18l3.62 4.35L17.53 3z"/></svg>' }
-const IconInstagram = { name: 'IconInstagram', template: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm10 2H7a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm-5 3a5 5 0 110 10 5 5 0 010-10zm5.8-1.8a1 1 0 110 2 1 1 0 010-2z"/></svg>' }
+const IconInstagram = { name: 'IconInstagram', template: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M12.315 2.518a.75.75 0 01.63 0C13.232 2.72 13.914 3 14.75 3h.25a7.5 7.5 0 017.5 7.5v.25c0 .836.28 1.518.482 2.315a.75.75 0 010 .63c-.202.797-.482 1.479-.482 2.315v.25a7.5 7.5 0 01-7.5 7.5h-.25c-.836 0-1.518-.28-2.315-.482a.75.75 0 01-.63 0c-.797.202-1.479.482-2.315.482h-.25a7.5 7.5 0 01-7.5-7.5v-.25c0-.836-.28-1.518-.482-2.315a.75.75 0 010-.63c.202-.797.482-1.479.482-2.315v-.25a7.5 7.5 0 017.5-7.5h.25c.836 0 1.518.28 2.315.482zM12 17.25a5.25 5.25 0 100-10.5 5.25 5.25 0 000 10.5zM12 15a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd" /><path d="M18.75 5.25h.008v.008h-.008V5.25z" /></svg>' }
 const IconFacebook = { name: 'IconFacebook', template: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7a1 1 0 011-1h3V2h-3a5 5 0 00-5 5v3H6v4h3v8h4z"/></svg>' }
 
 const router = useRouter()
@@ -323,7 +313,7 @@ const submitNewsletter = async () => {
 
 const socialLinks = [
   { name: 'X', href: 'https://x.com/', icon: IconX },
-  { name: 'Instagram', href: 'https://instagram.com/', icon: IconInstagram },
+  { name: 'Instagram', href: 'https://www.instagram.com/kambia_pe', icon: IconInstagram },
   { name: 'Facebook', href: 'https://facebook.com/', icon: IconFacebook },
 ]
 
