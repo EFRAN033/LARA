@@ -1,185 +1,91 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import { useUserStore } from '@/stores/user'; // Import your user store for route guards
+// src/router/index.js
+import { createRouter, createWebHistory } from 'vue-router'
 
-// Core layout and main page components
-import MainPage from '../views/MainPage.vue';
-import Footer from '../views/Footer.vue';
-import Header from '../views/Header.vue';
-import HeroSection from '../views/HeroSection.vue';
-import ProductFeed from '../views/ProductFeed.vue';
+// ✅ Lazy loading para vistas
+const LoginView = () => import('../views/LoginView.vue')
+const RegisterView = () => import('../views/Register.vue')
+// Ejemplo opcional de ruta protegida con lazy load:
+// const DashboardView = () => import('../views/DashboardView.vue')
 
-// Your custom navigation view components
-import AboutUsView from '../views/AboutUsView.vue';    // Corresponds to 'Nosotros'
-import PublishView from '../views/PublishView.vue';  // Corresponds to 'Publicar'
-import EventsView from '../views/EventsView.vue';    // Corresponds to 'Eventos'
-import InboxView from '../views/InboxView.vue';      // Corresponds to 'Buzón'
+/** 
+ * Utilidad mínima para auth.
+ * Ajusta según tu backend (token/JWT). 
+ * Aquí usamos 'auth_token' y, como fallback de desarrollo, 'lastUser'.
+ */
+function isAuthenticated() {
+  return !!(localStorage.getItem('auth_token') || localStorage.getItem('lastUser'))
+}
 
-// --- Nuevas importaciones para Login, Register, MyProfile y Configuration ---
-import LoginView from '../views/Login.vue';
-import RegisterView from '../views/Register.vue';
-import MyProfile from '../views/MyProfile.vue';
-import ConfigurationView from '../views/Configuration.vue';
-// --- FIN de nuevas importaciones ---
-
-// --- NUEVA IMPORTACIÓN PARA MyProducts.vue ---
-import MyProducts from '../views/MyProducts.vue';
-// --- FIN NUEVA IMPORTACIÓN ---
-
+// 1) Define tus rutas
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: MainPage,
-    meta: {
-      title: 'Inicio | KambiaPe'
-    }
-  },
-  // Existing structural routes (consider if these should be direct routes or sub-components)
-  {
-    path: '/header',
-    name: 'header',
-    component: Header,
-    meta: {
-      title: 'Header | KambiaPe'
-    }
-  },
-  {
-    path: '/footer',
-    name: 'footer',
-    component: Footer,
-    meta: {
-      title: 'Footer | KambiaPe'
-    }
-  },
-  {
-    path: '/hero-section',
-    name: 'hero-section',
-    component: HeroSection,
-    meta: {
-      title: 'Hero Section | KambiaPe'
-    }
-  },
-  {
-    path: '/productos',
-    name: 'products',
-    component: ProductFeed,
-    meta: {
-      title: 'Productos | KambiaPe'
-    }
-  },
-  // New routes for your navigation items
-  {
-    path: '/nosotros', // Path for 'Nosotros'
-    name: 'about',
-    component: AboutUsView,
-    meta: {
-      title: 'Nosotros | KambiaPe'
-    }
-  },
-  {
-    path: '/publicar', // Path for 'Publicar'
-    name: 'publish',
-    component: PublishView,
-    meta: {
-      title: 'Publicar | KambiaPe'
-    }
-  },
-  {
-    path: '/eventos', // Path for 'Eventos'
-    name: 'events',
-    component: EventsView,
-    meta: {
-      title: 'Eventos | KambiaPe'
-    }
-  },
-  {
-    path: '/buzon', // Path for 'Buzón'
-    name: 'inbox',
-    component: InboxView,
-    meta: {
-      title: 'Buzón | KambiaPe'
-    }
-  },
-  // --- Rutas para autenticación y perfil de usuario ---
+  // Redirige raíz a /login
+  { path: '/', redirect: '/login' },
+
+  // Login
   {
     path: '/login',
     name: 'Login',
     component: LoginView,
-    meta: {
-      title: 'Iniciar Sesión | KambiaPe'
-    }
+    meta: { title: 'Iniciar Sesión | Sistema Académico' }
   },
+
+  // Register
   {
     path: '/register',
     name: 'Register',
     component: RegisterView,
-    meta: {
-      title: 'Registrarse | KambiaPe'
-    }
+    meta: { title: 'Crear Cuenta | Sistema Académico' }
   },
-  {
-    path: '/profile',
-    name: 'MyProfile',
-    component: MyProfile,
-    meta: {
-      title: 'Mi Perfil | KambiaPe',
-      requiresAuth: true
-    }
-  },
-  {
-    path: '/settings',
-    name: 'Settings',
-    component: ConfigurationView,
-    meta: {
-      title: 'Configuración | KambiaPe',
-      requiresAuth: true
-    }
-  },
-  // --- NUEVA RUTA PARA "MIS PRODUCTOS" (INVENTARIO) ---
-  {
-    path: '/my-products', // Esta es la ruta a la que apunta el botón del sidebar
-    name: 'MyProducts',
-    component: MyProducts,
-    meta: {
-      title: 'Mis Productos | KambiaPe',
-      requiresAuth: true // Probablemente quieras que esta ruta esté protegida también
-    }
-  },
-  // --- FIN NUEVA RUTA ---
 
-  // Catch-all route for unmatched paths, redirects to home
+  // ⚠️ Ejemplo de ruta protegida (descomenta si la usas)
+  // {
+  //   path: '/dashboard',
+  //   name: 'Dashboard',
+  //   component: DashboardView,
+  //   meta: { requiresAuth: true, title: 'Panel | Sistema Académico' }
+  // },
+
+  // 404 Catch-all
   {
     path: '/:pathMatch(.*)*',
-    redirect: '/'
+    name: 'NotFound',
+    // Puedes crear una vista NotFound.vue y cargarla lazy:
+    component: {
+      // Componente mínimo inline para 404 (reemplaza por tu vista si quieres)
+      template: `<div style="padding:2rem">
+                  <h1 style="font-weight:800;font-size:1.5rem">404</h1>
+                  <p>La página no existe.</p>
+                  <p><a href="/login" style="color:#2563eb">Ir a Iniciar Sesión</a></p>
+                 </div>`
+    },
+    meta: { title: '404 | Sistema Académico' }
   }
-];
+]
 
+// 2) Crea el router
 const router = createRouter({
+  // Usa BASE_URL de Vite por si tu app está en subcarpeta
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: 'smooth',
-        top: 100
-      };
-    } else if (savedPosition) {
-      return savedPosition;
-    }
-    return { top: 0 };
+    if (savedPosition) return savedPosition
+    return { top: 0 }
   }
-});
+})
 
+// 3) Guard opcional para rutas protegidas
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || 'KambiaPe';
-
-  const userStore = useUserStore();
-  if (to.meta.requiresAuth && !userStore.isLoggedIn) {
-    next('/login');
-  } else {
-    next();
+  if (to.meta?.requiresAuth && !isAuthenticated()) {
+    // Redirige a login con 'redirect' para volver luego
+    return next({ path: '/login', query: { redirect: to.fullPath } })
   }
-});
+  next()
+})
 
-export default router;
+// 4) Actualiza el título del documento
+router.afterEach((to) => {
+  const defaultTitle = 'Sistema Académico'
+  document.title = to.meta?.title || defaultTitle
+})
+
+export default router
