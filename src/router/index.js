@@ -4,11 +4,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 // ✅ Lazy loading para vistas
 const LoginView = () => import('../views/LoginView.vue')
 const RegisterView = () => import('../views/Register.vue')
-// Ejemplo opcional de ruta protegida con lazy load:
-// const DashboardView = () => import('../views/DashboardView.vue')
+// ✨ NUEVA VISTA: Lazy loading para el Dashboard
+const DashboardView = () => import('../views/DashboardView.vue')
 
-/** 
- * Utilidad mínima para auth.
+/** * Utilidad mínima para auth.
  * Ajusta según tu backend (token/JWT). 
  * Aquí usamos 'auth_token' y, como fallback de desarrollo, 'lastUser'.
  */
@@ -37,13 +36,13 @@ const routes = [
     meta: { title: 'Crear Cuenta | Sistema Académico' }
   },
 
-  // ⚠️ Ejemplo de ruta protegida (descomenta si la usas)
-  // {
-  //   path: '/dashboard',
-  //   name: 'Dashboard',
-  //   component: DashboardView,
-  //   meta: { requiresAuth: true, title: 'Panel | Sistema Académico' }
-  // },
+  // ⚠️ RUTA PROTEGIDA: Panel principal después del login
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: DashboardView,
+    meta: { requiresAuth: true, title: 'Panel | Sistema Académico' }
+  },
 
   // 404 Catch-all
   {
@@ -75,14 +74,16 @@ const router = createRouter({
 
 // 3) Guard opcional para rutas protegidas
 router.beforeEach((to, from, next) => {
+  // Verifica si la ruta requiere autenticación y el usuario no está autenticado
   if (to.meta?.requiresAuth && !isAuthenticated()) {
-    // Redirige a login con 'redirect' para volver luego
+    // Redirige a login con 'redirect' para volver luego a la página que intentaba acceder
     return next({ path: '/login', query: { redirect: to.fullPath } })
   }
+  // Si todo está bien, permite la navegación
   next()
 })
 
-// 4) Actualiza el título del documento
+// 4) Actualiza el título del documento en cada cambio de ruta
 router.afterEach((to) => {
   const defaultTitle = 'Sistema Académico'
   document.title = to.meta?.title || defaultTitle
