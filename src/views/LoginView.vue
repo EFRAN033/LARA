@@ -8,7 +8,7 @@
     <div class="flex h-screen flex-col">
 
       <header class="w-full shrink-0">
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-8">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           <router-link to="/login" class="inline-flex items-center gap-2 text-sm font-semibold">
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
             {{ t('loginTop') }}
@@ -17,10 +17,10 @@
         </div>
       </header>
 
-      <div class="flex-1 lg:overflow-y-hidden">
-        <div class="relative mx-auto grid h-full max-w-7xl grid-cols-1 lg:grid-cols-2">
+      <div class="flex-1 overflow-y-auto">
+        <div class="relative mx-auto grid min-h-full max-w-7xl grid-cols-1 lg:grid-cols-2">
 
-          <aside class="hidden lg:sticky lg:top-0 lg:flex lg:h-full lg:flex-col lg:justify-between lg:px-8 lg:py-12">
+          <aside class="hidden lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-between lg:px-8 lg:py-16">
             <div class="text-3xl font-black tracking-tight">LARA<span class="text-sky-500">.</span></div>
             <figure>
               <blockquote class="text-2xl font-semibold leading-relaxed">“{{ t('quote.body') }}”</blockquote>
@@ -28,19 +28,19 @@
             </figure>
           </aside>
 
-          <section class="flex flex-col justify-center px-6 py-8 sm:px-8 lg:px-12">
+          <section class="flex flex-col justify-center px-6 py-12 sm:px-8 lg:px-12">
             <div class="w-full max-w-md">
               <header>
                 <h1 class="text-3xl font-extrabold tracking-tight">{{ t('loginTitle') }}</h1>
-                <p class="mt-1 text-slate-600 dark:text-slate-400">{{ t('loginSubtitle') }}</p>
+                <p class="mt-2 text-slate-600 dark:text-slate-400">{{ t('loginSubtitle') }}</p>
               </header>
 
-              <form id="login-form" @submit.prevent="handleLogin" class="mt-6 space-y-6">
+              <form id="login-form" @submit.prevent="handleLogin" class="mt-8 space-y-8">
                 <div>
                   <label for="email" class="text-sm font-medium">{{ t('email') }}</label>
                   <input id="email" ref="emailInput" v-model="email" @blur="validateField('email')"
                          type="email" autocomplete="email" required
-                         :class="['mt-1 block w-full rounded-md border py-2 px-3 text-sm shadow-sm placeholder:text-slate-400 dark:bg-slate-900',
+                         :class="['mt-2 block w-full rounded-md border py-2 px-3 text-sm shadow-sm placeholder:text-slate-400 dark:bg-slate-900',
                                   emailError ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
                                              : 'border-slate-300 dark:border-slate-700 focus:border-sky-500 focus:ring-sky-500']" />
                   <p v-if="emailError" class="mt-1 text-xs text-red-500">{{ emailError }}</p>
@@ -48,7 +48,7 @@
 
                 <div>
                   <label for="password" class="text-sm font-medium">{{ t('password') }}</label>
-                  <div class="relative mt-1">
+                  <div class="relative mt-2">
                     <input id="password" v-model="password" @blur="validateField('password')" @keyup="(e)=>capsLock = e.getModifierState('CapsLock')"
                            :type="showPassword ? 'text' : 'password'" autocomplete="current-password" required
                            :class="['block w-full rounded-md border py-2 px-3 text-sm shadow-sm placeholder:text-slate-400 dark:bg-slate-900',
@@ -62,7 +62,7 @@
                   </div>
                 </div>
 
-                <div v-if="errorSummary.length && !passwordError" class="rounded-md bg-red-50 p-3 dark:bg-red-900/20">
+                <div v-if="errorSummary.length && !passwordError" class="rounded-md bg-red-50 p-4 dark:bg-red-900/20">
                   <div class="flex">
                     <div class="shrink-0">
                       <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" /></svg>
@@ -82,7 +82,7 @@
                 </div>
               </form>
 
-              <p class="mt-6 text-center text-sm">
+              <p class="mt-8 text-center text-sm">
                 {{ t('noAccount') }}
                 <router-link to="/register" class="font-medium text-sky-600 hover:underline">{{ t('registerHere') }}</router-link>
               </p>
@@ -92,7 +92,7 @@
       </div>
 
       <footer class="w-full shrink-0">
-        <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-3 sm:flex-row lg:px-8">
+        <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-4 sm:flex-row lg:px-8">
           <p class="text-sm text-slate-500">&copy; {{ new Date().getFullYear() }} LARA. {{ t('rights') }}</p>
           <div class="flex items-center gap-4 text-sm">
             <a href="#" class="text-slate-600 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200">{{ t('support') }}</a>
@@ -119,8 +119,10 @@
 import { ref, computed, onMounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import { useUserStore } from '@/stores/user.js'; // Asegúrate de que esta ruta sea correcta
 
 const router = useRouter();
+const userStore = useUserStore();
 
 /* =========================
    I18N
@@ -230,9 +232,10 @@ const handleLogin = async () => {
 
     const accessToken = response.data.access_token;
     console.log('Login exitoso, token:', accessToken);
-
-    localStorage.setItem('access_token', accessToken);
     
+    // Usar la tienda Pinia para guardar el token
+    userStore.setToken(accessToken);
+
     router.push('/dashboard');
 
   } catch (error) {
