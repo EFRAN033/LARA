@@ -21,7 +21,11 @@
         <div class="relative mx-auto grid min-h-full max-w-7xl grid-cols-1 lg:grid-cols-2">
 
           <aside class="hidden lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-between lg:px-8 lg:py-16">
-            <div class="text-3xl font-black tracking-tight">LARA<span class="text-sky-500">.</span></div>
+            <div>
+              <div class="text-3xl font-black tracking-tight">I.E. <span class="text-sky-500">20798</span></div>
+              <p class="mt-2 text-lg font-medium text-slate-700 dark:text-slate-300">Manuel Cayahuallpa Coriguan</p>
+              <p class="mt-4 border-t border-slate-200 pt-4 text-sm text-slate-500 dark:border-slate-700">Formando líderes para el futuro de Imperial, Cañete.</p>
+            </div>
             <figure>
               <blockquote class="text-2xl font-semibold leading-relaxed">“{{ t('quote.body') }}”</blockquote>
               <figcaption class="mt-4 text-sm text-slate-600 dark:text-slate-400">— {{ t('quote.author') }}</figcaption>
@@ -82,18 +86,14 @@
                 </div>
               </form>
 
-              <p class="mt-8 text-center text-sm">
-                {{ t('noAccount') }}
-                <router-link to="/register" class="font-medium text-sky-600 hover:underline">{{ t('registerHere') }}</router-link>
-              </p>
-            </div>
+              </div>
           </section>
         </div>
       </div>
 
       <footer class="w-full shrink-0">
         <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-4 sm:flex-row lg:px-8">
-          <p class="text-sm text-slate-500">&copy; {{ new Date().getFullYear() }} LARA. {{ t('rights') }}</p>
+          <p class="text-sm text-slate-500">&copy; {{ new Date().getFullYear() }} I.E. 20798. {{ t('rights') }}</p>
           <div class="flex items-center gap-4 text-sm">
             <a href="#" class="text-slate-600 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200">{{ t('support') }}</a>
             <span class="text-slate-300 dark:text-slate-700">|</span>
@@ -119,7 +119,7 @@
 import { ref, computed, onMounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-import { useUserStore } from '@/stores/user.js'; // Asegúrate de que esta ruta sea correcta
+import { useUserStore } from '@/stores/user.js';
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -133,14 +133,13 @@ const messages = {
       skip: 'Saltar al contenido principal', system: 'Portal Académico', rights: 'Todos los derechos reservados.',
       quote: { body: 'La educación es el arma más poderosa que puedes usar para cambiar el mundo.', author: 'Nelson Mandela' },
       support: 'Soporte Técnico', version: 'Versión', theme: 'Tema',
-      loginTop: 'Iniciar sesión', registerNow: 'Crear cuenta',
+      loginTop: 'Iniciar sesión',
       loginTitle: 'Bienvenido de vuelta',
       loginSubtitle: 'Ingresa a tu cuenta para continuar',
       email: 'Correo electrónico',
       password: 'Contraseña',
       show: 'Mostrar', hide: 'Ocultar', caps: 'Mayúsculas activadas',
       verifying: 'Verificando…', signIn: 'Iniciar sesión',
-      noAccount: '¿No tienes una cuenta?', registerHere: 'Regístrate aquí',
       fixErrors: 'Por favor, corrige los errores para continuar.',
       errors: {
         email: { required: 'El correo es obligatorio.' },
@@ -151,14 +150,13 @@ const messages = {
       skip: 'Skip to main content', system: 'Academic Portal', rights: 'All rights reserved.',
       quote: { body: 'Education is the most powerful weapon which you can use to change the world.', author: 'Nelson Mandela' },
       support: 'Technical Support', version: 'Version', theme: 'Theme',
-      loginTop: 'Sign in', registerNow: 'Create account',
+      loginTop: 'Sign in',
       loginTitle: 'Welcome back',
       loginSubtitle: 'Sign in to your account to continue',
       email: 'Email address',
       password: 'Password',
       show: 'Show', hide: 'Hide', caps: 'Caps Lock is on',
       verifying: 'Verifying…', signIn: 'Sign in',
-      noAccount: "Don't have an account?", registerHere: 'Register here',
       fixErrors: 'Please fix the errors to continue.',
       errors: {
         email: { required: 'Email is required.' },
@@ -233,7 +231,6 @@ const handleLogin = async () => {
     const accessToken = response.data.access_token;
     console.log('Login exitoso, token:', accessToken);
     
-    // Usar la tienda Pinia para guardar el token
     userStore.setToken(accessToken);
 
     router.push('/dashboard');
