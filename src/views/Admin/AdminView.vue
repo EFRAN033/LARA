@@ -106,25 +106,46 @@
       </div>
   
       <div v-if="isModalOpen" @click.self="isModalOpen = false" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 transition-opacity">
-        <div class="w-full max-w-md rounded-xl bg-white p-6 shadow-2xl dark:bg-gray-800">
+        <div class="w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl dark:bg-gray-800">
           <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ modalTitle }}</h3>
           
           <form @submit.prevent="handleSubmit" class="mt-6 space-y-4">
-            <div>
-              <label for="fullName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre Completo</label>
-              <input v-model="currentUser.full_name" type="text" id="fullName" class="mt-1 block w-full input-style" required>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label for="fullName" class="form-label">Nombre Completo</label>
+                <input v-model="currentUser.full_name" type="text" id="fullName" class="input-style" required>
+              </div>
+              <div>
+                <label for="dni" class="form-label">N° de DNI</label>
+                <input v-model="currentUser.dni" type="text" id="dni" class="input-style" required>
+              </div>
             </div>
-            <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-              <input v-model="currentUser.email" type="email" id="email" class="mt-1 block w-full input-style" required>
+            
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input v-model="currentUser.email" type="email" id="email" class="input-style" required>
+              </div>
+              <div>
+                <label for="phone" class="form-label">Número de Teléfono</label>
+                <input v-model="currentUser.phone" type="tel" id="phone" class="input-style">
+              </div>
             </div>
-            <div>
-              <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña <span v-if="isEditing" class="text-xs text-gray-400">(dejar en blanco para no cambiar)</span></label>
-              <input v-model="currentUser.password" type="password" id="password" class="mt-1 block w-full input-style" :required="!isEditing">
+  
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label for="username" class="form-label">Nombre de Usuario</label>
+                <input v-model="currentUser.username" type="text" id="username" class="input-style" required>
+              </div>
+              <div>
+                <label for="password" class="form-label">Contraseña <span v-if="isEditing" class="text-xs text-gray-400">(dejar para no cambiar)</span></label>
+                <input v-model="currentUser.password" type="password" id="password" class="input-style" :required="!isEditing">
+              </div>
             </div>
+  
             <div class="mt-8 flex justify-end gap-4 border-t border-gray-200 pt-4 dark:border-gray-700">
-              <button type="button" @click="isModalOpen = false" class="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:text-gray-300 dark:ring-gray-600 dark:hover:bg-gray-700">Cancelar</button>
-              <button type="submit" class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700">Guardar Cambios</button>
+              <button type="button" @click="isModalOpen = false" class="btn-secondary">Cancelar</button>
+              <button type="submit" class="btn-primary">Guardar Cambios</button>
             </div>
           </form>
         </div>
@@ -145,17 +166,29 @@
   const router = useRouter();
   const userStore = useUserStore();
   
-  // --- ESTADO ---
+  // --- ESTADO INICIAL PARA UN NUEVO USUARIO (CON CAMPOS ADICIONALES) ---
+  const getInitialCurrentUser = (role = 'student') => ({
+    id: null,
+    full_name: '',
+    dni: '',
+    email: '',
+    phone: '',
+    username: '',
+    password: '',
+    role,
+  });
+  
+  // --- ESTADO DEL COMPONENTE ---
   const activePanel = ref(null);
   const users = ref([]);
   const isModalOpen = ref(false);
   const isEditing = ref(false);
-  const currentUser = ref({ id: null, full_name: '', email: '', password: '', role: 'student' });
+  const currentUser = ref(getInitialCurrentUser());
   const activeUserTab = ref('students');
   
   // --- COMPUTED PROPERTIES ---
   const userFullName = computed(() => userStore.user?.full_name || 'Admin');
-  const modalTitle = computed(() => isEditing.value ? 'Editar Usuario' : 'Agregar Nuevo Usuario');
+  const modalTitle = computed(() => isEditing.value ? `Editar ${currentUser.value.role === 'student' ? 'Estudiante' : 'Docente'}` : `Agregar Nuevo ${activeUserTab.value === 'students' ? 'Estudiante' : 'Docente'}`);
   const students = computed(() => users.value.filter(u => u.role === 'student'));
   const teachers = computed(() => users.value.filter(u => u.role === 'teacher'));
   const currentPanelTitle = computed(() => {
@@ -168,7 +201,7 @@
   const openAddModal = () => {
     isEditing.value = false;
     const defaultRole = activeUserTab.value === 'students' ? 'student' : 'teacher';
-    currentUser.value = { id: null, full_name: '', email: '', password: '', role: defaultRole };
+    currentUser.value = getInitialCurrentUser(defaultRole);
     isModalOpen.value = true;
   };
   
@@ -179,7 +212,7 @@
   };
   
   const handleSubmit = async () => {
-    // Aquí iría tu lógica para llamar a la API
+    // Lógica para enviar a la API
     console.log('Enviando:', currentUser.value);
     isModalOpen.value = false;
     fetchUsers();
@@ -195,12 +228,12 @@
   // --- OBTENCIÓN DE DATOS ---
   const fetchUsers = async () => {
     console.log('Obteniendo usuarios...');
-    // Simulación de llamada a API
+    // Simulación de API
     users.value = [
-      { id: 'uuid-1', full_name: 'Ana García', email: 'ana.garcia@example.com', role: 'student' },
-      { id: 'uuid-2', full_name: 'Carlos Ruiz', email: 'carlos.ruiz@example.com', role: 'teacher' },
-      { id: 'uuid-3', full_name: 'Luisa Fernandez', email: 'luisa.f@example.com', role: 'student' },
-      { id: 'uuid-4', full_name: 'Pedro Martinez', email: 'pedro.m@example.com', role: 'teacher' },
+      { id: 'uuid-1', full_name: 'Ana García', email: 'ana.garcia@example.com', role: 'student', dni: '71234567', phone: '987654321', username: 'agarcia' },
+      { id: 'uuid-2', full_name: 'Carlos Ruiz', email: 'carlos.ruiz@example.com', role: 'teacher', dni: '21234567', phone: '912345678', username: 'cruiz' },
+      { id: 'uuid-3', full_name: 'Luisa Fernandez', email: 'luisa.f@example.com', role: 'student', dni: '81234567', phone: '923456789', username: 'lfernandez' },
+      { id: 'uuid-4', full_name: 'Pedro Martinez', email: 'pedro.m@example.com', role: 'teacher', dni: '11234567', phone: '934567890', username: 'pmartinez' },
     ];
   };
   
@@ -217,25 +250,19 @@
   };
   
   // --- DATOS PARA EL TEMPLATE ---
-  const userTabs = [
-    { id: 'students', name: 'Estudiantes' },
-    { id: 'teachers', name: 'Docentes' },
-  ];
-  
+  const userTabs = [{ id: 'students', name: 'Estudiantes' }, { id: 'teachers', name: 'Docentes' }];
   const stats = [
     { name: 'Total Estudiantes', value: '1,250', icon: UsersIcon, iconBg: 'bg-blue-500' },
     { name: 'Total Docentes', value: '85', icon: AcademicCapIcon, iconBg: 'bg-teal-500' },
     { name: 'Cursos Activos', value: '150', icon: BookOpenIcon, iconBg: 'bg-indigo-500' },
     { name: 'Registros Hoy', value: '12', icon: UserPlusIcon, iconBg: 'bg-orange-500' },
   ];
-  
   const quickActions = [
     { name: 'Gestionar Usuarios', panelId: 'users', icon: Cog8ToothIcon, style: 'bg-blue-500 hover:bg-blue-600' },
     { name: 'Crear Nuevo Curso', panelId: 'courses', icon: BookOpenIcon, style: 'bg-indigo-500 hover:bg-indigo-600' },
     { name: 'Ver Matrículas', panelId: 'enrollments', icon: DocumentTextIcon, style: 'bg-teal-500 hover:bg-teal-600' },
     { name: 'Enviar Anuncio Global', panelId: 'announcements', icon: MegaphoneIcon, style: 'bg-orange-500 hover:bg-orange-600' },
   ];
-  
   const recentActivity = [
     { id: 1, text: "Docente 'Carlos Ruiz' registrado.", time: 'Hace 30 minutos', icon: UserPlusIcon, iconBg: 'bg-green-500' },
     { id: 2, text: "Curso 'Cálculo II' creado.", time: 'Hace 2 horas', icon: BookOpenIcon, iconBg: 'bg-indigo-500' },
@@ -243,19 +270,12 @@
   </script>
   
   <style scoped>
-  .widget {
-    @apply overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900;
-  }
-  .widget-title {
-    @apply border-b border-gray-200 px-5 py-3 text-lg font-medium text-gray-900 dark:border-gray-800 dark:text-white;
-  }
-  .action-button {
-    @apply flex w-full items-center justify-center gap-3 rounded-lg py-3 px-4 font-semibold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg;
-  }
-  .input-style {
-    @apply w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white;
-  }
-  .placeholder-panel {
-    @apply rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900 text-lg font-semibold;
-  }
+  .widget { @apply overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900; }
+  .widget-title { @apply border-b border-gray-200 px-5 py-3 text-lg font-medium text-gray-900 dark:border-gray-800 dark:text-white; }
+  .action-button { @apply flex w-full items-center justify-center gap-3 rounded-lg py-3 px-4 font-semibold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg; }
+  .placeholder-panel { @apply rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900 text-lg font-semibold; }
+  .form-label { @apply block text-sm font-medium text-gray-700 dark:text-gray-300; }
+  .input-style { @apply mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white; }
+  .btn-primary { @apply rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700; }
+  .btn-secondary { @apply rounded-lg px-4 py-2 text-sm font-medium text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:text-gray-300 dark:ring-gray-600 dark:hover:bg-gray-700; }
   </style>
