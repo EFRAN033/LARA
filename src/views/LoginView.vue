@@ -215,13 +215,13 @@ const handleLogin = async () => {
     return;
   }
   isLoading.value = true;
-  passwordError.value = ''; // Clear previous global errors
+  passwordError.value = '';
 
   try {
     const API_URL = 'http://localhost:8000/login';
 
     const params = new URLSearchParams();
-    params.append('username', email.value); // FastAPI's form expects 'username'
+    params.append('username', email.value);
     params.append('password', password.value);
 
     const response = await axios.post(API_URL, params, {
@@ -229,11 +229,21 @@ const handleLogin = async () => {
     });
 
     const accessToken = response.data.access_token;
-    console.log('Login exitoso, token:', accessToken);
-    
     userStore.setToken(accessToken);
 
-    router.push('/dashboard');
+    // --- ✨ LÓGICA DE REDIRECCIÓN DINÁMICA ---
+    const role = userStore.userRole;
+
+    if (role === 'admin') {
+      router.push('/dashboard');
+    } else if (role === 'teacher') {
+      router.push('/teacher-dashboard');
+    } else if (role === 'student') {
+      router.push('/student-dashboard');
+    } else {
+      console.error('Rol no reconocido:', role);
+      router.push('/login');
+    }
 
   } catch (error) {
     if (error.response && error.response.status === 401) {
