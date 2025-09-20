@@ -1,30 +1,25 @@
 // vite.config.js
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'path' // Asegúrate de que 'path' esté importado
+import path from 'path'
 
 export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
+      '@': path.resolve(__dirname, './src'),
+      // --- ✨ AÑADE ESTA LÍNEA PARA SOLUCIONAR EL ERROR DE COMPILACIÓN ---
+      'vue': 'vue/dist/vue.esm-bundler.js',
     }
   },
   server: {
-    historyApiFallback: true,
-    // --- INICIO: Añade esta sección de proxy ---
+    // Tu configuración de proxy se mantiene igual
     proxy: {
-      '/api': { // Cuando una petición empiece con '/api'
-        target: 'http://localhost:8000', // Reenvíala a tu backend de FastAPI
-        changeOrigin: true, // Cambia el origen de la petición a 'http://localhost:8000'
-        rewrite: (path) => path.replace(/^\/api/, '/api/v1'), // IMPORTANTE: Reemplaza '/api' por '/api/v1' para que coincida con tus rutas de FastAPI
-      },
-      // Si sirves imágenes u otros archivos estáticos desde tu backend, añade un proxy para ellos también
-      '/uploads': { // Por ejemplo, si tus imágenes subidas están en /uploads
+      '/api': {
         target: 'http://localhost:8000',
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''), 
       },
     },
-    // --- FIN: Añade esta sección de proxy ---
   }
 })
