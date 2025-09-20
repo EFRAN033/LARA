@@ -174,7 +174,7 @@ const links = {
   student: [
     { name: 'Resumen Académico', path: '/student-dashboard', icon: HomeIcon },
     { name: 'Mis Cursos', path: '/student/courses', icon: BookOpenIcon },
-    { name: 'Calificaciones', path: '/student/grades', icon: AcademicCapIcon },
+    { name: 'Calificaciones', path: '/student/qualifications', icon: AcademicCapIcon },
     // --- ✅ SECCIONES AÑADIDAS ---
     { name: 'Mi Asistencia', path: '/student/attendance', icon: ClipboardDocumentCheckIcon },
     { name: 'Matrícula', path: '/student/enrollment', icon: IdentificationIcon },
